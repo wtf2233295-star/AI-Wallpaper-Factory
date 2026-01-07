@@ -1,16 +1,36 @@
-name: Auto-Generator
+name: Omni-Auto-Evolution
 on:
   schedule:
-    - cron: '0 * * * *' # 每小时自动运行一次
-  workflow_dispatch: # 允许你手动点火
+    - cron: '0 * * * *' # 每小时自动运行
+  workflow_dispatch: # 允许手动测试
+
+permissions:
+  contents: write # 再次确认赋予写权限
+
 jobs:
-  run-logic:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Run Machine
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run Omni-Mind
         env:
           API_KEY: ${{ secrets.SF_API_KEY }}
+        run: python main.py
+
+      - name: Auto-Commit & Push # 这一步是让分身自己保存网页
         run: |
-          pip install requests
-          python main.py
+          git config --global user.name "Omni-Bot"
+          git config --global user.email "bot@empire.com"
+          git add index.html
+          git commit -m "Auto-Update: New Asset Generated" || echo "No changes to commit"
+          git push
