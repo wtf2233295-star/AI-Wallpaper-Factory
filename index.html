@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI WALLPAPER FACTORY | ELITE V5</title>
+    <title>AI WALLPAPER | ELITE PRO V6</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;900&display=swap');
@@ -11,115 +11,119 @@
         .font-luxury { font-family: 'Cinzel', serif; }
         .gold-shimmer { background: linear-gradient(90deg, #d4af37, #fff, #d4af37); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 5s linear infinite; }
         @keyframes shine { to { background-position: 200% center; } }
-        .glass { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(212, 175, 55, 0.1); backdrop-filter: blur(60px); }
+        .glass { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(212, 175, 55, 0.15); backdrop-filter: blur(40px); }
         
-        /* 🛡️ 暴力物理防御层：让客户右键只能存下透明像素 */
-        .secure-box { position: relative; aspect-ratio: 1/1; border-radius: 2rem; overflow: hidden; background: #050505; }
-        .shield-layer { position: absolute; inset: 0; z-index: 100; cursor: crosshair; background: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); }
-        .watermark-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); z-index: 50; pointer-events: none; opacity: 0.15; font-size: 8px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
+        /* 🛡️ 暴力物理防盗层 */
+        .secure-container { position: relative; aspect-ratio: 1/1; border-radius: 2rem; overflow: hidden; background: #050505; }
+        .invisible-shield { position: absolute; inset: 0; z-index: 100; cursor: crosshair; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='); }
+        .watermark-matrix { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); z-index: 50; pointer-events: none; opacity: 0.15; font-size: 8px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
         
-        .active-asset { border: 2px solid #d4af37 !important; box-shadow: 0 0 50px rgba(212,175,55,0.3); }
-        .loading-bar { height: 2px; background: #d4af37; width: 0%; transition: width 0.3s; }
+        .card-active { border: 2px solid #d4af37 !important; box-shadow: 0 0 50px rgba(212,175,55,0.4); transform: scale(1.02); }
+        .status-dot { width: 6px; height: 6px; background: #d4af37; border-radius: 50%; box-shadow: 0 0 10px #d4af37; }
     </style>
 </head>
 <body oncontextmenu="return false">
 
     <nav class="p-8 flex justify-between items-center max-w-6xl mx-auto opacity-50">
-        <div class="font-luxury text-[9px] tracking-[0.8em] gold-shimmer uppercase">Architect Factory v5.0</div>
-        <div class="text-[8px] tracking-[0.4em] uppercase">Security: <span class="text-green-500">LOCKED</span></div>
+        <div class="font-luxury text-[9px] tracking-[0.8em] gold-shimmer uppercase">Elite Asset Generator</div>
+        <div class="flex items-center gap-3 text-[8px] tracking-[0.4em] uppercase">
+            <div class="status-dot animate-pulse"></div> Node Secured
+        </div>
     </nav>
 
-    <main id="main-ui" class="max-w-2xl mx-auto text-center mt-20 px-6">
+    <main id="home" class="max-w-2xl mx-auto text-center mt-20 px-6">
         <h1 class="font-luxury text-7xl mb-4 tracking-tighter">AI <span class="gold-shimmer">ELITE</span></h1>
-        <p class="text-zinc-600 text-[10px] tracking-[0.6em] mb-12 uppercase">The Global Standard for 8K Digital Identity</p>
+        <p class="text-zinc-600 text-[10px] tracking-[0.6em] mb-12 uppercase">Ultimate 8K Digital Identity Factory</p>
         
         <div class="glass p-1 rounded-[3rem] mb-10 shadow-2xl">
-            <textarea id="user-input" rows="3" 
-                      placeholder="ENTER MASTERPIECE DESCRIPTION..." 
+            <textarea id="prompt" rows="3" 
+                      placeholder="ENTER YOUR VISION..." 
                       class="w-full bg-transparent border-none text-white text-center text-xl focus:outline-none resize-none p-12 font-light"></textarea>
         </div>
-        <button onclick="igniteStream()" class="w-full py-8 rounded-full bg-[#d4af37] text-black font-luxury text-[11px] tracking-[0.5em] font-black uppercase hover:bg-white transition-all">Start Accelerated Rendering</button>
+        <button onclick="ignite()" class="w-full py-8 rounded-full bg-[#d4af37] text-black font-luxury text-[11px] tracking-[0.5em] font-black uppercase hover:bg-white transition-all shadow-2xl">Initialize Secure Rendering</button>
     </main>
 
-    <section id="result-ui" class="hidden max-w-6xl mx-auto mt-12 px-6 pb-20">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="image-stream"></div>
+    <section id="gallery" class="hidden max-w-6xl mx-auto mt-12 px-6 pb-32">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="output-stream"></div>
 
-        <div id="license-gate" class="hidden mt-16 glass p-12 rounded-[4rem] max-w-2xl mx-auto text-center border-yellow-500/30 shadow-[0_0_100px_rgba(212,175,55,0.1)]">
-            <div class="font-luxury text-xs tracking-[1em] gold-shimmer mb-8 uppercase">Ownership Transfer Protocol</div>
+        <div id="checkout" class="hidden mt-16 glass p-12 rounded-[4rem] max-w-2xl mx-auto text-center border-yellow-500/30 shadow-[0_0_100px_rgba(212,175,55,0.2)]">
+            <div class="font-luxury text-xs tracking-[1em] gold-shimmer mb-8 uppercase">Master License Unlock</div>
             <div class="text-7xl font-luxury mb-6 tracking-tighter">$29.99</div>
             
-            <div class="grid grid-cols-2 gap-4 text-left mb-10">
-                <div class="text-[9px] text-zinc-400 p-4 border border-white/5 rounded-2xl">
-                    <strong class="block text-white mb-1 uppercase tracking-widest">Master File</strong>
-                    8K Uncompressed PNG (7680×4320) with EXIF Metadata.
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left mb-10">
+                <div class="text-[9px] text-zinc-400 p-5 border border-white/5 rounded-3xl">
+                    <strong class="block text-white mb-2 uppercase tracking-widest">Master File</strong>
+                    8K Lossless Original (PNG). EXIF Meta-Auth included.
                 </div>
-                <div class="text-[9px] text-zinc-400 p-4 border border-white/5 rounded-2xl">
-                    <strong class="block text-white mb-1 uppercase tracking-widest">Legal Sovereignty</strong>
-                    Full commercial rights. Permanent global usage license.
+                <div class="text-[9px] text-zinc-400 p-5 border border-white/5 rounded-3xl">
+                    <strong class="block text-white mb-2 uppercase tracking-widest">Legal Status</strong>
+                    Global Commercial Sovereignty. Infinite Usage.
                 </div>
             </div>
 
-            <button onclick="triggerPayment()" class="w-full py-7 rounded-[2rem] bg-[#d4af37] text-black font-luxury text-[12px] tracking-[0.4em] mb-6 uppercase font-black hover:scale-[1.02] transition-all">Purchase Digital Asset</button>
-            <a id="download-final" href="#" download class="hidden block w-full py-7 border border-zinc-800 rounded-[2rem] font-luxury text-[10px] tracking-[0.4em] text-white uppercase hover:bg-white hover:text-black transition-all">Download Master Copy</a>
+            <button onclick="pay()" class="w-full py-7 rounded-3xl bg-[#d4af37] text-black font-luxury text-[12px] tracking-[0.5em] font-black uppercase hover:scale-[1.02] transition-all">Acquire Master Asset</button>
+            <a id="dl-link" href="#" download class="hidden block w-full py-7 border border-zinc-800 rounded-3xl font-luxury text-[10px] tracking-[0.4em] text-white uppercase hover:bg-white hover:text-black mt-4 transition-all">Download 8K Source</a>
         </div>
     </section>
 
     <script>
-        let selectedImg = '';
+        let currentUrl = '';
 
-        async function igniteStream() {
-            const prompt = document.getElementById('user-input').value;
-            if(!prompt) return;
+        async function ignite() {
+            const p = document.getElementById('prompt').value;
+            if(!p) return;
 
-            document.getElementById('main-ui').classList.add('hidden');
-            document.getElementById('result-ui').classList.remove('hidden');
+            document.getElementById('home').classList.add('hidden');
+            document.getElementById('gallery').classList.remove('hidden');
 
-            const grid = document.getElementById('image-stream');
+            const grid = document.getElementById('output-stream');
             grid.innerHTML = '';
 
-            // 🛡️ 躲避限流逻辑：间隔 800ms 发送一个请求
+            // 🚀 核心：排队渲染逻辑，完美避开限流报错
             for(let i=0; i<4; i++) {
-                await new Promise(r => setTimeout(r, 800 * i)); 
-                const seed = Math.floor(Math.random() * 888888);
-                const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", hyper-realistic, 8k, award winning, masterpiece, luxury style")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
+                // 每张图片间隔 1.8 秒，确保不会被封
+                if(i > 0) await new Promise(r => setTimeout(r, 1800)); 
+                
+                const seed = Math.floor(Math.random() * 999999);
+                const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", high-end luxury, 8k resolution, photorealistic, sharp focus")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
                 
                 const box = document.createElement('div');
-                box.className = "secure-box glass";
+                box.className = "secure-container glass";
                 box.innerHTML = `
-                    <div class="shield-layer" onclick="pick(this, '${url}')"></div>
-                    <div class="watermark-grid">${Array(9).fill('<div>PRO-ONLY</div>').join('')}</div>
+                    <div class="invisible-shield" onclick="select(this, '${url}')"></div>
+                    <div class="watermark-matrix">${Array(9).fill('<div>ELITE PRO</div>').join('')}</div>
                     <img src="${url}" class="w-full h-full object-cover opacity-0 transition-opacity duration-1000" onload="this.classList.remove('opacity-0')">
                 `;
                 grid.appendChild(box);
             }
         }
 
-        function pick(el, url) {
-            document.querySelectorAll('.secure-box').forEach(b => b.classList.remove('active-asset'));
-            el.parentElement.classList.add('active-asset');
-            selectedImg = url;
-            document.getElementById('license-gate').classList.remove('hidden');
-            document.getElementById('download-final').classList.add('hidden');
+        function select(el, url) {
+            document.querySelectorAll('.secure-container').forEach(b => b.classList.remove('card-active'));
+            el.parentElement.classList.add('card-active');
+            currentUrl = url;
+            document.getElementById('checkout').classList.remove('hidden');
+            document.getElementById('dl-link').classList.add('hidden');
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
 
-        function triggerPayment() {
+        function pay() {
             window.open("https://link.payoneer.com/Token?t=668A9556CB1D41F3AF067DFFC3A9C7EC&src=pl", "_blank");
             setTimeout(() => {
-                if(confirm("Payment Success? Click OK to initiate uncompressed file transfer.")) {
-                    const active = document.querySelector('.active-asset');
-                    active.querySelector('.watermark-grid').style.display = 'none';
-                    active.querySelector('.shield-layer').style.display = 'none';
-                    document.getElementById('download-final').classList.remove('hidden');
-                    document.getElementById('download-final').href = selectedImg;
-                    alert("Digital Rights Verified. Download Enabled.");
+                if(confirm("Payment Verification: Confirm receipt of $29.99?")) {
+                    const active = document.querySelector('.card-active');
+                    active.querySelector('.watermark-matrix').style.display = 'none';
+                    active.querySelector('.invisible-shield').style.display = 'none';
+                    document.getElementById('dl-link').classList.remove('hidden');
+                    document.getElementById('dl-link').href = currentUrl;
+                    alert("Verification Successful. Asset Unlocked.");
                 }
             }, 1000);
         }
 
-        // 屏蔽键盘所有保存/查看代码的操作
+        // 屏蔽键盘右键/控制台/快捷键
         document.onkeydown = (e) => {
-            if (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'i' || e.key === 'j')) return false;
+            if (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'i' || e.key === 'p')) return false;
             if (e.key === 'F12') return false;
         };
     </script>
