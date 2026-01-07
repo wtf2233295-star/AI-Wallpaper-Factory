@@ -12,83 +12,83 @@
         .gold-shimmer { background: linear-gradient(90deg, #d4af37, #fff, #d4af37); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 5s linear infinite; }
         @keyframes shine { to { background-position: 200% center; } }
         .glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.2); backdrop-filter: blur(40px); }
-        .btn-gold { background: #d4af37; color: #000; font-family: 'Cinzel', serif; transition: all 0.4s; }
-        .btn-gold:hover { transform: scale(1.02); box-shadow: 0 0 40px rgba(212,175,55,0.4); }
+        .btn-gold { background: #d4af37; color: #000; font-family: 'Cinzel', serif; transition: all 0.4s ease-out; }
+        .btn-gold:hover { transform: scale(1.02); box-shadow: 0 0 50px rgba(212,175,55,0.5); background: #fff; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-6 bg-[radial-gradient(circle_at_50%_50%,#111_0%,#000_100%)]">
 
     <nav class="fixed top-0 w-full p-10 flex justify-center opacity-40">
-        <div class="font-luxury text-[10px] tracking-[0.8em] gold-shimmer uppercase">AI-Wallpaper-Factory v2.0</div>
+        <div class="font-luxury text-[10px] tracking-[0.8em] gold-shimmer uppercase">Architect Factory v2.0</div>
     </nav>
 
-    <main id="ui-main" class="w-full max-w-xl text-center z-10">
+    <main id="input-stage" class="w-full max-w-xl text-center z-10 transition-all duration-700">
         <h1 class="font-luxury text-6xl mb-6 tracking-tighter">AI <span class="gold-shimmer">ELITE</span></h1>
-        <p class="text-zinc-600 text-[9px] tracking-[0.5em] mb-12 uppercase font-bold">Infinite High-Definition Asset Engine</p>
+        <p class="text-zinc-600 text-[9px] tracking-[0.5em] mb-12 uppercase font-bold">Flux-Powered Infinite Asset Engine</p>
         
         <div class="glass p-1 rounded-[2.5rem] mb-10 shadow-2xl">
-            <textarea id="user-prompt" rows="3" 
-                      placeholder="DESCRIBE YOUR VISION..." 
+            <textarea id="desc-input" rows="3" 
+                      placeholder="ENTER YOUR VISION..." 
                       class="w-full bg-transparent border-none text-white text-center text-xl focus:outline-none resize-none p-12 font-light tracking-wide"></textarea>
         </div>
 
-        <button onclick="ignite()" class="btn-gold w-full py-8 rounded-full text-[10px] tracking-[0.6em] font-black uppercase shadow-2xl">Start Neural Rendering</button>
+        <button onclick="generate()" class="btn-gold w-full py-8 rounded-full text-[10px] tracking-[0.6em] font-black uppercase shadow-2xl">Initiate Neural Render</button>
     </main>
 
-    <section id="ui-result" class="hidden w-full max-w-lg z-10 opacity-0 transition-all duration-1000 scale-95">
+    <section id="output-stage" class="hidden w-full max-w-lg z-10 opacity-0 transition-all duration-1000 scale-95">
         <div class="glass p-4 rounded-[3.5rem]">
             <div class="relative aspect-square rounded-[2.8rem] overflow-hidden bg-black shadow-inner">
-                <img id="render-img" class="w-full h-full object-cover transition-all duration-[3s]">
-                <div id="loading-spinner" class="absolute inset-0 flex flex-col items-center justify-center bg-black">
-                    <div class="w-12 h-12 border-2 border-yellow-500/10 border-t-yellow-500 rounded-full animate-spin mb-4"></div>
-                    <p class="font-luxury text-[8px] tracking-[1em] text-yellow-500 animate-pulse uppercase">Rendering Asset</p>
+                <img id="final-image" class="w-full h-full object-cover">
+                <div id="loading-overlay" class="absolute inset-0 flex flex-col items-center justify-center bg-black">
+                    <div class="w-12 h-12 border-2 border-yellow-500/10 border-t-yellow-500 rounded-full animate-spin mb-6"></div>
+                    <p class="font-luxury text-[8px] tracking-[1em] text-yellow-500 animate-pulse uppercase">Syncing Neural Nodes</p>
                 </div>
             </div>
             
-            <div id="payment-box" class="hidden mt-10 px-6 pb-6 text-center">
+            <div id="action-box" class="hidden mt-10 px-6 pb-6 text-center animate-fade-in">
                 <div class="text-4xl font-luxury mb-2 tracking-widest text-white">$29.99</div>
-                <button onclick="pay()" class="w-full py-6 rounded-2xl bg-[#d4af37] text-black font-luxury text-[10px] tracking-[0.4em] mb-4 uppercase font-bold shadow-xl">Unlock 8K Masterpiece</button>
-                <a id="download-link" href="#" download class="hidden block w-full py-6 border border-zinc-800 rounded-2xl font-luxury text-[10px] tracking-[0.4em] text-zinc-500 hover:text-white uppercase transition-all">Save to Device</a>
+                <p class="text-zinc-600 text-[8px] tracking-[0.4em] mb-10 uppercase italic">Full Commercial Sovereignty</p>
+                <button onclick="payNow()" class="w-full py-6 rounded-2xl bg-[#d4af37] text-black font-luxury text-[10px] tracking-[0.4em] mb-6 uppercase font-bold shadow-xl">Unlock 8K Asset</button>
+                <a id="download-trigger" href="#" download class="hidden block w-full py-6 border border-zinc-800 rounded-2xl font-luxury text-[10px] tracking-[0.4em] text-zinc-500 hover:text-white uppercase">Download High-Res</a>
             </div>
         </div>
     </section>
 
     <script>
-        function ignite() {
-            const prompt = document.getElementById('user-prompt').value;
+        function generate() {
+            const prompt = document.getElementById('desc-input').value;
             if(!prompt) return;
 
-            // UI 转换
-            document.getElementById('ui-main').classList.add('hidden');
-            const resView = document.getElementById('ui-result');
-            resView.classList.remove('hidden');
-            setTimeout(() => { resView.classList.add('opacity-100', 'scale-100'); }, 50);
+            // UI 切换
+            document.getElementById('input-stage').classList.add('hidden');
+            const outputView = document.getElementById('output-stage');
+            outputView.classList.remove('hidden');
+            setTimeout(() => { outputView.classList.add('opacity-100', 'scale-100'); }, 50);
 
-            // 👑 终极免密钥方案：使用 Pollinations 流式生成
-            // 这种方式 GitHub 永远无法拦截
-            const seed = Math.floor(Math.random() * 1000000);
-            const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
+            // 🚀 核心：使用 Pollinations 免密钥流式调用 (支持 Flux 模型)
+            const seed = Math.floor(Math.random() * 999999);
+            const fluxUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", high-end luxury fashion photography, cinematic 8k, detailed texture")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
 
-            const img = document.getElementById('render-img');
-            img.src = imageUrl;
+            const img = document.getElementById('final-image');
+            img.src = fluxUrl;
 
             img.onload = () => {
-                document.getElementById('loading-spinner').classList.add('hidden');
-                document.getElementById('payment-box').classList.remove('hidden');
-                document.getElementById('download-link').href = imageUrl;
+                document.getElementById('loading-overlay').classList.add('hidden');
+                document.getElementById('action-box').classList.remove('hidden');
+                document.getElementById('download-trigger').href = fluxUrl;
             };
 
             img.onerror = () => {
-                alert("Neural link busy. Retrying...");
+                alert("Cloud latency. Re-initiating...");
                 location.reload();
             };
         }
 
-        function pay() {
+        function payNow() {
             window.open("https://link.payoneer.com/Token?t=668A9556CB1D41F3AF067DFFC3A9C7EC&src=pl", "_blank");
             setTimeout(() => {
-                if(confirm("Verify payment? Click OK to reveal the high-resolution asset.")) {
-                    document.getElementById('download-link').classList.remove('hidden');
+                if(confirm("Verify payment? OK will reveal the master asset.")) {
+                    document.getElementById('download-trigger').classList.remove('hidden');
                 }
             }, 1000);
         }
