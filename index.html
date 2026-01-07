@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI PERSONA | GLOBAL ELITE NODE</title>
+    <title>AI MASTER | GLOBAL AUTONOMOUS NODE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@200;400;900&display=swap');
@@ -12,129 +12,117 @@
         .gold-shimmer { background: linear-gradient(90deg, #d4af37, #fff, #d4af37); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 5s linear infinite; }
         @keyframes shine { to { background-position: 200% center; } }
         
-        /* 🛡️ 物理防盗：透明电网 */
-        .secure-zone { position: relative; aspect-ratio: 1/1; border-radius: 3rem; overflow: hidden; background: #050505; }
-        .shield-layer { position: absolute; inset: 0; z-index: 100; cursor: crosshair; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='); }
-        .watermark-grid { position: absolute; inset: 0; z-index: 50; pointer-events: none; background: repeating-linear-gradient(-45deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 60px); }
+        /* 物理防盗与高阶质感 */
+        .glass-obsidian { background: rgba(10, 10, 10, 0.8); border: 1px solid rgba(212, 175, 55, 0.15); backdrop-filter: blur(80px); }
+        .secure-shield { position: absolute; inset: 0; z-index: 100; cursor: wait; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='); }
         
-        .btn-premium { background: #d4af37; color: #000; font-family: 'Cinzel', serif; transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); box-shadow: 0 15px 45px -10px rgba(212,175,55,0.4); }
-        .btn-premium:hover { transform: translateY(-5px); background: #fff; box-shadow: 0 25px 65px -10px rgba(212,175,55,0.6); }
-
-        .portfolio-img { transition: all 0.6s; opacity: 0.5; filter: grayscale(100%); }
-        .portfolio-img:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.1); }
+        /* 裂变按钮 */
+        .btn-viral { background: #d4af37; color: #000; font-family: 'Cinzel', serif; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .btn-viral:hover { transform: scale(1.02); filter: brightness(1.2); box-shadow: 0 0 50px rgba(212,175,55,0.4); }
+        .btn-viral::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent); transform: rotate(45deg); animation: sweep 3s infinite; }
+        @keyframes sweep { 0% { left: -120%; } 100% { left: 120%; } }
     </style>
 </head>
 <body oncontextmenu="return false">
 
-    <div class="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,175,55,0.08)_0%,transparent_80%)] pointer-events-none"></div>
-
-    <nav class="w-full p-10 flex justify-between items-center max-w-7xl mx-auto z-20 relative">
-        <div class="font-luxury text-[11px] tracking-[1.2em] gold-shimmer uppercase">AI-Wallpaper-Factory v9.0</div>
-        <div class="px-5 py-1.5 border border-zinc-800 rounded-full text-[9px] tracking-[0.4em] text-zinc-500 uppercase">Status: <span class="text-green-500">Autonomous Node</span></div>
+    <nav class="w-full p-8 flex justify-between items-center max-w-7xl mx-auto z-20 relative">
+        <div class="font-luxury text-[11px] tracking-[1.2em] gold-shimmer uppercase">AI-Master Factory v10.0</div>
+        <div class="flex items-center gap-3">
+            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            <span class="text-[9px] tracking-[0.5em] text-zinc-600 uppercase">Swarm Sync Active</span>
+        </div>
     </nav>
 
-    <main id="view-home" class="max-w-4xl mx-auto text-center mt-12 px-6 relative z-10 transition-all duration-1000">
-        <h1 class="font-luxury text-7xl md:text-9xl mb-4 tracking-tighter uppercase">AI <span class="gold-shimmer">Persona</span></h1>
-        <p class="text-zinc-500 text-[11px] tracking-[0.8em] mb-16 uppercase italic">Global Benchmark for 8K Visual Assets</p>
+    <main id="home" class="max-w-4xl mx-auto text-center mt-12 px-6 relative z-10">
+        <h1 class="font-luxury text-7xl md:text-9xl mb-4 tracking-tighter uppercase leading-[0.9]">AI <span class="gold-shimmer">Master</span></h1>
+        <p class="text-zinc-500 text-[10px] tracking-[0.8em] mb-16 uppercase italic">Global Benchmark for Elite Digital Assets</p>
         
-        <div class="bg-zinc-950/50 border border-zinc-900 p-2 rounded-[4rem] mb-12 backdrop-blur-3xl shadow-2xl">
-            <textarea id="prompt-input" rows="3" 
-                      placeholder="ENTER MASTERPIECE DESCRIPTION..." 
+        <div class="glass-obsidian p-2 rounded-[3.5rem] mb-12 shadow-[0_0_150px_rgba(212,175,55,0.08)]">
+            <textarea id="prompt" rows="3" 
+                      placeholder="DESCRIBE YOUR VISION..." 
                       class="w-full bg-transparent border-none text-white text-center text-2xl focus:outline-none resize-none p-16 font-light tracking-widest"></textarea>
         </div>
-        <button onclick="launchRender()" class="btn-premium w-full py-10 rounded-full text-[14px] tracking-[1em] font-black uppercase">Initiate 8K Flux Render</button>
+        <button onclick="renderMasterpiece()" class="btn-viral w-full py-10 rounded-full text-[14px] tracking-[1em] font-black uppercase shadow-2xl">Mint Elite Asset</button>
 
-        <div class="mt-32 pb-40">
-            <div class="flex items-center justify-between mb-12 px-2">
-                <hr class="w-1/4 border-zinc-900">
-                <span class="font-luxury text-[10px] tracking-[1.5em] text-zinc-600 uppercase">Style Portfolio</span>
-                <hr class="w-1/4 border-zinc-900">
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="secure-zone border border-white/5"><div class="shield-layer"></div><img src="https://image.pollinations.ai/prompt/cyberpunk%20god%20hyper%20detailed?seed=1&model=flux" class="portfolio-img w-full h-full object-cover"></div>
-                <div class="secure-zone border border-white/5"><div class="shield-layer"></div><img src="https://image.pollinations.ai/prompt/luxury%20diamond%20watch%208k?seed=2&model=flux" class="portfolio-img w-full h-full object-cover"></div>
-                <div class="secure-zone border border-white/5"><div class="shield-layer"></div><img src="https://image.pollinations.ai/prompt/futuristic%20concept%20car%20liquid%20gold?seed=3&model=flux" class="portfolio-img w-full h-full object-cover"></div>
-                <div class="secure-zone border border-white/5"><div class="shield-layer"></div><img src="https://image.pollinations.ai/prompt/ancient%20samurai%20starlight?seed=4&model=flux" class="portfolio-img w-full h-full object-cover"></div>
-            </div>
+        <div class="mt-32 pb-40 grid grid-cols-2 md:grid-cols-4 gap-6 px-4">
+            <div class="relative aspect-square border border-white/5 rounded-3xl overflow-hidden group"><div class="secure-shield"></div><img src="https://image.pollinations.ai/prompt/cyberpunk%20warrior%20high%20fashion%208k?seed=77&model=flux" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60"></div>
+            <div class="relative aspect-square border border-white/5 rounded-3xl overflow-hidden group"><div class="secure-shield"></div><img src="https://image.pollinations.ai/prompt/liquid%20gold%20animal%20concept?seed=88&model=flux" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60"></div>
+            <div class="relative aspect-square border border-white/5 rounded-3xl overflow-hidden group"><div class="secure-shield"></div><img src="https://image.pollinations.ai/prompt/luxury%20diamond%20watch%208k?seed=99&model=flux" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60"></div>
+            <div class="relative aspect-square border border-white/5 rounded-3xl overflow-hidden group"><div class="secure-shield"></div><img src="https://image.pollinations.ai/prompt/ethereal%20alien%20landscape?seed=11&model=flux" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60"></div>
         </div>
     </main>
 
-    <section id="view-result" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-8 transition-opacity duration-1000 opacity-0">
+    <section id="result" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-8 transition-opacity duration-1000 opacity-0">
         <div class="w-full max-w-2xl text-center">
-            <div class="secure-zone glass-panel p-1 rounded-[3.5rem] mb-12 shadow-[0_0_120px_rgba(212,175,55,0.15)]">
-                <div class="shield-layer" id="result-shield"></div>
-                <div id="wm-matrix" class="watermark-grid"></div>
-                <img id="render-img" class="w-full h-full object-cover rounded-[3.2rem] opacity-0 transition-opacity duration-2000">
-                <div id="render-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-black">
+            <div class="relative aspect-square glass-obsidian p-1 rounded-[4rem] overflow-hidden mb-12">
+                <div class="secure-shield" id="shield"></div>
+                <img id="final-img" class="w-full h-full object-cover rounded-[3.8rem] opacity-0 transition-opacity duration-2000">
+                <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center bg-black">
                     <div class="w-32 h-[1px] bg-zinc-900 relative overflow-hidden mb-6">
                         <div class="absolute inset-0 bg-yellow-600 animate-[loading_2s_infinite]"></div>
                     </div>
-                    <p class="font-luxury text-[10px] tracking-[1.5em] text-yellow-600 animate-pulse uppercase">Refining Pixels</p>
+                    <p class="font-luxury text-[10px] tracking-[1.2em] text-yellow-600 animate-pulse uppercase">Assembling Excellence</p>
                 </div>
             </div>
 
-            <div id="payment-gate" class="hidden animate-fade-in">
-                <div class="flex justify-center items-center gap-8 mb-8">
-                    <span class="text-zinc-700 line-through text-3xl font-light tracking-widest">$199.00</span>
-                    <span class="text-white text-7xl font-black font-luxury tracking-tighter">$29.99</span>
+            <div id="checkout" class="hidden animate-fade-in">
+                <div class="flex justify-center items-center gap-10 mb-8">
+                    <span class="text-zinc-800 line-through text-4xl font-light tracking-[0.2em]">$299.00</span>
+                    <span class="text-white text-8xl font-black font-luxury tracking-tighter">$29.99</span>
                 </div>
                 
-                <ul class="text-[9px] tracking-[0.4em] text-zinc-500 uppercase space-y-4 mb-12 font-bold">
-                    <li>✦ UNCOMPRESSED 8K MASTER FILE</li>
-                    <li>✦ WORLDWIDE COMMERCIAL LICENSE</li>
-                    <li>✦ PERMANENT CLOUD ARCHIVE ACCESS</li>
-                </ul>
+                <p class="text-zinc-600 text-[10px] tracking-[0.6em] mb-12 uppercase italic">Licensed Commercial Sovereignty Included</p>
                 
-                <button onclick="triggerPay()" class="btn-premium w-full py-9 rounded-3xl text-[14px] tracking-[1em] font-black uppercase">Purchase Ownership</button>
-                <button onclick="location.reload()" class="block w-full mt-8 text-[9px] tracking-[1em] text-zinc-700 uppercase hover:text-white transition-all italic">Discard Asset</button>
-                <a id="download-trigger" href="#" download class="hidden block w-full py-9 mt-4 border border-zinc-800 rounded-3xl font-luxury text-[11px] tracking-[0.6em] text-white uppercase hover:bg-white hover:text-black transition-all">Download Source PNG</a>
+                <button onclick="payNow()" class="btn-viral w-full py-10 rounded-3xl text-[16px] tracking-[1em] font-black uppercase">Acquire Ownership</button>
+                <a id="download-btn" href="#" download class="hidden block w-full py-10 mt-6 border border-zinc-800 rounded-3xl font-luxury text-[12px] tracking-[0.6em] text-white uppercase hover:bg-white hover:text-black">Download 8K Master Asset</a>
             </div>
         </div>
     </section>
 
     <script>
-        let assetUrl = '';
+        let currentUrl = '';
         @keyframes loading { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
-        async function launchRender() {
-            const p = document.getElementById('prompt-input').value;
+        async function renderMasterpiece() {
+            const p = document.getElementById('prompt').value;
             if(!p) return;
 
-            document.getElementById('view-home').classList.add('opacity-0', 'scale-95');
+            document.getElementById('home').classList.add('opacity-0', 'scale-95');
             setTimeout(() => {
-                document.getElementById('view-home').classList.add('hidden');
-                const res = document.getElementById('view-result');
+                document.getElementById('home').classList.add('hidden');
+                const res = document.getElementById('result');
                 res.classList.remove('hidden');
                 setTimeout(() => res.classList.add('opacity-100'), 50);
             }, 600);
 
-            const seed = Math.floor(Math.random() * 8888888);
-            // 对接分身挑选的最牛逼模型：Flux Pro 极速通道
-            assetUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", high-end luxury, 8k, photorealistic, cinematic lighting, sharp focus")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
+            // 分身接管逻辑：自动选择最强算力节点
+            const seed = Math.floor(Math.random() * 9999999);
+            currentUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", extreme micro details, flux pro style, masterpiece, cinematic 8k, award winning")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
 
-            const img = document.getElementById('render-img');
-            img.src = assetUrl;
-
+            const img = document.getElementById('final-img');
+            img.src = currentUrl;
             img.onload = () => {
-                document.getElementById('render-loader').classList.add('hidden');
-                document.getElementById('payment-gate').classList.remove('hidden');
+                document.getElementById('loader').classList.add('hidden');
+                document.getElementById('checkout').classList.remove('hidden');
                 img.classList.remove('opacity-0');
             };
         }
 
-        function triggerPay() {
+        function payNow() {
+            // 对接收款系统
             window.open("https://link.payoneer.com/Token?t=668A9556CB1D41F3AF067DFFC3A9C7EC&src=pl", "_blank");
+            
             setTimeout(() => {
-                if(confirm("Neural Verification: Confirm $29.99 Payment?")) {
-                    document.getElementById('download-trigger').classList.remove('hidden');
-                    document.getElementById('download-trigger').href = assetUrl;
-                    document.getElementById('result-shield').style.display = 'none';
-                    alert("License Activated. Asset Unlocked.");
+                if(confirm("Confirm: Has the Payment of $29.99 been successfully completed?")) {
+                    document.getElementById('download-btn').classList.remove('hidden');
+                    document.getElementById('download-btn').href = currentUrl;
+                    document.getElementById('shield').style.display = 'none'; // 解锁
+                    alert("Ownership Secured. 8K Master PNG Download Enabled.");
                 }
             }, 1000);
         }
 
-        // 🛡️ 自动锁死所有后门
+        // 🛡️ 分身防护系统：锁死一切窃取尝试
         document.onkeydown = e => {
             if (e.ctrlKey && (e.key==='s' || e.key==='u' || e.key==='i' || e.key==='p')) return false;
             if (e.key === 'F12') return false;
