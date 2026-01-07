@@ -3,102 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI WALLPAPER | LIFETIME FREE PRO</title>
+    <title>AI WALLPAPER | ELITE LICENSE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;900&display=swap');
-        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; user-select: none; overflow-x: hidden; }
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;600;900&display=swap');
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; user-select: none; overflow: hidden; -webkit-tap-highlight-color: transparent; }
         .font-luxury { font-family: 'Cinzel', serif; }
         .gold-shimmer { background: linear-gradient(90deg, #d4af37, #fff, #d4af37); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 5s linear infinite; }
         @keyframes shine { to { background-position: 200% center; } }
         .glass { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(212, 175, 55, 0.15); backdrop-filter: blur(40px); }
         
-        /* 🛡️ 暴力物理防盗层：右键保存无效 */
-        .secure-container { position: relative; aspect-ratio: 1/1; border-radius: 2.5rem; overflow: hidden; background: #050505; }
-        .invisible-shield { position: absolute; inset: 0; z-index: 100; cursor: crosshair; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='); }
+        /* 🛡️ 物理屏障：禁止一切右键保存行为 */
+        .secure-wrapper { position: relative; aspect-ratio: 1/1; border-radius: 2.5rem; overflow: hidden; background: #050505; border: 1px solid rgba(255,255,255,0.05); }
+        .shield { position: absolute; inset: 0; z-index: 100; cursor: wait; background: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); }
+        .watermark { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 8px; color: rgba(255,255,255,0.08); transform: rotate(-30deg); pointer-events: none; z-index: 50; white-space: nowrap; font-weight: 900; letter-spacing: 4px; }
         
-        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 15px #22c55e; }
+        .btn-pay { background: #d4af37; color: #000; font-family: 'Cinzel', serif; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .btn-pay:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(212,175,55,0.5); }
     </style>
 </head>
 <body oncontextmenu="return false">
 
-    <nav class="p-8 flex justify-between items-center max-w-6xl mx-auto opacity-60">
-        <div class="font-luxury text-[10px] tracking-[0.8em] gold-shimmer uppercase">Elite Asset Node</div>
-        <div class="flex items-center gap-3 text-[9px] tracking-[0.4em] uppercase">
-            <div class="status-dot animate-pulse"></div> Node Secured
+    <nav class="w-full p-8 flex justify-between items-center max-w-6xl mx-auto">
+        <div class="font-luxury text-[10px] tracking-[0.8em] gold-shimmer uppercase">Architect Factory v6.1</div>
+        <div class="flex items-center gap-2">
+            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <span class="text-[8px] tracking-widest text-zinc-500">8K SECURE NODE</span>
         </div>
     </nav>
 
-    <main id="home" class="max-w-2xl mx-auto text-center mt-20 px-6">
-        <h1 class="font-luxury text-7xl mb-4 tracking-tighter">AI <span class="gold-shimmer">ELITE</span></h1>
-        <p class="text-zinc-600 text-[10px] tracking-[0.6em] mb-12 uppercase">Professional 8K Wallpaper Factory</p>
+    <main id="ui-home" class="max-w-2xl mx-auto text-center mt-12 px-6 transition-all duration-700">
+        <h1 class="font-luxury text-6xl mb-4 tracking-tighter uppercase">AI <span class="gold-shimmer">Persona</span></h1>
+        <p class="text-zinc-600 text-[10px] tracking-[0.5em] mb-12 uppercase italic font-bold">The World's Finest Digital Identity Factory</p>
         
         <div class="glass p-1 rounded-[3rem] mb-10 shadow-2xl">
-            <textarea id="prompt" rows="3" 
-                      placeholder="DESCRIBE YOUR MASTERPIECE..." 
+            <textarea id="prompt-txt" rows="3" 
+                      placeholder="ENTER YOUR VISION..." 
                       class="w-full bg-transparent border-none text-white text-center text-xl focus:outline-none resize-none p-12 font-light tracking-wide"></textarea>
         </div>
-        <button onclick="ignite()" class="w-full py-8 rounded-full bg-[#d4af37] text-black font-luxury text-[11px] tracking-[0.6em] font-black uppercase hover:bg-white transition-all shadow-2xl">Create 8K Asset (Free)</button>
+        <button onclick="ignite()" class="w-full py-8 rounded-full bg-[#d4af37] text-black font-luxury text-[12px] tracking-[0.6em] font-black uppercase hover:bg-white transition-all shadow-2xl">Initialize Master Render</button>
     </main>
 
-    <section id="result" class="hidden max-w-xl mx-auto mt-12 px-6 pb-32 transition-all duration-1000 opacity-0 scale-95">
-        <div class="secure-container glass p-1">
-            <div class="invisible-shield"></div>
-            <img id="final-img" src="" class="w-full h-full object-cover rounded-[2.4rem] opacity-0 transition-opacity duration-1000">
-            <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-md">
-                <div class="w-12 h-12 border-2 border-yellow-500/10 border-t-yellow-500 rounded-full animate-spin mb-6"></div>
-                <p class="font-luxury text-[8px] tracking-[1em] text-yellow-500 animate-pulse uppercase">Neural Rendering</p>
+    <section id="ui-result" class="hidden max-w-xl mx-auto mt-6 px-6 pb-20 opacity-0 transition-all duration-1000">
+        <div class="secure-wrapper glass p-1 mb-10">
+            <div class="shield"></div>
+            <div id="wm" class="watermark">UNLICENSED PREVIEW ● UNLICENSED PREVIEW</div>
+            <img id="main-img" src="" class="w-full h-full object-cover rounded-[2.3rem] opacity-0 transition-opacity duration-[2000ms]">
+            <div id="loading" class="absolute inset-0 flex flex-col items-center justify-center bg-black/80">
+                <div class="w-16 h-1 bg-zinc-800 rounded-full overflow-hidden mb-4 w-40">
+                    <div class="h-full bg-yellow-600 animate-[loading_3s_ease-in-out_infinite]"></div>
+                </div>
+                <p class="font-luxury text-[8px] tracking-[1em] text-yellow-500 animate-pulse">SYNCING NEURAL CORES</p>
             </div>
         </div>
 
-        <div id="pricing" class="hidden mt-12 glass p-12 rounded-[4rem] text-center border-green-500/20 shadow-[0_0_100px_rgba(34,197,94,0.1)]">
-            <div class="font-luxury text-xs tracking-[1em] text-green-500 mb-6 uppercase">Special Offer Active</div>
-            <div class="text-7xl font-luxury mb-4 tracking-tighter">$0.00</div>
-            <p class="text-zinc-500 text-[10px] tracking-widest mb-10 uppercase italic">Lifetime Free Access For Early Supporters</p>
+        <div id="offer" class="hidden glass p-10 rounded-[3.5rem] text-center border-yellow-600/20 animate-fade-in">
+            <div class="flex justify-center gap-4 mb-6">
+                <span class="text-zinc-600 line-through text-xl font-light">$99.00</span>
+                <span class="text-white text-4xl font-black font-luxury tracking-widest">$0.00</span>
+            </div>
+            <p class="text-[9px] tracking-[0.5em] text-zinc-400 mb-10 uppercase italic">Limited Lifetime Free License For New Members</p>
             
-            <button id="unlock-btn" onclick="unlock()" class="w-full py-7 rounded-3xl bg-white text-black font-luxury text-[12px] tracking-[0.5em] font-black uppercase hover:bg-[#d4af37] transition-all">Claim 8K Asset</button>
-            <a id="dl-link" href="#" download class="hidden block w-full py-7 border border-zinc-800 rounded-3xl font-luxury text-[10px] tracking-[0.5em] text-white uppercase hover:bg-white hover:text-black mt-4 transition-all">Download Master Source</a>
+            <ul class="text-left text-[8px] tracking-widest text-zinc-500 space-y-3 mb-10 uppercase">
+                <li class="flex items-center gap-2"><span class="text-yellow-600">✔</span> 8K Uncompressed Original File</li>
+                <li class="flex items-center gap-2"><span class="text-yellow-600">✔</span> Worldwide Commercial Sovereignty</li>
+                <li class="flex items-center gap-2"><span class="text-yellow-600">✔</span> Lifetime Cloud Preservation</li>
+            </ul>
+
+            <button id="pay-btn" onclick="checkout()" class="btn-pay w-full py-7 rounded-2xl text-[12px] tracking-[0.5em] font-black uppercase">Claim Personal Ownership</button>
+            <a id="dl-btn" href="#" download class="hidden block w-full py-7 border border-zinc-700 rounded-2xl font-luxury text-[10px] tracking-[0.5em] text-white uppercase hover:bg-white hover:text-black transition-all">Download Master Asset</a>
         </div>
     </section>
 
     <script>
-        let imgUrl = '';
+        let finalUrl = '';
+        
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
 
         function ignite() {
-            const p = document.getElementById('prompt').value;
+            const p = document.getElementById('prompt-txt').value;
             if(!p) return;
 
-            document.getElementById('home').classList.add('hidden');
-            const res = document.getElementById('result');
+            document.getElementById('ui-home').classList.add('hidden');
+            const res = document.getElementById('ui-result');
             res.classList.remove('hidden');
-            setTimeout(() => { res.classList.add('opacity-100', 'scale-100'); }, 50);
+            setTimeout(() => res.classList.add('opacity-100'), 50);
 
             const seed = Math.floor(Math.random() * 999999);
-            // 只生成一张，极致画质且躲避限流
-            imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", extreme detail, photorealistic, 8k resolution, luxury style")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
+            // 精准调用一张 8K 图片，规避屏蔽
+            finalUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", high-end luxury, 8k, photorealistic, cinematic lighting, masterpiece")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
 
-            const img = document.getElementById('final-img');
-            img.src = imgUrl;
+            const img = document.getElementById('main-img');
+            img.src = finalUrl;
 
             img.onload = () => {
-                document.getElementById('loader').classList.add('hidden');
-                document.getElementById('pricing').classList.remove('hidden');
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('offer').classList.remove('hidden');
                 img.classList.remove('opacity-0');
             };
         }
 
-        function unlock() {
-            document.getElementById('unlock-btn').classList.add('hidden');
-            document.getElementById('dl-link').classList.remove('hidden');
-            document.getElementById('dl-link').href = imgUrl;
-            document.querySelector('.invisible-shield').style.display = 'none';
-            alert("Success: 8K Asset Unlocked for Free.");
+        function checkout() {
+            // 即便免费，也要走仪式感
+            document.getElementById('pay-btn').innerText = "VERIFYING LICENSE...";
+            setTimeout(() => {
+                if(confirm("SUCCESS: 8K Commercial License Granted. Proceed to secure download?")) {
+                    document.getElementById('pay-btn').classList.add('hidden');
+                    document.getElementById('dl-btn').classList.remove('hidden');
+                    document.getElementById('dl-btn').href = finalUrl;
+                    document.getElementById('wm').style.display = 'none';
+                    document.querySelector('.shield').style.display = 'none';
+                } else {
+                    document.getElementById('pay-btn').innerText = "CLAIM PERSONAL OWNERSHIP";
+                }
+            }, 1500);
         }
 
-        // 屏蔽键盘与代码
+        // 终极锁死：屏蔽一切右键与保存快捷键
         document.onkeydown = (e) => {
-            if (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'i' || e.key === 'p')) return false;
+            if (e.ctrlKey && (e.key==='s' || e.key==='u' || e.key==='i' || e.key==='p' || e.key==='j')) return false;
             if (e.key === 'F12') return false;
+        };
+        // 针对移动端长按屏蔽
+        window.oncontextmenu = function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
         };
     </script>
 </body>
