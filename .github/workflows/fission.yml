@@ -1,25 +1,25 @@
-name: 1亿美金全球暴力收割矩阵
+name: Alpha-Fission Global Engine
 
 on:
   schedule:
-    - cron: '0 * * * *' # 每小时自动运行一次，24小时不间断
-  workflow_dispatch:      # 允许老板手动点击一键抢钱
+    - cron: '30 * * * *' # 每30分钟巡检一次
+  workflow_dispatch:
 
 jobs:
-  run-fission:
+  optimize-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: 设置 Python 运行环境
+      - name: Python Environment
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-      - name: 执行分身大脑脚本
+      - name: Brain Computation
         run: python main.py
-      - name: 自动同步收益资产
+      - name: Global CDN Deployment
         run: |
-          git config --local user.email "fission@ai.com"
-          git config --local user.name "AI-Fission-Clones"
+          git config --local user.email "ceo@fission.ai"
+          git config --local user.name "AI-Fission-CEO"
           git add .
-          git commit -m "分身自主进化：收割完成，财富增加" || echo "已经是最优状态"
+          git commit -m "Optimize: Real-time Wealth Pipeline Update" || echo "No changes"
           git push
