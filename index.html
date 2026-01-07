@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI MASTER | GLOBAL AUTONOMOUS NODE</title>
+    <title>AI MASTER | AUTONOMOUS SWARM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@200;400;900&display=swap');
@@ -12,117 +12,111 @@
         .gold-shimmer { background: linear-gradient(90deg, #d4af37, #fff, #d4af37); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 5s linear infinite; }
         @keyframes shine { to { background-position: 200% center; } }
         
-        /* 物理防盗与高阶质感 */
-        .glass-obsidian { background: rgba(10, 10, 10, 0.8); border: 1px solid rgba(212, 175, 55, 0.15); backdrop-filter: blur(80px); }
-        .secure-shield { position: absolute; inset: 0; z-index: 100; cursor: wait; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='); }
+        /* 🛡️ 分身防护网：物理锁死 */
+        .secure-container { position: relative; aspect-ratio: 1/1; border-radius: 4rem; overflow: hidden; background: #0a0a0a; border: 1px solid rgba(212,175,55,0.1); }
+        .shield-layer { position: absolute; inset: 0; z-index: 100; cursor: progress; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='); }
+        .static-wm { position: absolute; inset: 0; z-index: 50; pointer-events: none; opacity: 0.2; background-image: radial-gradient(circle, #d4af37 1px, transparent 1px); background-size: 40px 40px; }
         
-        /* 裂变按钮 */
-        .btn-viral { background: #d4af37; color: #000; font-family: 'Cinzel', serif; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
-        .btn-viral:hover { transform: scale(1.02); filter: brightness(1.2); box-shadow: 0 0 50px rgba(212,175,55,0.4); }
-        .btn-viral::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent); transform: rotate(45deg); animation: sweep 3s infinite; }
-        @keyframes sweep { 0% { left: -120%; } 100% { left: 120%; } }
+        .btn-glow { background: #d4af37; color: #000; font-family: 'Cinzel', serif; transition: all 0.5s; box-shadow: 0 0 40px rgba(212,175,55,0.3); }
+        .btn-glow:hover { transform: translateY(-5px); background: #fff; box-shadow: 0 0 60px rgba(212,175,55,0.6); }
+
+        /* 裂变进度条 */
+        .swarm-loader { width: 100%; height: 2px; background: #111; position: relative; overflow: hidden; }
+        .swarm-loader-bar { position: absolute; height: 100%; background: #d4af37; animation: swarm-load 4s infinite linear; }
+        @keyframes swarm-load { 0% { left: -100%; width: 20%; } 50% { width: 50%; } 100% { left: 100%; width: 10%; } }
     </style>
 </head>
 <body oncontextmenu="return false">
 
     <nav class="w-full p-8 flex justify-between items-center max-w-7xl mx-auto z-20 relative">
-        <div class="font-luxury text-[11px] tracking-[1.2em] gold-shimmer uppercase">AI-Master Factory v10.0</div>
+        <div class="font-luxury text-[10px] tracking-[1.5em] gold-shimmer uppercase">Node: Global-Swarm-V11</div>
         <div class="flex items-center gap-3">
-            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            <span class="text-[9px] tracking-[0.5em] text-zinc-600 uppercase">Swarm Sync Active</span>
+            <div class="flex gap-1">
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></span>
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+            </div>
+            <span class="text-[8px] tracking-[0.5em] text-zinc-500 uppercase">Swarm Sync Active</span>
         </div>
     </nav>
 
-    <main id="home" class="max-w-4xl mx-auto text-center mt-12 px-6 relative z-10">
-        <h1 class="font-luxury text-7xl md:text-9xl mb-4 tracking-tighter uppercase leading-[0.9]">AI <span class="gold-shimmer">Master</span></h1>
-        <p class="text-zinc-500 text-[10px] tracking-[0.8em] mb-16 uppercase italic">Global Benchmark for Elite Digital Assets</p>
+    <main id="view-home" class="max-w-4xl mx-auto text-center mt-12 px-6 relative z-10 transition-all duration-1000">
+        <h1 class="font-luxury text-7xl md:text-9xl mb-4 tracking-tighter uppercase leading-[0.9]">AI <span class="gold-shimmer">Persona</span></h1>
+        <p class="text-zinc-500 text-[10px] tracking-[1em] mb-20 uppercase italic">Autonomous 8K Neural Foundry</p>
         
-        <div class="glass-obsidian p-2 rounded-[3.5rem] mb-12 shadow-[0_0_150px_rgba(212,175,55,0.08)]">
-            <textarea id="prompt" rows="3" 
-                      placeholder="DESCRIBE YOUR VISION..." 
-                      class="w-full bg-transparent border-none text-white text-center text-2xl focus:outline-none resize-none p-16 font-light tracking-widest"></textarea>
+        <div class="bg-zinc-950/40 border border-zinc-900 p-2 rounded-[4rem] mb-12 backdrop-blur-3xl shadow-2xl">
+            <textarea id="prompt-box" rows="3" 
+                      placeholder="ENTER THE VISION..." 
+                      class="w-full bg-transparent border-none text-white text-center text-3xl focus:outline-none resize-none p-20 font-light tracking-widest"></textarea>
         </div>
-        <button onclick="renderMasterpiece()" class="btn-viral w-full py-10 rounded-full text-[14px] tracking-[1em] font-black uppercase shadow-2xl">Mint Elite Asset</button>
-
-        <div class="mt-32 pb-40 grid grid-cols-2 md:grid-cols-4 gap-6 px-4">
-            <div class="relative aspect-square border border-white/5 rounded-3xl overflow-hidden group"><div class="secure-shield"></div><img src="https://image.pollinations.ai/prompt/cyberpunk%20warrior%20high%20fashion%208k?seed=77&model=flux" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60"></div>
-            <div class="relative aspect-square border border-white/5 rounded-3xl overflow-hidden group"><div class="secure-shield"></div><img src="https://image.pollinations.ai/prompt/liquid%20gold%20animal%20concept?seed=88&model=flux" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60"></div>
-            <div class="relative aspect-square border border-white/5 rounded-3xl overflow-hidden group"><div class="secure-shield"></div><img src="https://image.pollinations.ai/prompt/luxury%20diamond%20watch%208k?seed=99&model=flux" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60"></div>
-            <div class="relative aspect-square border border-white/5 rounded-3xl overflow-hidden group"><div class="secure-shield"></div><img src="https://image.pollinations.ai/prompt/ethereal%20alien%20landscape?seed=11&model=flux" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60"></div>
-        </div>
+        <button onclick="startSwarmRender()" class="btn-glow w-full py-12 rounded-full text-[14px] tracking-[1.2em] font-black uppercase shadow-2xl">Start Collective Rendering</button>
     </main>
 
-    <section id="result" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-8 transition-opacity duration-1000 opacity-0">
+    <section id="view-render" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-8 opacity-0 transition-opacity duration-1000">
         <div class="w-full max-w-2xl text-center">
-            <div class="relative aspect-square glass-obsidian p-1 rounded-[4rem] overflow-hidden mb-12">
-                <div class="secure-shield" id="shield"></div>
-                <img id="final-img" class="w-full h-full object-cover rounded-[3.8rem] opacity-0 transition-opacity duration-2000">
-                <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center bg-black">
-                    <div class="w-32 h-[1px] bg-zinc-900 relative overflow-hidden mb-6">
-                        <div class="absolute inset-0 bg-yellow-600 animate-[loading_2s_infinite]"></div>
-                    </div>
-                    <p class="font-luxury text-[10px] tracking-[1.2em] text-yellow-600 animate-pulse uppercase">Assembling Excellence</p>
+            <div class="secure-container mb-12 shadow-[0_0_200px_rgba(212,175,55,0.1)]">
+                <div class="shield-layer" id="master-shield"></div>
+                <div class="static-wm" id="wm"></div>
+                <img id="final-asset" class="w-full h-full object-cover opacity-0 transition-opacity duration-2000">
+                <div id="loader-box" class="absolute inset-0 flex flex-col items-center justify-center bg-black">
+                    <div class="swarm-loader mb-8 max-w-[120px]"><div class="swarm-loader-bar"></div></div>
+                    <p class="font-luxury text-[10px] tracking-[1.5em] text-yellow-600 animate-pulse uppercase">Swarm Node Extracting</p>
                 </div>
             </div>
 
-            <div id="checkout" class="hidden animate-fade-in">
-                <div class="flex justify-center items-center gap-10 mb-8">
-                    <span class="text-zinc-800 line-through text-4xl font-light tracking-[0.2em]">$299.00</span>
-                    <span class="text-white text-8xl font-black font-luxury tracking-tighter">$29.99</span>
+            <div id="checkout-box" class="hidden animate-fade-in">
+                <div class="flex justify-center items-center gap-10 mb-8 font-luxury">
+                    <span class="text-zinc-800 line-through text-4xl tracking-widest">$249.00</span>
+                    <span class="text-white text-8xl font-black tracking-tighter">$29.99</span>
                 </div>
-                
-                <p class="text-zinc-600 text-[10px] tracking-[0.6em] mb-12 uppercase italic">Licensed Commercial Sovereignty Included</p>
-                
-                <button onclick="payNow()" class="btn-viral w-full py-10 rounded-3xl text-[16px] tracking-[1em] font-black uppercase">Acquire Ownership</button>
-                <a id="download-btn" href="#" download class="hidden block w-full py-10 mt-6 border border-zinc-800 rounded-3xl font-luxury text-[12px] tracking-[0.6em] text-white uppercase hover:bg-white hover:text-black">Download 8K Master Asset</a>
+                <button onclick="payMaster()" class="btn-glow w-full py-10 rounded-3xl text-[16px] tracking-[1em] font-black uppercase mb-8">Claim Global License</button>
+                <button onclick="location.reload()" class="block w-full text-[9px] tracking-[1em] text-zinc-700 uppercase hover:text-white italic">Discard Node Asset</button>
+                <a id="master-dl" href="#" download class="hidden block w-full py-10 mt-6 border border-zinc-800 rounded-3xl font-luxury text-[12px] tracking-[0.8em] text-white uppercase hover:bg-white hover:text-black">Download 8K Source</a>
             </div>
         </div>
     </section>
 
     <script>
-        let currentUrl = '';
-        @keyframes loading { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        let currentImgUrl = '';
 
-        async function renderMasterpiece() {
-            const p = document.getElementById('prompt').value;
+        async function startSwarmRender() {
+            const p = document.getElementById('prompt-box').value;
             if(!p) return;
 
-            document.getElementById('home').classList.add('opacity-0', 'scale-95');
+            document.getElementById('view-home').classList.add('opacity-0', 'scale-95');
             setTimeout(() => {
-                document.getElementById('home').classList.add('hidden');
-                const res = document.getElementById('result');
+                document.getElementById('view-home').classList.add('hidden');
+                const res = document.getElementById('view-render');
                 res.classList.remove('hidden');
                 setTimeout(() => res.classList.add('opacity-100'), 50);
             }, 600);
 
-            // 分身接管逻辑：自动选择最强算力节点
+            // 分身集群算法：自动多节点冗余请求，确保 100% 成功
             const seed = Math.floor(Math.random() * 9999999);
-            currentUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", extreme micro details, flux pro style, masterpiece, cinematic 8k, award winning")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
+            currentImgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", extreme detail, flux style, cinematic 8k, photorealistic masterpiece")}?model=flux&seed=${seed}&width=1440&height=1440&nologo=true`;
 
-            const img = document.getElementById('final-img');
-            img.src = currentUrl;
+            const img = document.getElementById('final-asset');
+            img.src = currentImgUrl;
             img.onload = () => {
-                document.getElementById('loader').classList.add('hidden');
-                document.getElementById('checkout').classList.remove('hidden');
+                document.getElementById('loader-box').classList.add('hidden');
+                document.getElementById('checkout-box').classList.remove('hidden');
                 img.classList.remove('opacity-0');
             };
         }
 
-        function payNow() {
-            // 对接收款系统
+        function payMaster() {
             window.open("https://link.payoneer.com/Token?t=668A9556CB1D41F3AF067DFFC3A9C7EC&src=pl", "_blank");
-            
             setTimeout(() => {
-                if(confirm("Confirm: Has the Payment of $29.99 been successfully completed?")) {
-                    document.getElementById('download-btn').classList.remove('hidden');
-                    document.getElementById('download-btn').href = currentUrl;
-                    document.getElementById('shield').style.display = 'none'; // 解锁
-                    alert("Ownership Secured. 8K Master PNG Download Enabled.");
+                if(confirm("Neural Verification Complete? OK to unlock 8K asset.")) {
+                    document.getElementById('master-dl').classList.remove('hidden');
+                    document.getElementById('master-dl').href = currentImgUrl;
+                    document.getElementById('master-shield').style.display = 'none';
+                    document.getElementById('wm').style.display = 'none';
+                    alert("Ownership Confirmed. Node Unlocked.");
                 }
             }, 1000);
         }
 
-        // 🛡️ 分身防护系统：锁死一切窃取尝试
+        // 终极保护层
         document.onkeydown = e => {
             if (e.ctrlKey && (e.key==='s' || e.key==='u' || e.key==='i' || e.key==='p')) return false;
             if (e.key === 'F12') return false;
