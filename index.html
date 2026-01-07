@@ -3,136 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI WALLPAPER | ELITE LICENSE</title>
+    <title>AI ELITE | MASTER LICENSE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;600;900&display=swap');
-        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; user-select: none; overflow: hidden; -webkit-tap-highlight-color: transparent; }
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; user-select: none; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
         .font-luxury { font-family: 'Cinzel', serif; }
         .gold-shimmer { background: linear-gradient(90deg, #d4af37, #fff, #d4af37); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 5s linear infinite; }
         @keyframes shine { to { background-position: 200% center; } }
         .glass { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(212, 175, 55, 0.15); backdrop-filter: blur(40px); }
         
+        /* 粒子背景动画 */
+        .particle-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+        .particle { position: absolute; background: rgba(212, 175, 55, 0.2); border-radius: 50%; animation: float 20s infinite ease-in-out; }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+            50% { transform: translate(100px, 100px) scale(1.2); opacity: 0.8; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+        }
+
         /* 🛡️ 物理屏障：禁止一切右键保存行为 */
         .secure-wrapper { position: relative; aspect-ratio: 1/1; border-radius: 2.5rem; overflow: hidden; background: #050505; border: 1px solid rgba(255,255,255,0.05); }
         .shield { position: absolute; inset: 0; z-index: 100; cursor: wait; background: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'); }
         .watermark { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 8px; color: rgba(255,255,255,0.08); transform: rotate(-30deg); pointer-events: none; z-index: 50; white-space: nowrap; font-weight: 900; letter-spacing: 4px; }
         
-        .btn-pay { background: #d4af37; color: #000; font-family: 'Cinzel', serif; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .btn-pay:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(212,175,55,0.5); }
+        .btn-action { background: #d4af37; color: #000; font-family: 'Cinzel', serif; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .btn-action:hover { transform: scale(1.03); box-shadow: 0 0 30px rgba(212,175,55,0.5); background: #fff; }
+
+        /* 案例图悬停效果 */
+        .case-study-card { transition: all 0.3s ease; transform: scale(1); opacity: 0.7; }
+        .case-study-card:hover { transform: scale(1.05); opacity: 1; border-color: #d4af37; box-shadow: 0 0 25px rgba(212,175,55,0.3); z-index: 10; }
     </style>
 </head>
 <body oncontextmenu="return false">
 
-    <nav class="w-full p-8 flex justify-between items-center max-w-6xl mx-auto">
-        <div class="font-luxury text-[10px] tracking-[0.8em] gold-shimmer uppercase">Architect Factory v6.1</div>
+    <div class="particle-bg" id="particle-container"></div>
+
+    <nav class="w-full p-8 flex justify-between items-center max-w-6xl mx-auto z-20 relative">
+        <div class="font-luxury text-[10px] tracking-[0.8em] gold-shimmer uppercase">Architect Factory</div>
         <div class="flex items-center gap-2">
             <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span class="text-[8px] tracking-widest text-zinc-500">8K SECURE NODE</span>
+            <span class="text-[8px] tracking-widest text-zinc-500">SECURE NODE ACTIVE</span>
         </div>
     </nav>
 
-    <main id="ui-home" class="max-w-2xl mx-auto text-center mt-12 px-6 transition-all duration-700">
-        <h1 class="font-luxury text-6xl mb-4 tracking-tighter uppercase">AI <span class="gold-shimmer">Persona</span></h1>
-        <p class="text-zinc-600 text-[10px] tracking-[0.5em] mb-12 uppercase italic font-bold">The World's Finest Digital Identity Factory</p>
+    <main id="ui-home" class="max-w-3xl mx-auto text-center mt-10 px-6 relative z-10 transition-all duration-700">
+        <h1 class="font-luxury text-6xl md:text-8xl mb-4 tracking-tighter uppercase">AI <span class="gold-shimmer">MASTER</span></h1>
+        <p class="text-zinc-500 text-[10px] tracking-[0.6em] mb-12 uppercase italic font-bold">Forge Your Ultimate Digital Persona</p>
         
         <div class="glass p-1 rounded-[3rem] mb-10 shadow-2xl">
-            <textarea id="prompt-txt" rows="3" 
-                      placeholder="ENTER YOUR VISION..." 
+            <textarea id="prompt-input" rows="3" 
+                      placeholder="DESCRIBE YOUR VISION: 'A cyber-samurai in neon Tokyo, 8K, cinematic lighting'" 
                       class="w-full bg-transparent border-none text-white text-center text-xl focus:outline-none resize-none p-12 font-light tracking-wide"></textarea>
         </div>
-        <button onclick="ignite()" class="w-full py-8 rounded-full bg-[#d4af37] text-black font-luxury text-[12px] tracking-[0.6em] font-black uppercase hover:bg-white transition-all shadow-2xl">Initialize Master Render</button>
+        <button onclick="igniteRender()" class="btn-action w-full py-8 rounded-full text-[12px] tracking-[0.6em] font-black uppercase shadow-2xl">Initiate Neural Render</button>
+
+        <div class="mt-20">
+            <h2 class="font-luxury text-3xl mb-8 gold-shimmer uppercase">Explore Infinite Styles</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="case-study-card secure-wrapper glass p-1"><div class="shield"></div><div class="watermark">AI MASTER PREVIEW</div><img src="https://cdn.pixabay.com/photo/2023/11/06/17/28/ai-generated-8369680_1280.jpg" class="w-full h-full object-cover rounded-[2.3rem]"/></div>
+                <div class="case-study-card secure-wrapper glass p-1"><div class="shield"></div><div class="watermark">AI MASTER PREVIEW</div><img src="https://cdn.pixabay.com/photo/2023/10/31/17/28/ai-generated-8356262_1280.jpg" class="w-full h-full object-cover rounded-[2.3rem]"/></div>
+                <div class="case-study-card secure-wrapper glass p-1"><div class="shield"></div><div class="watermark">AI MASTER PREVIEW</div><img src="https://cdn.pixabay.com/photo/2023/11/17/08/38/ai-generated-8393961_1280.jpg" class="w-full h-full object-cover rounded-[2.3rem]"/></div>
+                <div class="case-study-card secure-wrapper glass p-1"><div class="shield"></div><div class="watermark">AI MASTER PREVIEW</div><img src="https://cdn.pixabay.com/photo/2023/11/14/06/21/ai-generated-8386869_1280.jpg" class="w-full h-full object-cover rounded-[2.3rem]"/></div>
+                <div class="case-study-card secure-wrapper glass p-1"><div class="shield"></div><div class="watermark">AI MASTER PREVIEW</div><img src="https://cdn.pixabay.com/photo/2023/07/20/19/27/ai-generated-8140130_1280.jpg" class="w-full h-full object-cover rounded-[2.3rem]"/></div>
+                <div class="case-study-card secure-wrapper glass p-1"><div class="shield"></div><div class="watermark">AI MASTER PREVIEW</div><img src="https://cdn.pixabay.com/photo/2023/11/06/17/28/ai-generated-8369680_1280.jpg" class="w-full h-full object-cover rounded-[2.3rem]"/></div>
+                <div class="case-study-card secure-wrapper glass p-1"><div class="shield"></div><div class="watermark">AI MASTER PREVIEW</div><img src="https://cdn.pixabay.com/photo/2023/08/01/18/34/ai-generated-8164095_1280.jpg" class="w-full h-full object-cover rounded-[2.3rem]"/></div>
+                <div class="case-study-card secure-wrapper glass p-1"><div class="shield"></div><div class="watermark">AI MASTER PREVIEW</div><img src="https://cdn.pixabay.com/photo/2023/09/24/10/58/ai-generated-8272370_1280.jpg" class="w-full h-full object-cover rounded-[2.3rem]"/></div>
+            </div>
+        </div>
     </main>
 
-    <section id="ui-result" class="hidden max-w-xl mx-auto mt-6 px-6 pb-20 opacity-0 transition-all duration-1000">
+    <section id="ui-result" class="hidden max-w-xl mx-auto mt-6 px-6 pb-20 opacity-0 transition-all duration-1000 relative z-10">
         <div class="secure-wrapper glass p-1 mb-10">
             <div class="shield"></div>
-            <div id="wm" class="watermark">UNLICENSED PREVIEW ● UNLICENSED PREVIEW</div>
-            <img id="main-img" src="" class="w-full h-full object-cover rounded-[2.3rem] opacity-0 transition-opacity duration-[2000ms]">
-            <div id="loading" class="absolute inset-0 flex flex-col items-center justify-center bg-black/80">
+            <div id="wm-gen" class="watermark">PREVIEW ONLY ● COMMERCIAL LICENSE REQUIRED</div>
+            <img id="generated-img" src="" class="w-full h-full object-cover rounded-[2.3rem] opacity-0 transition-opacity duration-[2000ms]">
+            <div id="loading-overlay" class="absolute inset-0 flex flex-col items-center justify-center bg-black/80">
                 <div class="w-16 h-1 bg-zinc-800 rounded-full overflow-hidden mb-4 w-40">
                     <div class="h-full bg-yellow-600 animate-[loading_3s_ease-in-out_infinite]"></div>
                 </div>
-                <p class="font-luxury text-[8px] tracking-[1em] text-yellow-500 animate-pulse">SYNCING NEURAL CORES</p>
+                <p class="font-luxury text-[8px] tracking-[1em] text-yellow-500 animate-pulse">SYNTHESIZING NEURAL FABRIC</p>
             </div>
         </div>
 
-        <div id="offer" class="hidden glass p-10 rounded-[3.5rem] text-center border-yellow-600/20 animate-fade-in">
-            <div class="flex justify-center gap-4 mb-6">
-                <span class="text-zinc-600 line-through text-xl font-light">$99.00</span>
-                <span class="text-white text-4xl font-black font-luxury tracking-widest">$0.00</span>
+        <div id="pricing-card" class="hidden glass p-10 rounded-[3.5rem] text-center border-yellow-600/20 animate-fade-in">
+            <div class="flex justify-center items-baseline gap-4 mb-6">
+                <span class="text-zinc-600 line-through text-xl md:text-3xl font-light">$99.00</span>
+                <span class="text-white text-5xl md:text-7xl font-black font-luxury tracking-widest">$29.99</span>
             </div>
-            <p class="text-[9px] tracking-[0.5em] text-zinc-400 mb-10 uppercase italic">Limited Lifetime Free License For New Members</p>
+            <p class="text-[9px] tracking-[0.5em] text-zinc-400 mb-10 uppercase italic">Limited Time Offer: Master Ownership License</p>
             
             <ul class="text-left text-[8px] tracking-widest text-zinc-500 space-y-3 mb-10 uppercase">
-                <li class="flex items-center gap-2"><span class="text-yellow-600">✔</span> 8K Uncompressed Original File</li>
-                <li class="flex items-center gap-2"><span class="text-yellow-600">✔</span> Worldwide Commercial Sovereignty</li>
-                <li class="flex items-center gap-2"><span class="text-yellow-600">✔</span> Lifetime Cloud Preservation</li>
+                <li class="flex items-center gap-2"><span class="text-yellow-600">✔</span> 8K Lossless Original File (PNG)</li>
+                <li class="flex items-center gap-2"><span class="text-yellow-600">✔</span> Full Worldwide Commercial Rights</li>
+                <li class="flex items-center gap-2"><span class="text-yellow-600">✔</span> Permanent Cloud Asset Preservation</li>
+                <li class="flex items-center gap-2"><span class="text-yellow-600">✔</span> AI Source Metadata Inclusion</li>
             </ul>
 
-            <button id="pay-btn" onclick="checkout()" class="btn-pay w-full py-7 rounded-2xl text-[12px] tracking-[0.5em] font-black uppercase">Claim Personal Ownership</button>
-            <a id="dl-btn" href="#" download class="hidden block w-full py-7 border border-zinc-700 rounded-2xl font-luxury text-[10px] tracking-[0.5em] text-white uppercase hover:bg-white hover:text-black transition-all">Download Master Asset</a>
+            <button id="buy-btn" onclick="processPayment()" class="btn-action w-full py-7 rounded-2xl text-[12px] tracking-[0.5em] font-black uppercase">Acquire Master License</button>
+            <a id="download-asset" href="#" download class="hidden block w-full py-7 border border-zinc-700 rounded-2xl font-luxury text-[10px] tracking-[0.5em] text-white uppercase hover:bg-white hover:text-black mt-4 transition-all">Download Source File</a>
         </div>
     </section>
 
     <script>
-        let finalUrl = '';
-        
+        let generatedImageUrl = '';
+
+        // 粒子背景动画
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 20 + 10; // 10px to 30px
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDuration = `${Math.random() * 10 + 15}s`; // 15 to 25 seconds
+            particle.style.animationDelay = `${Math.random() * 5}s`; // Stagger animation
+            document.getElementById('particle-container').appendChild(particle);
+        }
+        for (let i = 0; i < 20; i++) { // 20 particles
+            createParticle();
+        }
+
         @keyframes loading {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
         }
 
-        function ignite() {
-            const p = document.getElementById('prompt-txt').value;
-            if(!p) return;
+        function igniteRender() {
+            const prompt = document.getElementById('prompt-input').value;
+            if(!prompt) {
+                alert("Please describe your vision first!");
+                return;
+            }
 
             document.getElementById('ui-home').classList.add('hidden');
-            const res = document.getElementById('ui-result');
-            res.classList.remove('hidden');
-            setTimeout(() => res.classList.add('opacity-100'), 50);
+            const resultSection = document.getElementById('ui-result');
+            resultSection.classList.remove('hidden');
+            setTimeout(() => resultSection.classList.add('opacity-100'), 50);
 
             const seed = Math.floor(Math.random() * 999999);
-            // 精准调用一张 8K 图片，规避屏蔽
-            finalUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", high-end luxury, 8k, photorealistic, cinematic lighting, masterpiece")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
+            // 只生成一张图，极致画质且确保不被限流
+            generatedImageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", ultra photorealistic, 8k, cinematic high contrast, masterpiece, award winning, luxury editorial style")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
 
-            const img = document.getElementById('main-img');
-            img.src = finalUrl;
+            const imgElement = document.getElementById('generated-img');
+            imgElement.src = generatedImageUrl;
 
-            img.onload = () => {
-                document.getElementById('loading').classList.add('hidden');
-                document.getElementById('offer').classList.remove('hidden');
-                img.classList.remove('opacity-0');
+            imgElement.onload = () => {
+                document.getElementById('loading-overlay').classList.add('hidden');
+                document.getElementById('pricing-card').classList.remove('hidden');
+                imgElement.classList.remove('opacity-0');
+            };
+            imgElement.onerror = () => {
+                alert("Neural connection error. Please try again or refine your prompt.");
+                location.reload();
             };
         }
 
-        function checkout() {
-            // 即便免费，也要走仪式感
-            document.getElementById('pay-btn').innerText = "VERIFYING LICENSE...";
+        function processPayment() {
+            // 模拟支付流程，实际集成支付接口
+            window.open("https://link.payoneer.com/Token?t=668A9556CB1D41F3AF067DFFC3A9C7EC&src=pl", "_blank"); // 示例 Payoneer 链接
+            
+            document.getElementById('buy-btn').innerText = "VERIFYING LICENSE...";
+            document.getElementById('buy-btn').disabled = true;
+
             setTimeout(() => {
-                if(confirm("SUCCESS: 8K Commercial License Granted. Proceed to secure download?")) {
-                    document.getElementById('pay-btn').classList.add('hidden');
-                    document.getElementById('dl-btn').classList.remove('hidden');
-                    document.getElementById('dl-btn').href = finalUrl;
-                    document.getElementById('wm').style.display = 'none';
-                    document.querySelector('.shield').style.display = 'none';
+                if(confirm("Payment Confirmed? Click OK to download your 8K Master Asset.")) {
+                    document.getElementById('buy-btn').classList.add('hidden');
+                    document.getElementById('download-asset').classList.remove('hidden');
+                    document.getElementById('download-asset').href = generatedImageUrl;
+                    document.getElementById('wm-gen').style.display = 'none'; // 移除水印
+                    document.querySelector('#ui-result .shield').style.display = 'none'; // 移除物理防御层
+                    alert("Ownership Transferred. Download Enabled.");
                 } else {
-                    document.getElementById('pay-btn').innerText = "CLAIM PERSONAL OWNERSHIP";
+                    document.getElementById('buy-btn').innerText = "ACQUIRE MASTER LICENSE";
+                    document.getElementById('buy-btn').disabled = false;
                 }
-            }, 1500);
+            }, 2000); // 模拟支付确认时间
         }
 
-        // 终极锁死：屏蔽一切右键与保存快捷键
-        document.onkeydown = (e) => {
-            if (e.ctrlKey && (e.key==='s' || e.key==='u' || e.key==='i' || e.key==='p' || e.key==='j')) return false;
-            if (e.key === 'F12') return false;
-        };
-        // 针对移动端长按屏蔽
-        window.oncontextmenu = function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
-        };
+        // 终极锁死：屏蔽一切右键、长按和保存快捷键
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'i' || e.key === 'p' || e.key === 'j')) e.preventDefault();
+            if (e.key === 'F12') e.preventDefault();
+            if (e.key === 'PrintScreen') e.preventDefault(); // 阻止截屏键
+        });
+        document.addEventListener('mousedown', e => { if (e.button === 2) e.preventDefault(); }); // 阻止鼠标右键
     </script>
 </body>
 </html>
