@@ -3,130 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI MASTER | PERPETUAL FREE ENGINE</title>
+    <title>AI MASTER | AUTONOMOUS ELITE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@200;400;900&display=swap');
-        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; user-select: none; overflow-x: hidden; }
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; user-select: none; overflow: hidden; }
         .font-luxury { font-family: 'Cinzel', serif; }
         .gold-shimmer { background: linear-gradient(90deg, #d4af37, #fff, #d4af37); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 5s linear infinite; }
         @keyframes shine { to { background-position: 200% center; } }
         
-        .secure-frame { position: relative; aspect-ratio: 1/1; border-radius: 4rem; overflow: hidden; background: #050505; border: 1px solid rgba(212, 175, 55, 0.1); }
+        .glass-obsidian { background: rgba(10, 10, 10, 0.8); border: 1px solid rgba(212, 175, 55, 0.15); backdrop-filter: blur(80px); }
+        .secure-container { position: relative; aspect-ratio: 1/1; border-radius: 4rem; overflow: hidden; background: #050505; border: 1px solid rgba(212, 175, 55, 0.1); }
         .shield-layer { position: absolute; inset: 0; z-index: 100; cursor: progress; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='); }
-        .grid-wm { position: absolute; inset: 0; z-index: 50; pointer-events: none; opacity: 0.1; background-image: radial-gradient(#d4af37 1px, transparent 1px); background-size: 30px 30px; }
         
         .btn-elite { background: #d4af37; color: #000; font-family: 'Cinzel', serif; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 0 50px rgba(212,175,55,0.3); }
         .btn-elite:hover { transform: translateY(-5px); background: #fff; box-shadow: 0 0 70px rgba(212,175,55,0.5); }
 
-        @keyframes loading-bar {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
+        @keyframes loading-bar { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
         .animate-loading { animation: loading-bar 2s infinite linear; }
     </style>
 </head>
 <body oncontextmenu="return false">
 
     <nav class="w-full p-10 flex justify-between items-center max-w-7xl mx-auto z-20 relative">
-        <div class="font-luxury text-[11px] tracking-[1.5em] gold-shimmer uppercase">AI-Master Perpetual-Flux</div>
+        <button onclick="toggleGallery()" class="font-luxury text-[10px] tracking-[1em] gold-shimmer uppercase border-b border-yellow-900/30">Elite Style Matrix</button>
         <div class="flex items-center gap-3 text-[9px] tracking-[0.5em] text-zinc-600 uppercase">
             <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
             Swarm Node Active
         </div>
     </nav>
 
-    <main id="home" class="max-w-4xl mx-auto text-center mt-12 px-6 relative z-10">
+    <main id="view-home" class="h-[80vh] flex flex-col justify-center items-center max-w-4xl mx-auto text-center px-6 relative z-10 transition-all duration-1000">
         <h1 class="font-luxury text-7xl md:text-9xl mb-6 tracking-tighter uppercase leading-none">AI <span class="gold-shimmer">MASTER</span></h1>
-        <p class="text-zinc-500 text-[11px] tracking-[0.8em] mb-16 uppercase italic">Elite 8K Assets • Infinite Free Architecture</p>
+        <p class="text-zinc-500 text-[11px] tracking-[1.2em] mb-16 uppercase italic">Elite 8K Asset Foundry</p>
         
-        <div class="bg-zinc-950/40 border border-zinc-900 p-2 rounded-[4rem] mb-12 backdrop-blur-3xl shadow-2xl">
-            <textarea id="prompt" rows="3" 
-                      placeholder="ENTER THE VISION: 'Cyberpunk deity, liquid gold, 8k...'" 
+        <div class="w-full glass-obsidian p-2 rounded-[4rem] mb-12 shadow-[0_0_150px_rgba(212,175,55,0.1)]">
+            <textarea id="prompt-input" rows="3" 
+                      placeholder="ENTER THE VISION..." 
                       class="w-full bg-transparent border-none text-white text-center text-3xl focus:outline-none resize-none p-20 font-light tracking-widest"></textarea>
         </div>
-        <button onclick="renderInfinite()" class="btn-elite w-full py-12 rounded-full text-[16px] tracking-[1.2em] font-black uppercase shadow-2xl">Initiate Master Render</button>
-
-        <div class="mt-32 pb-40 grid grid-cols-2 md:grid-cols-4 gap-6 px-4">
-            <div class="secure-frame opacity-40 hover:opacity-100 transition-all"><img src="https://image.pollinations.ai/prompt/cyberpunk%20lion%208k?seed=1&model=flux" class="w-full h-full object-cover"></div>
-            <div class="secure-frame opacity-40 hover:opacity-100 transition-all"><img src="https://image.pollinations.ai/prompt/luxury%20diamond%20watch%20details?seed=2&model=flux" class="w-full h-full object-cover"></div>
-            <div class="secure-frame opacity-40 hover:opacity-100 transition-all"><img src="https://image.pollinations.ai/prompt/futuristic%20concept%20car%20liquid%20metal?seed=3&model=flux" class="w-full h-full object-cover"></div>
-            <div class="secure-frame opacity-40 hover:opacity-100 transition-all"><img src="https://image.pollinations.ai/prompt/ancient%20samurai%20cinematic?seed=4&model=flux" class="w-full h-full object-cover"></div>
-        </div>
+        <button onclick="igniteRender()" class="btn-elite w-full py-12 rounded-full text-[16px] tracking-[1.5em] font-black uppercase shadow-2xl">Initiate Render</button>
     </main>
 
-    <section id="result" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-8 opacity-0 transition-opacity duration-1000">
+    <div id="gallery-modal" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-3xl p-10 overflow-y-auto">
+        <div class="flex justify-between mb-20">
+            <span class="font-luxury gold-shimmer tracking-[1em]">MASTER PORTFOLIO</span>
+            <button onclick="toggleGallery()" class="text-white text-xs tracking-widest uppercase">[ Close ]</button>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="secure-container opacity-60"><img src="https://image.pollinations.ai/prompt/cyberpunk%20lion%20gold?seed=1&model=flux" class="w-full h-full object-cover"></div>
+            <div class="secure-container opacity-60"><img src="https://image.pollinations.ai/prompt/luxury%20watch%208k?seed=2&model=flux" class="w-full h-full object-cover"></div>
+            <div class="secure-container opacity-60"><img src="https://image.pollinations.ai/prompt/liquid%20metal%20sculpture?seed=3&model=flux" class="w-full h-full object-cover"></div>
+            <div class="secure-container opacity-60"><img src="https://image.pollinations.ai/prompt/ancient%20deity%20starlight?seed=4&model=flux" class="w-full h-full object-cover"></div>
+        </div>
+    </div>
+
+    <section id="view-render" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-8 opacity-0 transition-opacity duration-1000">
         <div class="w-full max-w-2xl text-center">
-            <div class="secure-frame mb-12 shadow-[0_0_150px_rgba(212,175,55,0.15)]">
-                <div class="shield-layer" id="master-shield"></div>
-                <div class="grid-wm" id="wm"></div>
-                <img id="final-asset" class="w-full h-full object-cover opacity-0 transition-opacity duration-1000">
+            <div class="secure-container mb-12 shadow-[0_0_200px_rgba(212,175,55,0.15)]">
+                <div class="shield-layer" id="result-shield"></div>
+                <img id="render-out" class="w-full h-full object-cover opacity-0 transition-opacity duration-1000">
                 <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center bg-black">
                     <div class="w-40 h-[1px] bg-zinc-900 relative overflow-hidden mb-8">
                         <div class="absolute inset-0 bg-yellow-600 animate-loading"></div>
                     </div>
-                    <p class="font-luxury text-[10px] tracking-[1.5em] text-yellow-600 animate-pulse uppercase">Neural Extraction In Progress</p>
+                    <p class="font-luxury text-[10px] tracking-[1.5em] text-yellow-600 animate-pulse uppercase">Extracting Neural Masterpiece</p>
                 </div>
             </div>
 
-            <div id="checkout" class="hidden">
+            <div id="checkout-area" class="hidden">
                 <div class="flex justify-center items-center gap-10 mb-8 font-luxury">
                     <span class="text-zinc-800 line-through text-4xl tracking-widest">$299.00</span>
                     <span class="text-white text-8xl font-black tracking-tighter">$29.99</span>
                 </div>
-                <button onclick="payMaster()" class="btn-elite w-full py-10 rounded-3xl text-[18px] tracking-[1.2em] font-black uppercase mb-8">Claim Global Rights</button>
-                <button onclick="location.reload()" class="block w-full text-[9px] tracking-[1.5em] text-zinc-700 uppercase hover:text-white transition-all">Discard Asset</button>
-                <a id="dl-trigger" href="#" download class="hidden block w-full py-10 mt-6 border border-zinc-800 rounded-3xl font-luxury text-[12px] tracking-[1em] text-white uppercase hover:bg-white hover:text-black">Download Original PNG</a>
+                <button onclick="processPay()" class="btn-elite w-full py-10 rounded-3xl text-[18px] tracking-[1.2em] font-black uppercase mb-8">Unlock Global License</button>
+                <button onclick="location.reload()" class="block w-full text-[9px] tracking-[1.5em] text-zinc-700 uppercase hover:text-white transition-all">Discard Node</button>
+                <a id="dl-link" href="#" download class="hidden block w-full py-10 mt-6 border border-zinc-800 rounded-3xl font-luxury text-[12px] tracking-[1em] text-white uppercase hover:bg-white hover:text-black">Download 8K PNG</a>
             </div>
         </div>
     </section>
 
     <script>
-        let assetUrl = '';
+        let finalImgUrl = '';
 
-        function renderInfinite() {
-            const p = document.getElementById('prompt').value;
-            if(!p) {
-                alert("Please enter a vision.");
-                return;
-            }
+        function toggleGallery() {
+            document.getElementById('gallery-modal').classList.toggle('hidden');
+        }
 
-            document.getElementById('home').classList.add('opacity-0');
+        function igniteRender() {
+            const p = document.getElementById('prompt-input').value;
+            if(!p) return alert("Vision required.");
+
+            document.getElementById('view-home').classList.add('opacity-0');
             setTimeout(() => {
-                document.getElementById('home').classList.add('hidden');
-                const res = document.getElementById('result');
+                document.getElementById('view-home').classList.add('hidden');
+                const res = document.getElementById('view-render');
                 res.classList.remove('hidden');
                 setTimeout(() => res.classList.add('opacity-100'), 50);
             }, 500);
 
-            const seed = Math.floor(Math.random() * 99999999);
-            // 修正后的 API 调用地址
-            assetUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", extreme detail, flux style, cinematic 8k, masterpiece")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
+            const seed = Math.floor(Math.random() * 9999999);
+            finalImgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", high-end luxury, cinematic 8k, flux style, extremely detailed")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
 
-            const img = document.getElementById('final-asset');
-            img.src = assetUrl;
-
+            const img = document.getElementById('render-out');
+            img.src = finalImgUrl;
             img.onload = () => {
                 document.getElementById('loader').classList.add('hidden');
-                document.getElementById('checkout').classList.remove('hidden');
+                document.getElementById('checkout-area').classList.remove('hidden');
                 img.classList.remove('opacity-0');
-            };
-            
-            img.onerror = () => {
-                alert("Neural Node busy. Retrying...");
-                location.reload();
             };
         }
 
-        function payMaster() {
+        function processPay() {
             window.open("https://link.payoneer.com/Token?t=668A9556CB1D41F3AF067DFFC3A9C7EC&src=pl", "_blank");
             setTimeout(() => {
-                if(confirm("Verify: Payment of $29.99 Received?")) {
-                    document.getElementById('dl-trigger').classList.remove('hidden');
-                    document.getElementById('dl-trigger').href = assetUrl;
-                    document.getElementById('master-shield').style.display = 'none';
-                    document.getElementById('wm').style.display = 'none';
-                    alert("License Activated. 8K Master Source Unlocked.");
+                if(confirm("Confirm Payment?")) {
+                    document.getElementById('dl-link').classList.remove('hidden');
+                    document.getElementById('dl-link').href = finalImgUrl;
+                    document.getElementById('result-shield').style.display = 'none';
+                    alert("Ownership Granted.");
                 }
             }, 1000);
         }
