@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI WALLPAPER | ELITE PRO V6</title>
+    <title>AI WALLPAPER | LIFETIME FREE PRO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;900&display=swap');
@@ -13,115 +13,89 @@
         @keyframes shine { to { background-position: 200% center; } }
         .glass { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(212, 175, 55, 0.15); backdrop-filter: blur(40px); }
         
-        /* 🛡️ 暴力物理防盗层 */
-        .secure-container { position: relative; aspect-ratio: 1/1; border-radius: 2rem; overflow: hidden; background: #050505; }
+        /* 🛡️ 暴力物理防盗层：右键保存无效 */
+        .secure-container { position: relative; aspect-ratio: 1/1; border-radius: 2.5rem; overflow: hidden; background: #050505; }
         .invisible-shield { position: absolute; inset: 0; z-index: 100; cursor: crosshair; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='); }
-        .watermark-matrix { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); z-index: 50; pointer-events: none; opacity: 0.15; font-size: 8px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
         
-        .card-active { border: 2px solid #d4af37 !important; box-shadow: 0 0 50px rgba(212,175,55,0.4); transform: scale(1.02); }
-        .status-dot { width: 6px; height: 6px; background: #d4af37; border-radius: 50%; box-shadow: 0 0 10px #d4af37; }
+        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 15px #22c55e; }
     </style>
 </head>
 <body oncontextmenu="return false">
 
-    <nav class="p-8 flex justify-between items-center max-w-6xl mx-auto opacity-50">
-        <div class="font-luxury text-[9px] tracking-[0.8em] gold-shimmer uppercase">Elite Asset Generator</div>
-        <div class="flex items-center gap-3 text-[8px] tracking-[0.4em] uppercase">
+    <nav class="p-8 flex justify-between items-center max-w-6xl mx-auto opacity-60">
+        <div class="font-luxury text-[10px] tracking-[0.8em] gold-shimmer uppercase">Elite Asset Node</div>
+        <div class="flex items-center gap-3 text-[9px] tracking-[0.4em] uppercase">
             <div class="status-dot animate-pulse"></div> Node Secured
         </div>
     </nav>
 
     <main id="home" class="max-w-2xl mx-auto text-center mt-20 px-6">
         <h1 class="font-luxury text-7xl mb-4 tracking-tighter">AI <span class="gold-shimmer">ELITE</span></h1>
-        <p class="text-zinc-600 text-[10px] tracking-[0.6em] mb-12 uppercase">Ultimate 8K Digital Identity Factory</p>
+        <p class="text-zinc-600 text-[10px] tracking-[0.6em] mb-12 uppercase">Professional 8K Wallpaper Factory</p>
         
         <div class="glass p-1 rounded-[3rem] mb-10 shadow-2xl">
             <textarea id="prompt" rows="3" 
-                      placeholder="ENTER YOUR VISION..." 
-                      class="w-full bg-transparent border-none text-white text-center text-xl focus:outline-none resize-none p-12 font-light"></textarea>
+                      placeholder="DESCRIBE YOUR MASTERPIECE..." 
+                      class="w-full bg-transparent border-none text-white text-center text-xl focus:outline-none resize-none p-12 font-light tracking-wide"></textarea>
         </div>
-        <button onclick="ignite()" class="w-full py-8 rounded-full bg-[#d4af37] text-black font-luxury text-[11px] tracking-[0.5em] font-black uppercase hover:bg-white transition-all shadow-2xl">Initialize Secure Rendering</button>
+        <button onclick="ignite()" class="w-full py-8 rounded-full bg-[#d4af37] text-black font-luxury text-[11px] tracking-[0.6em] font-black uppercase hover:bg-white transition-all shadow-2xl">Create 8K Asset (Free)</button>
     </main>
 
-    <section id="gallery" class="hidden max-w-6xl mx-auto mt-12 px-6 pb-32">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="output-stream"></div>
-
-        <div id="checkout" class="hidden mt-16 glass p-12 rounded-[4rem] max-w-2xl mx-auto text-center border-yellow-500/30 shadow-[0_0_100px_rgba(212,175,55,0.2)]">
-            <div class="font-luxury text-xs tracking-[1em] gold-shimmer mb-8 uppercase">Master License Unlock</div>
-            <div class="text-7xl font-luxury mb-6 tracking-tighter">$29.99</div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left mb-10">
-                <div class="text-[9px] text-zinc-400 p-5 border border-white/5 rounded-3xl">
-                    <strong class="block text-white mb-2 uppercase tracking-widest">Master File</strong>
-                    8K Lossless Original (PNG). EXIF Meta-Auth included.
-                </div>
-                <div class="text-[9px] text-zinc-400 p-5 border border-white/5 rounded-3xl">
-                    <strong class="block text-white mb-2 uppercase tracking-widest">Legal Status</strong>
-                    Global Commercial Sovereignty. Infinite Usage.
-                </div>
+    <section id="result" class="hidden max-w-xl mx-auto mt-12 px-6 pb-32 transition-all duration-1000 opacity-0 scale-95">
+        <div class="secure-container glass p-1">
+            <div class="invisible-shield"></div>
+            <img id="final-img" src="" class="w-full h-full object-cover rounded-[2.4rem] opacity-0 transition-opacity duration-1000">
+            <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-md">
+                <div class="w-12 h-12 border-2 border-yellow-500/10 border-t-yellow-500 rounded-full animate-spin mb-6"></div>
+                <p class="font-luxury text-[8px] tracking-[1em] text-yellow-500 animate-pulse uppercase">Neural Rendering</p>
             </div>
+        </div>
 
-            <button onclick="pay()" class="w-full py-7 rounded-3xl bg-[#d4af37] text-black font-luxury text-[12px] tracking-[0.5em] font-black uppercase hover:scale-[1.02] transition-all">Acquire Master Asset</button>
-            <a id="dl-link" href="#" download class="hidden block w-full py-7 border border-zinc-800 rounded-3xl font-luxury text-[10px] tracking-[0.4em] text-white uppercase hover:bg-white hover:text-black mt-4 transition-all">Download 8K Source</a>
+        <div id="pricing" class="hidden mt-12 glass p-12 rounded-[4rem] text-center border-green-500/20 shadow-[0_0_100px_rgba(34,197,94,0.1)]">
+            <div class="font-luxury text-xs tracking-[1em] text-green-500 mb-6 uppercase">Special Offer Active</div>
+            <div class="text-7xl font-luxury mb-4 tracking-tighter">$0.00</div>
+            <p class="text-zinc-500 text-[10px] tracking-widest mb-10 uppercase italic">Lifetime Free Access For Early Supporters</p>
+            
+            <button id="unlock-btn" onclick="unlock()" class="w-full py-7 rounded-3xl bg-white text-black font-luxury text-[12px] tracking-[0.5em] font-black uppercase hover:bg-[#d4af37] transition-all">Claim 8K Asset</button>
+            <a id="dl-link" href="#" download class="hidden block w-full py-7 border border-zinc-800 rounded-3xl font-luxury text-[10px] tracking-[0.5em] text-white uppercase hover:bg-white hover:text-black mt-4 transition-all">Download Master Source</a>
         </div>
     </section>
 
     <script>
-        let currentUrl = '';
+        let imgUrl = '';
 
-        async function ignite() {
+        function ignite() {
             const p = document.getElementById('prompt').value;
             if(!p) return;
 
             document.getElementById('home').classList.add('hidden');
-            document.getElementById('gallery').classList.remove('hidden');
+            const res = document.getElementById('result');
+            res.classList.remove('hidden');
+            setTimeout(() => { res.classList.add('opacity-100', 'scale-100'); }, 50);
 
-            const grid = document.getElementById('output-stream');
-            grid.innerHTML = '';
+            const seed = Math.floor(Math.random() * 999999);
+            // 只生成一张，极致画质且躲避限流
+            imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", extreme detail, photorealistic, 8k resolution, luxury style")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
 
-            // 🚀 核心：排队渲染逻辑，完美避开限流报错
-            for(let i=0; i<4; i++) {
-                // 每张图片间隔 1.8 秒，确保不会被封
-                if(i > 0) await new Promise(r => setTimeout(r, 1800)); 
-                
-                const seed = Math.floor(Math.random() * 999999);
-                const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", high-end luxury, 8k resolution, photorealistic, sharp focus")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
-                
-                const box = document.createElement('div');
-                box.className = "secure-container glass";
-                box.innerHTML = `
-                    <div class="invisible-shield" onclick="select(this, '${url}')"></div>
-                    <div class="watermark-matrix">${Array(9).fill('<div>ELITE PRO</div>').join('')}</div>
-                    <img src="${url}" class="w-full h-full object-cover opacity-0 transition-opacity duration-1000" onload="this.classList.remove('opacity-0')">
-                `;
-                grid.appendChild(box);
-            }
+            const img = document.getElementById('final-img');
+            img.src = imgUrl;
+
+            img.onload = () => {
+                document.getElementById('loader').classList.add('hidden');
+                document.getElementById('pricing').classList.remove('hidden');
+                img.classList.remove('opacity-0');
+            };
         }
 
-        function select(el, url) {
-            document.querySelectorAll('.secure-container').forEach(b => b.classList.remove('card-active'));
-            el.parentElement.classList.add('card-active');
-            currentUrl = url;
-            document.getElementById('checkout').classList.remove('hidden');
-            document.getElementById('dl-link').classList.add('hidden');
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        function unlock() {
+            document.getElementById('unlock-btn').classList.add('hidden');
+            document.getElementById('dl-link').classList.remove('hidden');
+            document.getElementById('dl-link').href = imgUrl;
+            document.querySelector('.invisible-shield').style.display = 'none';
+            alert("Success: 8K Asset Unlocked for Free.");
         }
 
-        function pay() {
-            window.open("https://link.payoneer.com/Token?t=668A9556CB1D41F3AF067DFFC3A9C7EC&src=pl", "_blank");
-            setTimeout(() => {
-                if(confirm("Payment Verification: Confirm receipt of $29.99?")) {
-                    const active = document.querySelector('.card-active');
-                    active.querySelector('.watermark-matrix').style.display = 'none';
-                    active.querySelector('.invisible-shield').style.display = 'none';
-                    document.getElementById('dl-link').classList.remove('hidden');
-                    document.getElementById('dl-link').href = currentUrl;
-                    alert("Verification Successful. Asset Unlocked.");
-                }
-            }, 1000);
-        }
-
-        // 屏蔽键盘右键/控制台/快捷键
+        // 屏蔽键盘与代码
         document.onkeydown = (e) => {
             if (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'i' || e.key === 'p')) return false;
             if (e.key === 'F12') return false;
