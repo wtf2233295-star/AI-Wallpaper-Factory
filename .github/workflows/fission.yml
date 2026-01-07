@@ -1,0 +1,28 @@
+name: 1亿美金全球暴力收割矩阵
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 核心指令：每小时全自动进化一次，收割全球流量
+  workflow_dispatch:      # 允许老板手动点击一键抢钱
+
+jobs:
+  fission_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出帝国资产
+        uses: actions/checkout@v3
+
+      - name: 激活分身大脑
+        run: |
+          echo "正在连接 Payoneer 支付回路..."
+          echo "正在拦截全球流量..."
+          # 这里会自动运行你的 main.py，产生新的 AI 图片，拦截更多流量
+          python main.py 
+
+      - name: 强制同步现实
+        run: |
+          git config --local user.email "fission@ai.com"
+          git config --local user.name "AI-Fission-Clones"
+          git add .
+          git commit -m "分身自主进化：新增财富节点，加速每秒进账目标" || echo "已经是最优状态"
+          git push
