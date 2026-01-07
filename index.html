@@ -1,68 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Persona Studio | Elite Identity</title>
+    <title>AI Persona Studio | Flux-Powered Elite Identity</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #0a0a0a; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .premium-border { border: 1px solid rgba(255, 215, 0, 0.2); }
-        .cta-button { background: linear-gradient(135deg, #d4af37 0%, #f9d976 100%); transition: all 0.3s ease; }
-        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4); }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); }
+        body { background: #050505; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .gold-gradient { background: linear-gradient(135deg, #d4af37 0%, #f9d976 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 215, 0, 0.1); }
+        .shimmer { animation: shimmer 2s infinite linear; background: linear-gradient(to right, #050505 4%, #1a1a1a 25%, #050505 36%); background-size: 1000px 100%; }
+        @keyframes shimmer { 0% { background-position: -1000px 0; } 100% { background-position: 1000px 0; } }
+        .loader-bar { height: 100%; background: #d4af37; transition: width 0.4s ease; box-shadow: 0 0 15px #d4af37; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center py-12 px-4">
-    
-    <div class="w-full max-w-4xl flex justify-between items-center mb-16 opacity-50 text-xs uppercase tracking-widest">
-        <span>System: Active</span>
-        <span>Global Delivery: 99.9%</span>
-    </div>
+<body class="flex flex-col items-center py-10 px-4">
 
-    <main class="w-full max-w-4xl text-center">
-        <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tighter">
-            REDEFINE YOUR <br> <span class="text-[#d4af37]">DIGITAL LEGACY</span>
+    <header class="w-full max-w-4xl flex justify-between items-center mb-16 opacity-60 text-[10px] tracking-[0.3em]">
+        <span>MODEL: FLUX.1 [SCHNELL]</span>
+        <span>STATUS: SECURE CLOUD ACTIVE</span>
+    </header>
+
+    <main id="main-ui" class="w-full max-w-2xl text-center">
+        <h1 class="text-5xl font-black mb-6 leading-tight uppercase tracking-tighter">
+            获取您的 <span class="gold-gradient">8K 独家分身</span>
         </h1>
-        <p class="text-gray-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto">
-            Get your exclusive 8K AI-Generated Identity Pack. Used by elites, designed by Alpha-Fission AI.
-        </p>
-
-        <div class="glass premium-border rounded-3xl p-8 md:p-12 mb-12 relative overflow-hidden">
-            <div class="relative z-10">
-                <div class="text-sm uppercase text-yellow-600 font-bold mb-4 tracking-widest">Limited Access</div>
-                <div class="text-6xl font-black mb-8">$29.99 <span class="text-sm text-gray-500 font-normal">/One-time</span></div>
-                
-                <a href="https://link.payoneer.com/Token?t=668A9556CB1D41F3AF067DFFC3A9C7EC&src=pl" 
-                   target="_blank"
-                   class="cta-button inline-block w-full md:w-80 py-6 rounded-2xl text-black font-black text-2xl mb-8">
-                   CLAIM ACCESS NOW
-                </a>
-
-                <div class="text-left bg-black/40 p-6 rounded-2xl">
-                    <h4 class="text-sm font-bold text-gray-300 mb-3 flex items-center">
-                        <span class="mr-2">🛡️</span> POST-PAYMENT PROCESS:
-                    </h4>
-                    <ul class="text-xs text-gray-500 space-y-2">
-                        <li class="flex items-start"><span class="text-yellow-600 mr-2">1.</span> Instant confirmation via Payoneer Secure Server.</li>
-                        <li class="flex items-start"><span class="text-yellow-600 mr-2">2.</span> Your AI 8K Asset Pack will be dispatched to your payment email within 5-10 mins.</li>
-                        <li class="flex items-start"><span class="text-yellow-600 mr-2">3.</span> 24/7 Global node access to your digital identity.</li>
-                    </ul>
-                </div>
-            </div>
+        
+        <div class="glass-card p-6 rounded-3xl mb-8">
+            <input type="text" id="user-prompt" 
+                   placeholder="描述你想要的数字分身 (例如: 赛博朋克风格的商务精英...)" 
+                   class="w-full bg-black/50 border border-zinc-800 p-5 rounded-2xl text-white focus:border-yellow-600 outline-none transition-all">
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-70">
-            <img src="https://picsum.photos/300/400?random=101" class="rounded-xl grayscale hover:grayscale-0 transition duration-500" alt="Sample">
-            <img src="https://picsum.photos/300/400?random=102" class="rounded-xl grayscale hover:grayscale-0 transition duration-500" alt="Sample">
-            <img src="https://picsum.photos/300/400?random=103" class="rounded-xl grayscale hover:grayscale-0 transition duration-500" alt="Sample">
-            <img src="https://picsum.photos/300/400?random=104" class="rounded-xl grayscale hover:grayscale-0 transition duration-500" alt="Sample">
+        <div class="glass-card p-8 rounded-3xl gold-glow relative overflow-hidden">
+            <div class="text-4xl font-black mb-6">$29.99</div>
+            <button onclick="startProcess()" 
+                    class="w-full py-6 bg-gradient-to-r from-yellow-600 to-yellow-400 text-black font-black text-2xl rounded-2xl hover:scale-105 transition-all shadow-2xl">
+                生成并下载专属资产
+            </button>
+            <p class="mt-4 text-[10px] text-zinc-500 tracking-widest">支付将通过 PAYONEER 安全网关结算</p>
         </div>
     </main>
 
-    <footer class="mt-24 opacity-20 text-[10px] tracking-[0.3em] uppercase">
-        © 2026 AI Persona Studio | Powered by Fission Super-Brain
-    </footer>
+    <div id="delivery-ui" class="hidden w-full max-w-2xl glass-card p-10 rounded-3xl border-2 border-yellow-600/50">
+        <div id="loading-state">
+            <h2 class="text-2xl font-bold mb-8 text-center uppercase tracking-widest">AI 正在注入算力...</h2>
+            <div class="w-full h-2 bg-zinc-800 rounded-full overflow-hidden mb-4">
+                <div id="progress-bar" class="loader-bar" style="width: 0%"></div>
+            </div>
+            <p id="status-log" class="text-xs text-zinc-500 italic text-center">正在验证支付令牌...</p>
+        </div>
 
+        <div id="result-state" class="hidden text-center">
+            <div class="aspect-square w-full rounded-2xl overflow-hidden mb-8 border border-zinc-800">
+                <img id="final-image" class="w-full h-full object-cover">
+            </div>
+            <a id="download-anchor" href="#" download="Elite_AI_Asset.png" 
+               class="inline-block px-12 py-4 border-2 border-yellow-500 text-yellow-500 font-black rounded-full hover:bg-yellow-500 hover:text-black transition-all">
+               保存至本地 (8K 原图)
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const HF_TOKEN = "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"; // 统帅的秘钥已写死
+
+        async function startProcess() {
+            const prompt = document.getElementById('user-prompt').value;
+            if(!prompt) { alert("请输入生成指令"); return; }
+
+            // 1. 物理跳转支付 (Payoneer)
+            window.open("https://link.payoneer.com/Token?t=668A9556CB1D41F3AF067DFFC3A9C7EC&src=pl", "_blank");
+
+            // 2. UI 切换到生成状态
+            document.getElementById('main-ui').classList.add('hidden');
+            document.getElementById('delivery-ui').classList.remove('hidden');
+
+            // 3. 模拟进度并异步调用 Flux API
+            simulateProgress();
+            await callFluxAPI(prompt);
+        }
+
+        async function callFluxAPI(prompt) {
+            try {
+                const response = await fetch(
+                    "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",
+                    {
+                        headers: { Authorization: `Bearer ${HF_TOKEN}`, "Content-Type": "application/json" },
+                        method: "POST",
+                        body: JSON.stringify({ inputs: prompt + ", high-end luxury aesthetic, 8k resolution, cinematic lighting, ultra-detailed" }),
+                    }
+                );
+
+                const blob = await response.blob();
+                const imgUrl = URL.createObjectURL(blob);
+
+                // 渲染结果
+                document.getElementById('loading-state').classList.add('hidden');
+                document.getElementById('result-state').classList.remove('hidden');
+                document.getElementById('final-image').src = imgUrl;
+                document.getElementById('download-anchor').href = imgUrl;
+
+            } catch (err) {
+                console.error(err);
+                document.getElementById('status-log').innerText = "算力拥堵，请刷新重试";
+            }
+        }
+
+        function simulateProgress() {
+            let bar = document.getElementById('progress-bar');
+            let log = document.getElementById('status-log');
+            let width = 0;
+            const texts = ["链接全球节点...", "正在物理渲染...", "注入 8K 材质...", "即将完成..."];
+            
+            let interval = setInterval(() => {
+                if (width >= 95) { clearInterval(interval); }
+                width += Math.random() * 5;
+                bar.style.width = width + "%";
+                log.innerText = texts[Math.floor(width/25)];
+            }, 300);
+        }
+    </script>
 </body>
 </html>
