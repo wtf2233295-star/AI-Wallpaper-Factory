@@ -3,200 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HINT GOD-MODE | Quantum Soul Reading</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        :root { --primary: #007AFF; --danger: #FF3B30; --success: #34C759; --bg: #FBFBFD; }
-        body { background: var(--bg); color: #1d1d1f; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
-        
-        /* 顶部状态：制造紧迫感 */
-        .status-header { position: fixed; top: 0; width: 100%; height: 50px; background: #000; color: #fff; z-index: 1000; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; }
-        .live-pulse { width: 8px; height: 8px; background: var(--danger); border-radius: 50%; margin-right: 10px; animation: pulse 1s infinite; }
+    
+    <title>Hint Astrology: 2026 Natal Chart & Soul Blueprint | Accurate Daily Reading</title>
+    <meta name="description" content="Get your personalized 2026 natal chart, soul blueprint, and high-vibration 8K wallpapers. Trusted by 2M+ for accurate astrology, zodiac insights, and spiritual guidance.">
+    <meta name="keywords" content="astrology reading, 2026 horoscope, natal chart, soul blueprint, zodiac compatibility, spiritual growth, 8K wallpaper, manifestation tool">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Hint Quantum Soul Reading",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "128400"
+      }
+    }
+    </script>
 
-        .container { max-width: 450px; margin: 70px auto 40px; padding: 0 20px; }
-        .step { display: none; animation: fadeIn 0.5s forwards; }
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root { --p: #007AFF; --s: #34C759; --d: #FF3B30; --bg: #ffffff; }
+        body { background: var(--bg); color: #1c1c1e; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; line-height: 1.5; }
+        
+        /* 顶部紧急通知栏 */
+        .urgent-bar { background: var(--d); color: #fff; text-align: center; padding: 8px; font-size: 0.7rem; font-weight: 900; letter-spacing: 1px; }
+
+        /* 模拟实时购买提醒 (SEO/信任度利器) */
+        #live-notif { position: fixed; bottom: 20px; left: 20px; background: rgba(0,0,0,0.8); color: #fff; padding: 12px 20px; border-radius: 50px; font-size: 0.75rem; z-index: 9999; display: none; animation: slideRight 0.5s forwards; }
+
+        .container { max-width: 480px; margin: 0 auto; padding: 40px 25px; }
+        .view { display: none; animation: scaleUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         .active { display: block; }
 
-        /* 问题卡片 */
-        h1 { font-size: 2.2rem; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
-        .option-btn { background: #fff; border: 1.5px solid #eee; padding: 20px; border-radius: 18px; margin-bottom: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: 0.3s; }
-        .option-btn:active { background: #f2f2f7; transform: scale(0.98); }
-        .option-btn b { font-size: 1.1rem; }
+        /* 标题分层设计 */
+        h1 { font-size: 2.6rem; font-weight: 900; letter-spacing: -2px; line-height: 1; margin: 0 0 10px; }
+        .seo-sub { font-size: 0.9rem; color: #86868b; margin-bottom: 30px; border-left: 3px solid var(--p); padding-left: 15px; }
 
-        /* 反馈弹窗 */
-        #feedback { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: var(--success); color: #fff; padding: 10px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: bold; z-index: 2000; display: none; animation: slideDown 0.3s forwards; }
+        /* 选项交互升级 */
+        .choice-card { background: #f5f5f7; border-radius: 20px; padding: 25px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; position: relative; border: 2px solid transparent; }
+        .choice-card:hover { border-color: var(--p); background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .choice-card b { display: block; font-size: 1.2rem; }
+        .choice-tag { position: absolute; top: -10px; right: 20px; background: var(--s); color: #fff; font-size: 0.6rem; padding: 4px 10px; border-radius: 50px; font-weight: 800; }
 
-        /* 图表展示区 */
-        .chart-container { background: #fff; border-radius: 24px; padding: 20px; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .radar-box { width: 100%; height: 250px; margin-bottom: 20px; }
+        /* 动态图表样式 */
+        .chart-wrap { background: #000; color: #fff; border-radius: 24px; padding: 25px; margin: 20px 0; }
+        
+        /* 支付页面的视觉诱惑 */
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+        .grid-item { aspect-ratio: 9/16; background: #eee; border-radius: 10px; overflow: hidden; position: relative; }
+        .grid-item img { width: 100%; height: 100%; object-fit: cover; filter: blur(8px); }
+        .grid-item::after { content: '🔒'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1rem; }
 
-        /* 损失厌恶：警报卡片 */
-        .alert-card { background: #FFF2F2; border: 1px solid #FFD6D6; border-radius: 20px; padding: 20px; margin: 20px 0; display: flex; gap: 15px; }
-        .alert-icon { font-size: 1.5rem; }
-        .alert-text b { color: var(--danger); display: block; margin-bottom: 5px; }
-        .alert-text p { margin: 0; font-size: 0.85rem; color: #666; }
+        /* 损失厌恶强力插件 */
+        .warning-box { background: #FFF9E6; border: 1.5px dashed #FFCC00; border-radius: 20px; padding: 20px; margin: 20px 0; }
+        .warning-box b { color: #CC9900; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
 
-        /* 交付预览：模糊效果引诱 */
-        .delivery-preview { position: relative; width: 100%; height: 300px; border-radius: 24px; overflow: hidden; margin-top: 20px; }
-        .preview-img { width: 100%; height: 100%; object-fit: cover; filter: blur(15px); }
-        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; }
+        .pay-footer { position: sticky; bottom: 0; background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); padding: 20px; border-top: 1px solid #eee; margin: 0 -25px -40px; }
+        .btn-main { background: #000; color: #fff; width: 100%; padding: 22px; border-radius: 20px; font-weight: 900; font-size: 1.2rem; border: none; cursor: pointer; text-decoration: none; display: block; text-align: center; }
 
-        /* 最终支付按钮 */
-        .pay-btn { background: #000; color: #fff; width: 100%; padding: 22px; border-radius: 20px; font-size: 1.2rem; font-weight: 800; border: none; cursor: pointer; text-decoration: none; display: block; text-align: center; margin-top: 25px; box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
-
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideDown { from { top: 40px; opacity: 0; } to { top: 70px; opacity: 1; } }
+        @keyframes scaleUp { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @keyframes slideRight { from { transform: translateX(-100%); } to { transform: translateX(0); } }
     </style>
 </head>
 <body>
 
-    <div id="feedback">COMPATIBILITY MATCHED 98%</div>
+    <div class="urgent-bar">CRITICAL COSMIC ALIGNMENT DETECTED: 47 HOURS REMAINING</div>
     
-    <div class="status-header">
-        <div class="live-pulse"></div> HIGH-FREQUENCY NODE CONNECTED
-    </div>
+    <div id="live-notif"></div>
 
     <div class="container">
         
-        <div class="step active" id="s1">
-            <h1>What keeps you awake at night?</h1>
-            <div class="option-btn" onclick="showFeedback('Energy Aligned', 2)"><b>Unfulfilled Potential</b><span>→</span></div>
-            <div class="option-btn" onclick="showFeedback('Destiny Syncing', 2)"><b>Financial Uncertainty</b><span>→</span></div>
-            <div class="option-btn" onclick="showFeedback('Heart-Link Detected', 2)"><b>Romantic Void</b><span>→</span></div>
-            <p style="font-size: 0.7rem; color: #999; margin-top: 20px;">94% of seekers found clarity within 24 hours.</p>
+        <div class="view active" id="v1">
+            <h1>2026 Soul Reading</h1>
+            <p class="seo-sub">Calculate your accurate natal chart with the world's most advanced AI astrology engine. Discover your purpose today.</p>
+            
+            <div class="choice-card" onclick="next(2)">
+                <div class="choice-tag">MOST ACCURATE</div>
+                <b>Love & Soulmate Reading</b>
+                <span style="font-size: 0.8rem; color:#888;">Detect 2026 romantic peaks</span>
+            </div>
+            <div class="choice-card" onclick="next(2)">
+                <b>Wealth & Career Blueprint</b>
+                <span style="font-size: 0.8rem; color:#888;">Identify 2026 abundance windows</span>
+            </div>
+            <div class="choice-card" onclick="next(2)">
+                <b>Karmic Debt Cleansing</b>
+                <span style="font-size: 0.8rem; color:#888;">Remove spiritual blockages</span>
+            </div>
         </div>
 
-        <div class="step" id="s2">
-            <h1>Identify your Soul Signature.</h1>
-            <input type="text" id="name" style="width:100%; padding:20px; border:1px solid #eee; border-radius:15px; font-size:1.1rem; margin-bottom:15px; box-sizing:border-box;" placeholder="Full Name">
-            <input type="date" id="dob" style="width:100%; padding:20px; border:1px solid #eee; border-radius:15px; font-size:1.1rem; box-sizing:border-box;">
-            <button class="pay-btn" style="background:var(--primary)" onclick="startAnalysis()">Analyze Neural Map</button>
+        <div class="view" id="v2">
+            <h1>Identify Resonance.</h1>
+            <p class="seo-sub">We synchronize your data with NASA's Jet Propulsion Laboratory (JPL) ephemeris for 100% precision.</p>
+            <input type="text" id="name" placeholder="Full Name" style="width:100%; padding:20px; background:#f5f5f7; border:none; border-radius:15px; font-size:1.1rem; margin-bottom:15px; box-sizing: border-box;">
+            <input type="date" id="dob" style="width:100%; padding:20px; background:#f5f5f7; border:none; border-radius:15px; font-size:1.1rem; box-sizing: border-box;">
+            <button class="btn-main" style="margin-top: 30px; background: var(--p);" onclick="startCalc()">Calculate Neural Chart</button>
         </div>
 
-        <div class="step" id="s3">
-            <h1 style="text-align: center;">Decoding...</h1>
-            <div class="chart-container">
-                <canvas id="soulRadar"></canvas>
+        <div class="view" id="v3">
+            <h1 style="text-align: center;">Mapping Nodes...</h1>
+            <div class="chart-wrap">
+                <canvas id="karmaChart"></canvas>
             </div>
-            <p id="loading-logs" style="font-family:'JetBrains Mono'; font-size:0.7rem; color:var(--primary); text-align: center; margin-top: 20px;"></p>
+            <p id="log" style="font-family:'Space Mono'; font-size:0.65rem; color:var(--p); text-align: center;"></p>
         </div>
 
-        <div class="step" id="s4">
-            <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                <h1 style="font-size: 1.5rem;">Results for <span id="u-name" style="color:var(--primary);"></span></h1>
-                <span style="font-size: 0.7rem; color: var(--success);">● LIVE READING</span>
+        <div class="view" id="v4">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <span style="background: var(--s); color: #fff; padding: 5px 15px; border-radius: 50px; font-size: 0.7rem; font-weight: 800;">REPORT GENERATED</span>
+            </div>
+            <h1>The Shift for <span id="u-name" style="color:var(--p)">Seeker</span>.</h1>
+            
+            <div class="warning-box">
+                <b>⚠️ WARNING: KARMIC REVERSAL</b>
+                <p style="font-size: 0.8rem; margin: 10px 0 0; color: #663300;">An unexpected Saturn square is approaching your 2nd house. If not neutralized with your <b>Power Totem</b>, a significant financial opportunity may be blocked.</p>
             </div>
 
-            <div class="alert-card">
-                <div class="alert-icon">⚠️</div>
-                <div class="alert-text">
-                    <b>CRITICAL TIME WINDOW DETECTED</b>
-                    <p>A major celestial shift occurs in <b>41 hours</b>. Failure to act on this window may reset your wealth cycle for another 12 years.</p>
-                </div>
+            <p style="font-size: 0.95rem; line-height: 1.6;">Your 8K Soul Wallpapers have been rendered based on your specific planetary frequency at birth. They are designed to act as digital talismans for 2026.</p>
+
+            <div class="gallery-grid">
+                <div class="grid-item"><img src="https://images.unsplash.com/photo-1534796636912-3b95b3ab5986"></div>
+                <div class="grid-item"><img src="https://images.unsplash.com/photo-1464802686167-b939a67e06a1"></div>
+                <div class="grid-item"><img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78"></div>
             </div>
 
-            <p style="line-height: 1.6; color: #444; font-size: 0.9rem;">
-                Your <b>Quantum Soul Blueprint</b> reveals a hidden blockage in your "Abundance Sector". To clear this and manifest your 2026 totem, you must unlock the full visual ritual.
-            </p>
-
-            <div class="delivery-preview">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" class="preview-img">
-                <div class="lock-overlay">
-                    <span style="font-size: 2rem;">🔒</span>
-                    <p style="font-weight: bold; margin-top: 10px;">YOUR 8K POWER TOTEM</p>
-                    <p style="font-size: 0.7rem;">PERSONALIZED & RENDERED</p>
-                </div>
-            </div>
-
-            <div style="background: #fff; padding: 25px; border-radius: 24px; margin-top: 20px; border: 1.5px solid #000;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="pay-footer">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <div>
-                        <span style="font-size: 0.7rem; color: #888; text-decoration: line-through;">REGULAR $49.00</span>
-                        <div style="font-size: 2.2rem; font-weight: 900;">$0.90</div>
+                        <div style="font-size: 2.5rem; font-weight: 900;">$0.90 <del style="font-size: 1rem; color: #888;">$49.00</del></div>
+                        <div style="font-size: 0.6rem; color: var(--s);">✔ ONE-TIME SECURE ACCESS</div>
                     </div>
-                    <div style="text-align: right;">
-                        <span style="display: block; font-size: 0.6rem; font-weight: bold; color: var(--danger);">EXPIRES IN</span>
-                        <span id="timer" style="font-family: 'JetBrains Mono'; font-size: 1.2rem; font-weight: bold;">04:59</span>
-                    </div>
+                    <div style="text-align: right; color: var(--d); font-weight: 900; font-size: 1.1rem;" id="timer">04:59</div>
                 </div>
-                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="pay-btn">UNLOCK MY DESTINY NOW</a>
-                <p style="text-align: center; font-size: 0.6rem; color: #999; margin-top: 15px;">SECURE CHECKOUT • INSTANT ACCESS</p>
+                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-main">Unlock 2026 Blueprint & Totems</a>
             </div>
         </div>
 
     </div>
 
     <script>
-        function showFeedback(text, nextStep) {
-            const fb = document.getElementById('feedback');
-            fb.innerText = text;
-            fb.style.display = 'block';
-            setTimeout(() => {
-                fb.style.display = 'none';
-                if(nextStep) go(nextStep);
-            }, 1000);
-        }
-
-        function go(s) {
-            document.querySelectorAll('.step').forEach(v => v.classList.remove('active'));
-            document.getElementById('s' + s).classList.add('active');
+        function next(s) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('v' + s).classList.add('active');
             window.scrollTo(0,0);
         }
 
-        function startAnalysis() {
-            const name = document.getElementById('name').value;
-            if(!name) return alert("Your Soul Signature is required.");
-            document.getElementById('u-name').innerText = name;
-            go(3);
+        function startCalc() {
+            const n = document.getElementById('name').value;
+            if(!n) return alert("Soul signature required.");
+            document.getElementById('u-name').innerText = n.split(' ')[0];
+            next(3);
             
-            // 初始化雷达图 (伪专业数据)
-            const ctx = document.getElementById('soulRadar').getContext('2d');
+            // 绘制动态业力曲线 (正向反馈升级)
+            const ctx = document.getElementById('karmaChart').getContext('2d');
             new Chart(ctx, {
-                type: 'radar',
+                type: 'line',
                 data: {
-                    labels: ['Wealth', 'Love', 'Karma', 'Energy', 'Focus', 'Future'],
+                    labels: ['Jan', 'Mar', 'Jun', 'Aug', 'Oct', 'Dec'],
                     datasets: [{
-                        label: 'Your Vibration',
-                        data: [65, 80, 45, 90, 70, 85],
-                        backgroundColor: 'rgba(0, 122, 255, 0.2)',
+                        label: 'Vibrational Energy',
+                        data: [20, 45, 30, 85, 95, 100],
                         borderColor: '#007AFF',
-                        borderWidth: 2
+                        tension: 0.4,
+                        fill: true,
+                        backgroundColor: 'rgba(0, 122, 255, 0.1)'
                     }]
                 },
-                options: { scales: { r: { display: false } }, plugins: { legend: { display: false } } }
+                options: { plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { color: '#444' } } } }
             });
 
-            const logs = [
-                "RETRIEVING CELESTIAL COORDINATES...",
-                "CALCULATING KARMIC VELOCITY...",
-                "DETECTING ABUNDANCE BLOCKAGES...",
-                "RENDERING 8K POWER TOTEM...",
-                "FINALIZING SOUL BLUEPRINT..."
-            ];
+            const msgs = ["ACCESSING NASA JPL API...", "CALCULATING MIDPOINTS...", "RENDERING 8K ARTSETS...", "SECURITY CHECK PASSED."];
             let i = 0;
             const t = setInterval(() => {
-                if(i < logs.length) {
-                    document.getElementById('loading-logs').innerText = logs[i];
-                    i++;
-                } else {
-                    clearInterval(t);
-                    go(4);
-                    startTimer();
-                }
-            }, 1500);
+                if(i < msgs.length) { document.getElementById('log').innerText = msgs[i]; i++; }
+                else { clearInterval(t); next(4); startTimer(); }
+            }, 1200);
         }
 
         function startTimer() {
-            let time = 299;
+            let s = 299;
             setInterval(() => {
-                let m = Math.floor(time / 60);
-                let s = time % 60;
-                document.getElementById('timer').innerText = `0${m}:${s < 10 ? '0' + s : s}`;
-                if(time > 0) time--;
+                let m = Math.floor(s/60);
+                let sec = s%60;
+                document.getElementById('timer').innerText = `0${m}:${sec<10?'0'+sec:sec}`;
+                if(s>0) s--;
             }, 1000);
         }
+
+        // 模拟实时购买弹窗 (信任度收割)
+        const names = ["Emily from NY", "James from London", "Sofia from Berlin", "Liam from Sydney"];
+        setInterval(() => {
+            if(Math.random() > 0.7) {
+                const toast = document.getElementById('live-notif');
+                toast.innerText = `✨ ${names[Math.floor(Math.random()*names.length)]} just unlocked their 2026 Soul Map.`;
+                toast.style.display = 'block';
+                setTimeout(() => { toast.style.display = 'none'; }, 3000);
+            }
+        }, 8000);
     </script>
 </body>
 </html>
