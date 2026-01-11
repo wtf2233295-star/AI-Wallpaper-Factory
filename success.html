@@ -3,45 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Bundle Delivered | Thank You!</title>
+    <title>Cosmic Unlock | 2026 Zodiac Bundle Delivered</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Inter&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --bg: #0a0a1a; }
-        body { background:var(--bg); color:#fff; font-family:'Inter',sans-serif; text-align:center; padding:40px; }
-        canvas { position:fixed; top:0; left:0; z-index:-1; opacity:0.5; }
-        .glow { font-family:'Cinzel',serif; font-size:3.5rem; color:var(--gold); text-shadow:0 0 40px rgba(212,175,55,0.6); animation:pulse 3s infinite; }
-        .card { background:linear-gradient(135deg,#111,#000); border:1px solid #333; border-radius:30px; padding:40px; margin:40px auto; max-width:600px; box-shadow:0 30px 80px rgba(0,0,0,0.9); animation:fadeIn 2s; }
-        .preview { width:100%; border-radius:20px; margin:20px 0; }
-        .btn-dl { background:var(--gold); color:#000; padding:20px 60px; border-radius:50px; display:block; text-decoration:none; font-weight:bold; margin:30px 0; font-size:1.3rem; box-shadow:0 0 40px rgba(212,175,55,0.5); }
-        .upsell { margin-top:50px; color:#aaa; }
-        @keyframes pulse { 0%{text-shadow:0 0 30px rgba(212,175,55,0.6);} 50%{text-shadow:0 0 60px rgba(212,175,55,0.9);} 100%{text-shadow:0 0 30px rgba(212,175,55,0.6);} }
-        @keyframes fadeIn { from{opacity:0; transform:scale(0.9);} to{opacity:1; transform:scale(1);} }
+        :root { --gold: #D4AF37; --blue: #1DA1F2; --bg: #000; }
+        body { background:var(--bg); color:#fff; font-family:'Inter',sans-serif; text-align:center; margin:0; padding:0; overflow:hidden; }
+        canvas { position:fixed; top:0; left:0; z-index:-1; opacity:0.9; }
+        .container { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; animation:fadeIn 2s; }
+        .glow { font-family:'Cinzel',serif; font-size:4rem; background:linear-gradient(var(--gold), var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 0 50px var(--blue); animation:pulse 3s infinite; }
+        .card { background:linear-gradient(135deg,#111,#000); border:1px solid var(--blue); border-radius:40px; padding:50px; max-width:700px; box-shadow:0 0 80px var(--gold); }
+        .preview { width:100%; border-radius:30px; margin:30px 0; box-shadow:0 0 40px var(--blue); }
+        .btn-dl { background:linear-gradient(var(--gold), #b88e25); color:#000; padding:25px 70px; border-radius:50px; font-weight:700; text-decoration:none; box-shadow:0 0 60px var(--gold); transition:0.4s; position:relative; overflow:hidden; }
+        .btn-dl::before { content:""; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition:0.5s; }
+        .btn-dl:hover::before { left:100%; }
+        .progress { width:100%; height:10px; background:#111; border-radius:10px; margin:20px 0; overflow:hidden; }
+        .progress-bar { height:100%; background:var(--blue); width:0; animation:load 3s forwards; }
+        .upsell { margin-top:60px; color:#ccc; }
+        @keyframes fadeIn { from{opacity:0; scale:0.8;} to{opacity:1; scale:1;} }
+        @keyframes pulse { 0%{text-shadow:0 0 30px var(--gold);} 50%{text-shadow:0 0 70px var(--blue);} 100%{text-shadow:0 0 30px var(--gold);} }
+        @keyframes load { to{width:100%;} }
     </style>
 </head>
 <body>
-    <canvas id="stars"></canvas>
-    <h1 class="glow">Cosmic Access Granted ✨</h1>
-    <p>Thank you! Your premium 2026 Zodiac Bundle is ready for download.</p>
-    
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=800" class="preview" alt="Bundle Preview">
-        <b style="color:var(--gold); font-size:1.5rem;">Full Bundle (60+ Files • 150MB)</b>
-        <p>All 12 signs • Phone + Desktop • Bonus Styles</p>
-        <a href="YOUR_ZIP_DOWNLOAD_LINK" class="btn-dl">DOWNLOAD FULL BUNDLE NOW</a>
+    <canvas id="nebula"></canvas>
+    <div class="container">
+        <h1 class="glow">Cosmic Unlock Granted ✨</h1>
+        <p>Your 2026 Zodiac Bundle is ready – dive into the stars!</p>
+        <div class="card">
+            <img class="preview" src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=1200" alt="Zodiac Bundle Preview">
+            <b style="color:var(--gold); font-size:2rem;">Full AI Bundle (60+ 8K Files)</b>
+            <div class="progress"><div class="progress-bar"></div></div>
+            <a href="YOUR_ZIP_DOWNLOAD_LINK" class="btn-dl">Download Now</a>
+        </div>
+        <div class="upsell">
+            <p>Upgrade to Personalized AI Zodiac? +$9.99</p>
+            <a href="YOUR_UPSELL_STRIPE_LINK" class="btn-dl">Unlock Custom</a>
+        </div>
     </div>
-    
-    <div class="card upsell">
-        <p>Want Personalized Custom Zodiac? Add for +$9.99</p>
-        <a href="YOUR_UPSELL_LINK" class="btn-dl">UPGRADE NOW</a>
-    </div>
-
     <script>
-        // 同上星空背景
-        const canvas = document.getElementById('stars');
+        // Nebula背景 (爆炸效果)
+        const canvas = document.getElementById('nebula');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const stars = []; for(let i=0;i<150;i++){ stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2,s:Math.random()*0.5}); }
-        function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); stars.forEach(s=>{ ctx.fillStyle='#D4AF37'; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); s.y += s.s; if(s.y>canvas.height) s.y=0; }); requestAnimationFrame(animate); } animate();
+        let particles = []; for(let i=0; i<500; i++) { particles.push({x:canvas.width/2, y:canvas.height/2, r:Math.random()*3+1, angle:Math.random()*Math.PI*2, speed:Math.random()*5+2}); }
+        function explode() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => { p.x += Math.cos(p.angle)*p.speed; p.y += Math.sin(p.angle)*p.speed; p.speed *= 0.98; if(p.speed > 0.1) { ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle = `rgba(29,161,242,${p.r/4})`; ctx.fill(); } }); requestAnimationFrame(explode); } explode();
     </script>
 </body>
 </html>
