@@ -3,157 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>UNSEEN | Hyper-Personalized Astrology</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>HINT | Quantum Soul Guidance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #050505; --ink: #f0f0f0; --dim: #444; --accent: #fff; }
-        body { background: var(--bg); color: var(--ink); font-family: 'Space Mono', monospace; margin: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+        :root { --accent: #fff; --bg: #080808; --gray: #888; }
+        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         
-        /* 动态背景：模仿 Co-Star 的虚无流动感 */
-        .void-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(20,20,20,1) 100%), radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%); z-index: -1; animation: breathe 8s infinite alternate; }
-        @keyframes breathe { 0% { opacity: 0.8; transform: scale(1); } 100% { opacity: 1; transform: scale(1.02); } }
+        /* 顶部进度条：Hint 的灵魂 */
+        .progress-wrap { position: fixed; top: 0; width: 100%; height: 3px; background: #1a1a1a; z-index: 100; }
+        .progress-bar { height: 100%; background: var(--accent); width: 0%; transition: 0.4s; }
 
-        /* 布局容器 */
-        .layout { padding: 30px; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; justify-content: space-between; max-width: 600px; margin: 0 auto; width: 100%; }
+        .container { width: 90%; max-width: 420px; padding: 100px 20px 40px; text-align: center; display: flex; flex-direction: column; flex: 1; }
+        .step { display: none; animation: slideIn 0.5s forwards; }
+        .active { display: block; }
 
-        /* 顶部品牌区 */
-        header { border-bottom: 1px solid var(--dim); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .brand { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; letter-spacing: -1px; line-height: 0.8; }
-        .status { font-size: 0.6rem; color: var(--dim); text-transform: uppercase; }
-
-        /* 核心交互区 */
-        .stage { flex: 1; display: flex; flex-direction: column; justify-content: center; opacity: 0; animation: fadeUp 0.8s forwards; }
-        .stage.hidden { display: none; }
+        /* 题目样式 */
+        h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: normal; font-style: italic; margin-bottom: 40px; line-height: 1.3; }
         
-        h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; margin: 0 0 30px 0; line-height: 1.1; }
-        p.desc { font-size: 0.75rem; color: #888; margin-bottom: 40px; line-height: 1.6; max-width: 90%; }
+        /* 选项样式：大方块，点击感极强 */
+        .option { background: #121212; border: 1px solid #222; padding: 20px; margin-bottom: 12px; border-radius: 8px; cursor: pointer; transition: 0.2s; text-align: left; display: flex; justify-content: space-between; align-items: center; }
+        .option:active { background: #1a1a1a; border-color: #444; }
+        .option span { font-size: 0.95rem; letter-spacing: 0.5px; }
+        .option::after { content: '→'; opacity: 0.3; }
 
-        /* 极简输入框 */
-        input, select { background: transparent; border: none; border-bottom: 1px solid var(--dim); color: var(--ink); font-family: 'Space Mono', monospace; font-size: 1.2rem; width: 100%; padding: 10px 0; outline: none; border-radius: 0; transition: 0.3s; }
-        input:focus { border-bottom-color: var(--accent); }
-        
-        /* 按钮：反色设计 */
-        .btn { background: var(--ink); color: var(--bg); border: none; padding: 18px 0; width: 100%; font-family: 'Space Mono', monospace; font-weight: 700; text-transform: uppercase; cursor: pointer; letter-spacing: 1px; margin-top: auto; transition: 0.2s; }
-        .btn:active { transform: scale(0.98); opacity: 0.9; }
+        /* 输入框样式 */
+        input { background: transparent; border: none; border-bottom: 1px solid #333; color: #fff; font-size: 1.5rem; width: 100%; padding: 10px 0; text-align: center; outline: none; margin-top: 20px; }
 
-        /* 运算界面：模仿 NASA 数据流 */
-        .terminal { font-size: 0.7rem; color: #666; line-height: 1.8; text-align: left; }
-        .cursor { display: inline-block; width: 8px; height: 14px; background: var(--ink); animation: blink 1s infinite; }
+        /* 模拟星盘旋转：高逼格视觉 */
+        .astrolabe { width: 200px; height: 200px; border: 1px solid #1a1a1a; border-radius: 50%; margin: 0 auto 30px; position: relative; animation: rotate 20s linear infinite; }
+        .astrolabe::before { content: ''; position: absolute; top: 20%; left: 20%; width: 60%; height: 60%; border: 1px dashed #333; border-radius: 50%; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* 结果模糊页 */
-        .report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--dim); border: 1px solid var(--dim); margin-bottom: 20px; }
-        .cell { background: var(--bg); padding: 15px; text-align: center; }
-        .cell-label { display: block; font-size: 0.6rem; color: #666; margin-bottom: 5px; }
-        .cell-value { font-size: 1.2rem; font-weight: bold; }
-        
-        .blur-wall { position: relative; margin-top: 30px; text-align: left; }
-        .blur-text { filter: blur(5px); opacity: 0.6; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; line-height: 1.6; }
-        .pay-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(to bottom, rgba(5,5,5,0), rgba(5,5,5,1)); }
-        
-        .price-tag { font-size: 2rem; font-family: 'Cormorant Garamond', serif; margin-bottom: 10px; }
-        .trial-text { font-size: 0.7rem; color: #888; margin-bottom: 20px; text-transform: uppercase; }
+        /* 支付卡片 */
+        .pay-card { background: #fff; color: #000; border-radius: 12px; padding: 30px; margin-top: 20px; text-align: left; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .old-price { text-decoration: line-through; color: #888; font-size: 0.9rem; }
+        .new-price { font-size: 2rem; font-weight: bold; color: #000; }
+        .btn-pay { background: #000; color: #fff; width: 100%; padding: 20px; border-radius: 8px; border: none; font-weight: bold; font-size: 1rem; cursor: pointer; text-align: center; text-decoration: none; display: block; box-sizing: border-box; }
 
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes blink { 50% { opacity: 0; } }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    <div class="void-bg"></div>
-    <div class="layout">
-        <header>
-            <div class="brand">UNSEEN</div>
-            <div class="status">Node: 2026.01.11<br>Lat: <span id="lat">---</span></div>
-        </header>
 
-        <div id="s1" class="stage">
-            <h2>Who is asking?</h2>
-            <p class="desc">We need to locate your energy signature in the current planetary transit.</p>
-            <input type="text" id="username" placeholder="Enter your name" autocomplete="off">
-            <div style="height: 50px;"></div>
-            <button class="btn" onclick="next(1)">Next · Initiate</button>
+    <div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
+
+    <div class="container">
+        
+        <div class="step active" id="s1">
+            <h2>What is your primary focus for 2026?</h2>
+            <div class="option" onclick="go(2, 20)"><span>Relationship & Love</span></div>
+            <div class="option" onclick="go(2, 20)"><span>Financial Wealth</span></div>
+            <div class="option" onclick="go(2, 20)"><span>Career Path</span></div>
+            <div class="option" onclick="go(2, 20)"><span>Health & Vitality</span></div>
         </div>
 
-        <div id="s2" class="stage hidden">
-            <h2>When did you arrive?</h2>
-            <p class="desc">Your celestial coordinates determine your karmic debt and future velocity.</p>
-            <input type="date" id="dob" style="color-scheme: dark;">
-            <div style="height: 50px;"></div>
-            <button class="btn" onclick="next(2)">Next · Calculate</button>
+        <div class="step" id="s2">
+            <h2>Are you currently feeling a sense of stagnation?</h2>
+            <div class="option" onclick="go(3, 40)"><span>Yes, very much</span></div>
+            <div class="option" onclick="go(3, 40)"><span>Sometimes</span></div>
+            <div class="option" onclick="go(3, 40)"><span>I'm thriving, but want more</span></div>
         </div>
 
-        <div id="s3" class="stage hidden">
-            <div class="terminal" id="console"></div>
+        <div class="step" id="s3">
+            <h2>Your date of birth</h2>
+            <p style="color:#666; font-size:0.8rem;">To calculate your exact planetary transit.</p>
+            <input type="date" id="dob" onchange="go(4, 60)">
         </div>
 
-        <div id="s4" class="stage hidden">
-            <div style="text-align: center; margin-bottom: 20px;">
-                <span class="status">ANALYSIS COMPLETE</span>
-                <h2 style="font-size: 1.5rem; margin-top: 10px;">Your Planetary Profile</h2>
-            </div>
+        <div class="step" id="s4">
+            <h2>And your name, seeker?</h2>
+            <input type="text" id="uname" placeholder="Enter full name">
+            <button class="option" style="width:100%; margin-top:40px; background:#fff; color:#000;" onclick="startCalc()">Calculate Destiny →</button>
+        </div>
+
+        <div class="step" id="s5">
+            <div class="astrolabe"></div>
+            <h2 id="loading-txt">Syncing with NASA data...</h2>
+            <p id="data-stream" style="font-family:'Courier New'; font-size:0.7rem; color:#444;"></p>
+        </div>
+
+        <div class="step" id="s6">
+            <p style="text-align:left; color:var(--gray); font-size:0.7rem; letter-spacing:2px;">REPORT GENERATED</p>
+            <h2 style="text-align:left; margin-bottom:10px;">The stars have a message for you, <span id="final-name"></span>.</h2>
             
-            <div class="report-grid">
-                <div class="cell"><span class="cell-label">MOON PHASE</span><span class="cell-value">Waning</span></div>
-                <div class="cell"><span class="cell-label">CHAOS METER</span><span class="cell-value" style="color: #ff4444;">HIGH</span></div>
-                <div class="cell"><span class="cell-label">POWER COLOR</span><span class="cell-value">Onyx</span></div>
-                <div class="cell"><span class="cell-label">LUCK VECTOR</span><span class="cell-value">NW 32°</span></div>
+            <p style="text-align:left; line-height:1.6; color:#ccc; font-size:0.9rem;">
+                Your chart shows a **rare triple-conjunction** in your 8th house. This only happens once every 24 years. It indicates that you have been ignoring a specific sign from the universe regarding your future.
+            </p>
+
+            <div style="filter:blur(4px); text-align:left; font-size:0.8rem; margin-top:20px; border-left: 2px solid #333; padding-left:15px;">
+                The specific person who will change your life this month has the following characteristics... You must avoid the date January 19th because...
             </div>
 
-            <div class="blur-wall">
-                <div class="blur-text">
-                    Your chart indicates a rare collision between Saturn and your 10th house. This means the anxiety you are feeling is not random, but a precursor to a major shift. To survive this transit, you must avoid...
-                    Lorem ipsum dolor sit amet.
+            <div class="pay-card">
+                <div class="price-row">
+                    <div>
+                        <div class="old-price">REGULAR $49.00</div>
+                        <div class="new-price">$0.90</div>
+                    </div>
+                    <div style="text-align:right; font-size:0.6rem; color:#666;">Limited Time Offer<br>Ends in 04:59</div>
                 </div>
-                <div class="pay-overlay">
-                    <div class="price-tag">$0.90</div>
-                    <div class="trial-text">7-Day Access + 8K Talisman</div>
-                    <button class="btn" onclick="window.location.href='https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600'">UNLOCK FULL REPORT</button>
-                    <div style="margin-top:15px; font-size:0.6rem; color:#666; cursor:pointer;" onclick="window.location.href='https://buy.stripe.com/28E00kgudf5ne5G0of5J601'">or Join VIP ($9.90/mo)</div>
-                </div>
+                <p style="font-size:0.8rem; margin-bottom:20px; color:#333; line-height:1.4;">
+                    ✔ Full 2026 Soul Blueprint<br>
+                    ✔ Your Personal 8K Power Totem (Wallpaper)<br>
+                    ✔ 7-Day Survival Guide
+                </p>
+                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-pay">REVEAL MY DESTINY</a>
             </div>
         </div>
+
     </div>
 
     <script>
-        // 模拟随机经纬度，增加真实感
-        document.getElementById('lat').innerText = (Math.random() * 180 - 90).toFixed(4) + " / " + (Math.random() * 360 - 180).toFixed(4);
-
-        function next(step) {
-            const current = document.getElementById('s' + step);
-            const nextStep = document.getElementById('s' + (step + 1));
-            
-            if(step === 1 && !document.getElementById('username').value) return;
-            if(step === 2 && !document.getElementById('dob').value) return;
-
-            current.classList.add('hidden');
-            nextStep.classList.remove('hidden');
-
-            if(step === 2) runTerminal();
+        function go(step, progress) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('s' + step).classList.add('active');
+            document.getElementById('pbar').style.width = progress + '%';
         }
 
-        function runTerminal() {
-            const logs = [
-                "ACCESSING NASA EPHEMERIS API...",
-                "CALCULATING PLANETARY POSITIONS...",
-                "DETECTING RETROGRADE MERCURY...",
-                "SYNTHESIZING KARMIC PATTERNS...",
-                "GENERATING 8K VISUAL ASSET...",
-                "DONE."
-            ];
-            const consoleDiv = document.getElementById('console');
-            let i = 0;
+        function startCalc() {
+            const name = document.getElementById('uname').value;
+            if(!name) return alert("Please enter your name.");
+            document.getElementById('final-name').innerText = name;
             
-            const interval = setInterval(() => {
-                if (i < logs.length) {
-                    consoleDiv.innerHTML += `> ${logs[i]}<br>`;
+            go(5, 80);
+            
+            const logs = [
+                "Locating star position...",
+                "Mapping 12 houses...",
+                "Analyzing karmic debt...",
+                "Finalizing 8K visualization..."
+            ];
+            let i = 0;
+            const timer = setInterval(() => {
+                if(i < logs.length) {
+                    document.getElementById('loading-txt').innerText = logs[i];
+                    document.getElementById('data-stream').innerHTML += Math.random().toString(16).substring(2,15) + "<br>";
                     i++;
                 } else {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        document.getElementById('s3').classList.add('hidden');
-                        document.getElementById('s4').classList.remove('hidden');
-                    }, 800);
+                    clearInterval(timer);
+                    go(6, 100);
                 }
-            }, 800);
+            }, 1000);
         }
     </script>
 </body>
