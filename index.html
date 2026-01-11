@@ -10,7 +10,8 @@
     <meta property="og:title" content="2026 Zodiac Aesthetic Wallpapers | AI Cosmic Bundle">
     <meta property="og:description" content="Premium AI-generated zodiac art. Instant digital download.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=1200">
-    <meta property="og:url" content="YOUR_SITE_URL">
+    <meta property="og:url" content="https://wtf2233295-star.github.io/AI-Wallpaper-Factory/">
+    <link rel="canonical" href="https://wtf2233295-star.github.io/AI-Wallpaper-Factory/">
     <!-- Schema.org for Product SEO -->
     <script type="application/ld+json">
     {
@@ -22,7 +23,7 @@
       "brand": {"@type": "Brand", "name": "Cosmic AI Art"},
       "offers": {
         "@type": "Offer",
-        "url": "YOUR_SITE_URL",
+        "url": "https://wtf2233295-star.github.io/AI-Wallpaper-Factory/",
         "priceCurrency": "USD",
         "price": "14.99",
         "availability": "https://schema.org/InStock"
@@ -31,87 +32,117 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.puter.com/puter.js"></script> <!-- Puter.js for Flux API -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script> <!-- 3D Tilt -->
     <style>
-        :root { --gold: #D4AF37; --blue: #1DA1F2; --bg: #000; --nebula: rgba(29,161,242,0.1); }
+        :root { --gold: #D4AF37; --blue: #1DA1F2; --bg: #000; --nebula: rgba(29,161,242,0.2); }
         body { margin:0; background:var(--bg); color:#fff; font-family:'Inter',sans-serif; overflow-x:hidden; }
-        canvas { position:fixed; top:0; left:0; z-index:-1; opacity:0.8; pointer-events:none; }
-        .hero { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; position:relative; }
-        .hero::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom, var(--nebula), transparent); }
-        h1 { font-family:'Cinzel',serif; font-size:4.5rem; background:linear-gradient(var(--gold), var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 0 20px var(--gold); animation:fadeIn 2s; }
-        .subtitle { font-size:1.5rem; color:#ccc; margin:10px 0; }
-        .price { font-size:3.5rem; margin:20px 0; text-shadow:0 0 15px var(--gold); }
-        .btn { background:linear-gradient(var(--gold), #b88e25); color:#000; padding:20px 60px; border-radius:50px; font-weight:700; text-decoration:none; box-shadow:0 0 40px var(--gold); animation:pulse 2s infinite; transition:0.4s; }
-        .btn:hover { transform:scale(1.1); box-shadow:0 0 60px var(--blue); }
-        select, button { padding:15px; background:#111; color:var(--gold); border:1px solid var(--blue); border-radius:15px; font-size:1.2rem; margin:15px; cursor:pointer; }
-        #preview { width:80%; max-width:800px; border-radius:30px; box-shadow:0 0 50px var(--blue); margin:30px auto; transition:transform 0.5s; }
-        #preview:hover { transform:rotate(2deg) scale(1.05); }
-        .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; max-width:1400px; margin:60px auto; padding:0 20px; }
-        .gallery img { width:100%; border-radius:25px; box-shadow:0 15px 40px rgba(0,0,0,0.7); loading:lazy; transition:0.4s; }
-        .gallery img:hover { transform:scale(1.08); box-shadow:0 0 50px var(--gold); }
-        .faq { max-width:800px; margin:80px auto; padding:20px; }
-        .faq h2 { color:var(--gold); font-family:'Cinzel'; }
-        .faq p { color:#aaa; }
-        .share { margin:40px 0; }
-        .share a { color:var(--blue); margin:0 15px; font-size:1.5rem; }
-        @keyframes fadeIn { from{opacity:0; transform:translateY(-50px);} to{opacity:1; transform:translateY(0);} }
-        @keyframes pulse { 0%{box-shadow:0 0 20px var(--gold);} 50%{box-shadow:0 0 50px var(--blue);} 100%{box-shadow:0 0 20px var(--gold);} }
-        /* Hidden SEO Keywords */
-        #seo-hidden { display:none; }
+        video { position:fixed; top:50%; left:50%; min-width:100%; min-height:100%; width:auto; height:auto; transform:translate(-50%,-50%); opacity:0.3; z-index:-1; }
+        canvas { position:fixed; top:0; left:0; z-index:-1; opacity:0.7; pointer-events:none; }
+        .hero { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; position:relative; text-shadow:0 0 20px var(--blue); }
+        .hero::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom, var(--nebula), transparent); animation:nebulaGlow 10s infinite alternate; }
+        h1 { font-family:'Cinzel',serif; font-size:5rem; background:linear-gradient(var(--gold), var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:breathe 4s infinite; }
+        .subtitle { font-size:1.6rem; color:#ddd; margin:15px 0; animation:fadeIn 3s; }
+        .price { font-size:4rem; margin:25px 0; text-shadow:0 0 25px var(--gold); }
+        .btn { background:linear-gradient(45deg, var(--gold), var(--blue)); color:#000; padding:22px 70px; border-radius:50px; font-weight:700; text-decoration:none; box-shadow:0 0 50px var(--blue); animation:pulse 2.5s infinite; transition:0.5s; }
+        .btn:hover { transform:scale(1.12) rotate(2deg); box-shadow:0 0 80px var(--gold); }
+        select, button { padding:16px 30px; background:rgba(17,17,17,0.8); color:var(--gold); border:2px solid var(--blue); border-radius:20px; font-size:1.3rem; margin:20px 10px; cursor:pointer; transition:0.4s; }
+        button:hover { background:var(--blue); color:#fff; border-color:var(--gold); }
+        #preview-carousel { display:flex; overflow-x:auto; width:90%; max-width:1000px; margin:40px auto; gap:20px; scroll-snap-type:x mandatory; }
+        #preview-carousel img { flex:0 0 80%; border-radius:40px; box-shadow:0 0 60px var(--blue); transition:transform 0.6s; }
+        .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:25px; max-width:1600px; margin:80px auto; padding:0 30px; }
+        .gallery img { width:100%; border-radius:30px; box-shadow:0 20px 50px rgba(0,0,0,0.8); loading:lazy; transition:0.5s; }
+        .gallery img:hover { transform:scale(1.1) rotate(3deg); box-shadow:0 0 70px var(--gold); }
+        .faq { max-width:900px; margin:100px auto; padding:30px; background:rgba(17,17,17,0.5); border-radius:40px; box-shadow:0 0 50px var(--blue); }
+        .faq h2 { color:var(--gold); font-family:'Cinzel'; animation:breathe 5s infinite; }
+        .faq p { color:#bbb; font-size:1.1rem; }
+        .share { margin:50px 0; display:flex; justify-content:center; gap:30px; }
+        .share a { color:var(--blue); font-size:2rem; transition:0.4s; }
+        .share a:hover { color:var(--gold); transform:scale(1.3); }
+        @keyframes fadeIn { from{opacity:0; transform:translateY(-60px);} to{opacity:1; transform:translateY(0);} }
+        @keyframes pulse { 0%{box-shadow:0 0 30px var(--gold);} 50%{box-shadow:0 0 70px var(--blue);} 100%{box-shadow:0 0 30px var(--gold);} }
+        @keyframes breathe { 0%,100%{opacity:0.8;} 50%{opacity:1; text-shadow:0 0 40px var(--blue);} }
+        @keyframes nebulaGlow { 0%{opacity:0.1;} 100%{opacity:0.3;} }
+        /* Hidden SEO Keywords (200+ long-tail) */
+        #seo-hidden { display:none; } /* Add more: zodiac wallpapers 2026 ai generated, galaxy star sign backgrounds, ethereal constellation phone lockscreens, premium mystical astrology pack, cosmic nebula desktop art, etc. */
     </style>
 </head>
 <body>
+    <video autoplay muted loop playsinline>
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-nebula-in-space-307-small.mp4" type="video/mp4"> <!-- Free nebula video, replace if needed -->
+    </video>
     <canvas id="nebula"></canvas>
     <section class="hero">
         <h1>2026 Zodiac Aesthetic</h1>
         <p class="subtitle">AI-Powered Cosmic Wallpapers • 60+ 8K Galaxy Designs • Instant Download</p>
         <div class="price">$14.99 <del>$49</del></div>
-        <a href="YOUR_STRIPE_PAYMENT_LINK" class="btn">Unlock Cosmic Bundle</a>
+        <a href="YOUR_STRIPE_PAYMENT_LINK" class="btn">Unlock Cosmic Bundle</a> <!-- REPLACE WITH REAL STRIPE LINK -->
         <select id="zodiacSelect">
-            <option value="aries">Aries</option>
-            <option value="taurus">Taurus</option>
-            <!-- 加满12个星座 -->
-            <option value="pisces">Pisces</option>
+            <option value="aries">Aries - Fiery Pioneer</option>
+            <option value="taurus">Taurus - Earthly Luxe</option>
+            <option value="gemini">Gemini - Dual Vibes</option>
+            <option value="cancer">Cancer - Lunar Emotion</option>
+            <option value="leo">Leo - Regal Fire</option>
+            <option value="virgo">Virgo - Pure Precision</option>
+            <option value="libra">Libra - Balanced Harmony</option>
+            <option value="scorpio">Scorpio - Intense Depth</option>
+            <option value="sagittarius">Sagittarius - Adventurous Arrow</option>
+            <option value="capricorn">Capricorn - Ambitious Climb</option>
+            <option value="aquarius">Aquarius - Innovative Wave</option>
+            <option value="pisces">Pisces - Dreamy Flow</option>
         </select>
-        <button onclick="generatePreview()">Generate AI Preview</button>
-        <img id="preview" src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=1200" alt="AI Zodiac Preview 2026" loading="lazy">
+        <button onclick="generateVariants()">Generate AI Variants</button>
+        <div id="preview-carousel"></div>
     </section>
 
     <section class="gallery">
-        <!-- 20+ 懒加载预览，加alt SEO -->
+        <!-- 30+ 预览，加alt SEO -->
         <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4ca60?w=600" alt="Aries Zodiac Wallpaper 2026 Galaxy Aesthetic" loading="lazy">
-        <!-- 加更多 -->
+        <!-- Add more high-quality AI-style images -->
     </section>
 
     <section class="faq">
-        <h2>Why Choose Our Cosmic Bundle?</h2>
-        <p>Q: Is it AI-generated? A: Yes, powered by state-of-the-art Flux AI for unique designs.</p>
-        <!-- 加3-5 FAQ -->
+        <h2>Why Our Cosmic Bundle?</h2>
+        <p>Q: AI-generated? A: Yes, Flux AI for unique, high-res designs.</p>
+        <p>Q: Instant? A: Download ZIP right after payment.</p>
+        <p>Q: Compatible? A: Phone, desktop, tablet – all resolutions.</p>
+        <p>Q: Refund? A: 30-day guarantee if not cosmic enough!</p>
+        <p>Q: Custom? A: Upgrade for personalized zodiac art.</p>
     </section>
 
     <div class="share">
-        <a href="https://twitter.com/intent/tweet?text=Check this cosmic zodiac art!&url=YOUR_SITE">Share on X</a>
-        <!-- 加FB/IG -->
+        <a href="https://twitter.com/intent/tweet?text=Discover cosmic zodiac art!&url=https://wtf2233295-star.github.io/AI-Wallpaper-Factory/">Share on X</a>
+        <a href="https://www.pinterest.com/pin/create/button/?url=https://wtf2233295-star.github.io/AI-Wallpaper-Factory/&media=PREVIEW_IMG_URL&description=2026 Zodiac Wallpapers">Pin on Pinterest</a>
     </div>
 
-    <div id="seo-hidden">zodiac wallpapers 2026, ai astrology art, galaxy backgrounds download, mystical star signs 8k, cosmic phone lockscreens, ethereal constellation designs, premium zodiac bundle, space nebula wallpapers, astrology aesthetic pack, digital zodiac art 2026, and 180 more long-tail keywords...</div>
+    <div id="seo-hidden">zodiac wallpapers 2026 ai generated, galaxy star sign backgrounds 8k, ethereal constellation phone lockscreens, premium mystical astrology pack digital, cosmic nebula desktop art download, futuristic zodiac designs bundle, space theme wallpapers instant, astrology aesthetic 2026 collection, ai powered star signs art, nebula galaxy zodiac wallpapers high res, and 190 more...</div>
 
     <script>
-        // Nebula粒子背景 (响应鼠标)
+        VanillaTilt.init(document.querySelectorAll(".gallery img"), { max: 25, speed: 400, glare: true, "max-glare": 0.5 }); // 3D Tilt
+
+        // Nebula粒子 (拖拽响应)
         const canvas = document.getElementById('nebula');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particles = []; for(let i=0; i<300; i++) { particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*2+1, vx:(Math.random()-0.5)*0.5, vy:(Math.random()-0.5)*0.5}); }
-        function draw() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => { ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle = `rgba(212,175,55,${p.r/3})`; ctx.fill(); p.x += p.vx; p.y += p.vy; if(p.x<0||p.x>canvas.width) p.vx=-p.vx; if(p.y<0||p.y>canvas.height) p.vy=-p.vy; }); requestAnimationFrame(draw); } draw();
-        window.addEventListener('mousemove', e => { particles.forEach(p => { let dx=e.clientX-p.x, dy=e.clientY-p.y, dist=Math.sqrt(dx*dx+dy*dy); if(dist<100) { p.vx += dx/dist*0.05; p.vy += dy/dist*0.05; } }); });
+        let particles = []; for(let i=0; i<400; i++) { particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*3+1, vx:(Math.random()-0.5)*0.6, vy:(Math.random()-0.5)*0.6}); }
+        function draw() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => { ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle = `rgba(212,175,55,${p.r/4})`; ctx.fill(); p.x += p.vx; p.y += p.vy; if(p.x<0||p.x>canvas.width) p.vx=-p.vx; if(p.y<0||p.y>canvas.height) p.vy=-p.vy; }); requestAnimationFrame(draw); } draw();
+        canvas.addEventListener('mousemove', e => { particles.forEach(p => { let dx=e.clientX-p.x, dy=e.clientY-p.y, dist=Math.sqrt(dx*dx+dy*dy); if(dist<150) { p.vx += dx/dist*0.08; p.vy += dy/dist*0.08; } }); });
 
-        // Puter.js Flux API 生成预览
-        async function generatePreview() {
+        // Generate 3 AI variants
+        async function generateVariants() {
             const zodiac = document.getElementById('zodiacSelect').value;
-            const prompt = `ethereal cosmic ${zodiac} zodiac wallpaper, galaxy nebula background, glowing stars, mystical aura, golden accents, high detail, 8K resolution, aesthetic digital art`;
-            try {
-                const image = await puter.ai.image(prompt, { model: "flux-2-pro" });
-                document.getElementById('preview').src = image.url;
-            } catch (error) { alert('AI generation failed: ' + error); }
+            const carousel = document.getElementById('preview-carousel');
+            carousel.innerHTML = '';
+            for(let i=0; i<3; i++) {
+                const style = ['galaxy nebula', 'neon cyberpunk', 'ethereal crystal'][i];
+                const prompt = `ethereal cosmic ${zodiac} zodiac wallpaper, ${style} background, glowing stars, mystical aura, golden accents, high detail, 8K resolution, aesthetic digital art`;
+                try {
+                    const image = await puter.ai.image(prompt, { model: "flux-2-pro" });
+                    const img = document.createElement('img');
+                    img.src = image.url;
+                    img.alt = `${zodiac} Variant ${i+1}`;
+                    carousel.appendChild(img);
+                } catch (error) { console.error('AI error:', error); }
+            }
         }
     </script>
 </body>
