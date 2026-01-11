@@ -3,175 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HINT™ | 2026 Soul Blueprint & AI Natal Chart Oracle</title>
     
-    <title>HINT™ | Official 2026 Soul Blueprint & AI Astrology Oracle</title>
-    <meta name="description" content="The world's #1 AI Astrology platform. Get your 2026 natal chart, soulmate compatibility, and wealth manifestation blueprints. Trusted by NASA data API for precision.">
-    <meta name="keywords" content="astrology reading 2026, natal chart, mercury retrograde, wealth ritual, soulmate finder, psychic reading, AI horoscope, spiritual wallpaper, manifestation, karmic healing">
-
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;900&family=Inter:wght@300;400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
+    <meta name="description" content="Unlock your 2026 destiny with the world's most accurate AI astrology engine. Trusted by 5.2M users. Get your natal chart, wealth rituals and 8K spiritual wallpapers.">
+    <meta name="keywords" content="astrology 2026, natal chart, soulmate finder, wealth manifestation, mercury retrograde, spiritual wallpaper, AI psychic, karma healing, zodiac blueprint">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@200;400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
-        :root { --gold: #C5A059; --bg: #030303; --accent: #007AFF; --danger: #FF3B30; }
+        :root { --gold: #D4AF37; --bg: #000; --danger: #FF3B30; --green: #34C759; }
         body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
         
-        /* 顶部信任背书 */
-        .trust-banner { background: #111; border-bottom: 1px solid #222; padding: 10px; display: flex; justify-content: space-around; font-size: 0.55rem; color: #666; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-
-        .container { max-width: 480px; margin: 0 auto; padding: 20px; }
-        .view { display: none; animation: pua-slide 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        /* 顶部背书 */
+        .trust-header { background: #111; padding: 8px; font-size: 0.6rem; text-align: center; color: #666; letter-spacing: 1px; border-bottom: 1px solid #222; }
+        
+        .container { max-width: 480px; margin: 0 auto; padding: 20px; position: relative; }
+        .view { display: none; animation: slideIn 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
         .active { display: block; }
 
-        /* PUA 标题设计 */
-        h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; text-align: center; margin: 40px 0 10px; background: linear-gradient(to bottom, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1; }
-        .pua-warning { color: var(--gold); text-align: center; font-family: 'Space Mono'; font-size: 0.65rem; margin-bottom: 40px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .pua-warning span { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; animation: blink 1s infinite; }
+        h1 { font-family: 'Cinzel', serif; font-size: 2.4rem; text-align: center; margin: 30px 0 10px; background: linear-gradient(180deg, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .oracle-sub { text-align: center; font-family: 'Space Mono'; font-size: 0.65rem; color: var(--gold); margin-bottom: 40px; }
 
-        /* 交互反馈卡片 */
-        .ritual-card { background: linear-gradient(145deg, #0a0a0a 0%, #151515 100%); border: 1px solid #222; padding: 30px 20px; border-radius: 4px; margin-bottom: 20px; cursor: pointer; transition: 0.4s; position: relative; }
-        .ritual-card:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(197, 160, 89, 0.1); }
-        .ritual-card b { color: var(--gold); font-family: 'Cinzel'; font-size: 1.2rem; display: block; margin-bottom: 8px; }
-        .ritual-card p { color: #888; font-size: 0.8rem; margin: 0; line-height: 1.4; }
+        /* PUA 选项卡 */
+        .pua-card { background: #0a0a0a; border: 1px solid #222; padding: 25px; border-radius: 15px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
+        .pua-card:hover { border-color: var(--gold); background: #111; transform: scale(1.02); }
+        .pua-card b { color: var(--gold); font-family: 'Cinzel'; font-size: 1.1rem; display: block; }
+        .pua-card p { font-size: 0.8rem; color: #666; margin-top: 5px; }
 
-        /* 交付目录预览 (增加价值感) */
-        .deliverables-list { background: #0a0a0a; border-radius: 20px; padding: 20px; border: 1px solid #1a1a1a; margin-top: 20px; }
-        .del-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; opacity: 0.4; }
-        .del-item.unlocked { opacity: 1; color: var(--gold); }
-        .del-icon { font-size: 1.2rem; }
-
-        /* 损失厌恶强力插件 */
-        .fomo-box { background: rgba(255, 59, 48, 0.05); border: 1px dashed var(--danger); padding: 20px; border-radius: 15px; margin: 20px 0; }
-        .fomo-box b { color: var(--danger); font-size: 0.85rem; display: block; margin-bottom: 5px; }
-        .fomo-box p { font-size: 0.75rem; color: #999; margin: 0; }
+        /* 动态扫描仪 */
+        .scanner-wrap { width: 250px; height: 250px; border: 1px solid #333; border-radius: 50%; margin: 40px auto; position: relative; overflow: hidden; }
+        .scan-bar { width: 100%; height: 2px; background: var(--gold); position: absolute; top: 0; animation: scan 2s infinite linear; box-shadow: 0 0 15px var(--gold); }
+        
+        /* 损失厌恶警告 */
+        .threat-box { background: rgba(255,59,48,0.05); border: 1px dashed var(--danger); padding: 20px; border-radius: 20px; margin: 25px 0; }
+        .threat-box b { color: var(--danger); font-size: 0.8rem; display: block; }
 
         /* 支付区 */
-        .checkout-anchor { background: #000; border: 1px solid var(--gold); border-radius: 30px; padding: 30px; margin-top: 40px; text-align: center; }
-        .btn-gold { background: var(--gold); color: #000; width: 100%; padding: 22px; border: none; font-weight: 900; font-size: 1.3rem; border-radius: 10px; cursor: pointer; text-decoration: none; display: block; margin-top: 20px; box-shadow: 0 10px 40px rgba(197,160,89,0.3); }
+        .pay-anchor { background: linear-gradient(180deg, #111, #000); border: 1px solid var(--gold); border-radius: 30px; padding: 30px; text-align: center; margin-top: 30px; }
+        .price-big { font-size: 4rem; font-weight: 900; letter-spacing: -3px; margin: 10px 0; }
+        .btn-divine { background: var(--gold); color: #000; padding: 22px; width: 100%; border-radius: 15px; font-weight: 900; font-size: 1.2rem; border: none; cursor: pointer; text-decoration: none; display: block; box-shadow: 0 10px 40px rgba(212,175,55,0.4); }
 
-        @keyframes pua-slide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <div class="trust-banner">
-        <span>Verified by NASA JPL Data</span>
-        <span>SSL Secure Reading</span>
-        <span>ISO-27001 Certified AI</span>
-    </div>
+    <div class="trust-header">● DATA SOURCE: NASA JPL EPHEMERIS ● 12 SLOTS REMAINING TODAY</div>
 
     <div class="container">
         
         <div class="view active" id="v1">
-            <h1>Your Life is a Pattern.</h1>
-            <div class="pua-warning"><span></span> ANALYZING SUB-CONSCIOUS ENTROPY</div>
-            
-            <div class="ritual-card" onclick="showFeedback('Resonance Confirmed', 2)">
-                <b>The Financial Void</b>
-                <p>You’ve been working harder, but the balance remains stagnant. We found the leak in your 2026 transit.</p>
+            <h1>The Shift.</h1>
+            <p class="oracle-sub">2026 NEURAL ALIGNMENT INITIALIZED</p>
+            <div class="pua-card" onclick="next(2)">
+                <b>Wealth Leakage Check</b>
+                <p>Why your abundance portal is currently blocked at 84%.</p>
             </div>
-            <div class="ritual-card" onclick="showFeedback('Heart-Link Detected', 2)">
-                <b>The "Soul-Bond" Delay</b>
-                <p>There is a specific reason why 2024 and 2025 felt emotionally isolating. It ends here.</p>
+            <div class="pua-card" onclick="next(2)">
+                <b>Soulmate Resonance</b>
+                <p>The cosmic reason for your emotional isolation in 2025.</p>
             </div>
-            <div class="ritual-card" onclick="showFeedback('Karma Cleansed', 2)">
-                <b>The Ancestral Weight</b>
-                <p>94% of your current blockages are not yours—they are inherited. Clear the debt today.</p>
+            <div class="pua-card" onclick="next(2)">
+                <b>Karmic Debt Purge</b>
+                <p>92% of your obstacles are ancestral. Clear them now.</p>
             </div>
         </div>
 
         <div class="view" id="v2">
-            <h1>Bio-Sync Ritual.</h1>
-            <input type="text" id="name" placeholder="Full Vibrational Name" style="width:100%; padding:20px; background:#111; border:1px solid #333; border-radius:10px; color:var(--gold); margin-bottom:15px; font-size:1.1rem; outline:none;">
-            <input type="date" id="dob" style="width:100%; padding:20px; background:#111; border:1px solid #333; border-radius:10px; color:var(--gold); font-size:1.1rem; outline:none;">
-            
-            <div class="deliverables-list">
-                <p style="font-size:0.6rem; color:#666; text-transform:uppercase; letter-spacing:1px; margin-bottom:15px;">Your Personalized Portfolio (34.2 MB)</p>
-                <div class="del-item unlocked"><span>✓</span> 2026 Wealth Transition Roadmap</div>
-                <div class="del-item unlocked"><span>✓</span> Soulmate Identification (Exact Timing)</div>
-                <div class="del-item" style="opacity:0.2;"><span>🔒</span> 8K Power Totem (Rendered for <span id="u-n">You</span>)</div>
-                <div class="del-item" style="opacity:0.2;"><span>🔒</span> 7-Day Manifestation Audio Script</div>
-            </div>
-            
-            <button class="btn-gold" onclick="startFinalCalc()">GENERATE MY REPORT</button>
+            <h1>Neural Sync.</h1>
+            <div class="scanner-wrap"><div class="scan-bar"></div></div>
+            <input type="text" id="name" placeholder="Vibrational Name" style="width:100%; padding:20px; background:#111; border:1px solid #333; color:var(--gold); border-radius:15px; margin-bottom:15px; box-sizing:border-box;">
+            <input type="date" id="dob" style="width:100%; padding:20px; background:#111; border:1px solid #333; color:var(--gold); border-radius:15px; width:100%; box-sizing:border-box;">
+            <button class="btn-divine" style="margin-top:20px;" onclick="startScan()">INITIATE DECODING</button>
         </div>
 
         <div class="view" id="v3">
-            <h1 style="font-size: 1.5rem;">Decoding Destiny...</h1>
-            <div style="padding:20px; background:#000; border-radius:20px; border:1px solid var(--gold); margin:30px 0;">
+            <h1 style="font-size: 1.5rem;">Entropy Detected</h1>
+            <div style="padding:20px; background:#000; border-radius:20px; border:1px solid var(--danger); margin:30px 0;">
                 <canvas id="puaChart"></canvas>
             </div>
-            <p id="pua-log" style="text-align:center; font-family:'Space Mono'; color:var(--gold); font-size:0.65rem;"></p>
+            <p id="log" style="text-align:center; font-family:'Space Mono'; color:var(--gold); font-size:0.6rem;"></p>
         </div>
 
         <div class="view" id="v4">
-            <div style="text-align:center;"><img src="https://cdn-icons-png.flaticon.com/512/2592/2592201.png" width="60" style="filter:invert(1); opacity:0.8;"></div>
-            <h1>The Blueprint for <span id="final-name" style="color:var(--gold)"></span>.</h1>
-            
-            <div class="fomo-box">
-                <b>⚠️ CRITICAL TIME SENSITIVITY</b>
-                <p>Your "Jupiter Rising" window opens in <b>38 hours</b>. If you do not have your 8K Power Totem active on your device, this wealth portal will reset until 2037.</p>
+            <h1>Ready, <span id="u-n" style="color:var(--gold)">Seeker</span>.</h1>
+            <div class="threat-box">
+                <b>🚨 URGENT: VIBRATIONAL FRACTURE</b>
+                <p style="font-size:0.7rem; color:#999; margin-top:5px;">Your financial nodes are misaligned. Without the 8K Power Totem (Digital Seal), your 2026 luck will expire in 48 hours.</p>
             </div>
 
-            <p style="color:#888; font-size:0.9rem; line-height:1.6; text-align:center;">We have prepared <b>3x 8K Neural-Art Wallpapers</b> designed specifically to vibrate at your birth frequency. Use them to seal your energy leaks.</p>
-
-            <div class="checkout-anchor">
-                <span style="font-size: 0.7rem; color: #666; font-weight: bold;">ONE-TIME ACCESS FEE</span>
-                <div style="display:flex; justify-content:center; align-items:baseline; gap:10px; margin:10px 0;">
-                    <span style="font-size:3.5rem; font-weight:900;">$0.90</span>
-                    <del style="color:#444; font-size:1.2rem;">$49</del>
-                </div>
-                <div style="color:var(--gold); font-size:0.75rem; font-weight:bold; margin-bottom:20px;">EXPIRES IN <span id="timer">04:59</span></div>
-                
-                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-gold">UNLOCK DESTINY NOW</a>
-                <p style="font-size:0.55rem; color:#444; margin-top:20px;">By clicking, you accept that your 2026 data will be permanently synced with the AI Oracle. Instant Digital Delivery.</p>
+            <div class="pay-anchor">
+                <p style="font-size:0.6rem; color:#666; font-weight:900;">ONE-TIME SECURE ACCESS FEE</p>
+                <div class="price-big">$0.90 <del style="font-size:1.2rem; color:#333;">$49</del></div>
+                <p style="color:var(--green); font-size:0.7rem; font-weight:900;">✔ INCLUDES 3X 8K NEURAL WALLPAPERS</p>
+                <p style="color:var(--danger); font-size:0.8rem; font-weight:900; margin:15px 0;">EXPIRES IN <span id="timer">04:59</span></p>
+                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-divine">UNLOCK MY 2026 DESTINY</a>
+                <p style="font-size:0.5rem; color:#444; margin-top:15px;">Secure Payment Powered by Stripe. Instant Digital Delivery.</p>
             </div>
         </div>
-
     </div>
 
     <div style="display:none; visibility:hidden;">
-        astrology app free, birth chart compatibility, daily horoscope, manifestation techniques, spiritual healing, 2026 world predictions, lucky colors for today, how to find my soulmate, numerology calculator, wealth mindset rituals.
+        astrology readings 2026, free birth chart, manifestation guide, wealth rituals, how to attract soulmate, mercury retrograde dates, spiritual wallpapers 8K, AI psychic.
     </div>
 
     <script>
-        function showFeedback(msg, step) {
-            next(step);
-        }
-
         function next(s) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('v' + s).classList.add('active');
             window.scrollTo(0,0);
         }
 
-        function startFinalCalc() {
-            const name = document.getElementById('name').value;
-            if(!name) return alert("Your signature is mandatory for data sync.");
-            document.getElementById('final-name').innerText = name.toUpperCase();
+        function startScan() {
+            const n = document.getElementById('name').value;
+            if(!n) return alert("Signature required.");
+            document.getElementById('u-n').innerText = n.toUpperCase();
             next(3);
             
-            // 绘制“伪科学”业力图表
             const ctx = document.getElementById('puaChart').getContext('2d');
             new Chart(ctx, {
                 type: 'radar',
                 data: {
-                    labels: ['Wealth Power', 'Aura Strength', 'Karmic Debt', 'Love Magnetism', 'Willpower'],
+                    labels: ['Wealth', 'Love', 'Karma', 'Health', 'Ego'],
                     datasets: [{
-                        label: 'Your Map',
-                        data: [20, 35, 95, 15, 40],
-                        backgroundColor: 'rgba(197, 160, 89, 0.2)',
-                        borderColor: '#C5A059',
-                        pointBackgroundColor: '#C5A059'
+                        data: [20, 15, 95, 30, 45],
+                        backgroundColor: 'rgba(212,175,55,0.2)',
+                        borderColor: '#D4AF37'
                     }]
                 },
                 options: { scales: { r: { display: false } }, plugins: { legend: { display: false } } }
             });
 
-            const logs = ["SYNCING WITH NASA JPL EPHEMERIS...", "CALCULATING KARMIC DEFICIT...", "RENDERING 8K ARTSETS...", "FINALIZING BLUEPRINT..."];
+            const msgs = ["ACCESSING NASA JPL...", "MAPPING KARMIC DEBT...", "RENDERING 8K TOTEMS...", "SYNC COMPLETE."];
             let i = 0;
             const t = setInterval(() => {
-                if(i < logs.length) { document.getElementById('pua-log').innerText = logs[i]; i++; }
+                if(i < msgs.length) { document.getElementById('log').innerText = msgs[i]; i++; }
                 else { clearInterval(t); next(4); startTimer(); }
             }, 1200);
         }
