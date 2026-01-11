@@ -3,99 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 Zodiac Aesthetic Wallpapers | 60+ 8K Cosmic Bundle</title>
-    <meta name="description" content="Instant download 60+ premium zodiac aesthetic wallpapers. Cosmic galaxy designs for phone & desktop. Limited time launch offer!">
-    <meta name="keywords" content="zodiac wallpaper 2026, astrology aesthetic bundle, galaxy phone wallpaper digital download, 8K constellation art, mystical zodiac pack">
+    <title>2026 Zodiac Aesthetic Wallpapers | AI-Powered Cosmic Bundle</title>
+    <meta name="description" content="Unlock 60+ AI-generated 8K zodiac wallpapers. Cosmic galaxy aesthetics for phone & desktop. Instant download, powered by advanced AI.">
+    <meta name="keywords" content="zodiac wallpaper 2026, astrology aesthetic bundle, galaxy phone wallpaper digital download, 8K constellation art, mystical zodiac pack, AI zodiac generator, cosmic desktop backgrounds, star sign wallpapers 2026, ethereal astrology art, nebula zodiac designs">
+    <!-- OG Meta for Social/SEO -->
+    <meta property="og:title" content="2026 Zodiac Aesthetic Wallpapers | AI Cosmic Bundle">
+    <meta property="og:description" content="Premium AI-generated zodiac art. Instant digital download.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=1200">
+    <meta property="og:url" content="YOUR_SITE_URL">
+    <!-- Schema.org for Product SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "2026 Zodiac Aesthetic Wallpapers",
+      "image": "https://images.unsplash.com/photo-1614728263952-84ea256f9679",
+      "description": "60+ 8K AI-generated cosmic zodiac wallpapers",
+      "brand": {"@type": "Brand", "name": "Cosmic AI Art"},
+      "offers": {
+        "@type": "Offer",
+        "url": "YOUR_SITE_URL",
+        "priceCurrency": "USD",
+        "price": "14.99",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.puter.com/puter.js"></script> <!-- Puter.js for Flux API -->
     <style>
-        :root { --gold: #D4AF37; --bg: #0a0a1a; --dark: #000; }
-        body { margin:0; padding:0; background:var(--bg); color:#fff; font-family:'Inter',sans-serif; overflow-x:hidden; }
-        canvas { position:fixed; top:0; left:0; z-index:-1; opacity:0.6; }
-        .container { max-width:1200px; margin:0 auto; padding:20px; text-align:center; animation:fadeIn 1.5s; }
-        h1 { font-family:'Cinzel',serif; font-size:3.5rem; background:linear-gradient(#fff,var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-        .subtitle { font-size:1.3rem; color:#aaa; margin:20px 0; }
-        .price { font-size:3rem; font-weight:bold; margin:30px 0; }
-        .timer { color:var(--gold); font-size:1.5rem; font-weight:bold; }
-        .btn { background:var(--gold); color:#000; padding:18px 50px; border-radius:50px; font-weight:bold; text-decoration:none; display:inline-block; box-shadow:0 0 30px rgba(212,175,55,0.4); animation:pulse 2s infinite; transition:0.3s; }
-        .btn:hover { transform:scale(1.08); }
-        select { padding:15px; background:#111; color:var(--gold); border:1px solid #333; border-radius:15px; font-size:1.1rem; margin:20px 0; }
-        #preview { width:100%; max-width:600px; border-radius:30px; box-shadow:0 20px 60px rgba(0,0,0,0.8); margin:30px auto; transition:0.5s; }
-        .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:15px; margin:50px 0; }
-        .gallery img { width:100%; border-radius:20px; transition:0.5s; cursor:pointer; }
-        .gallery img:hover { transform:scale(1.1); box-shadow:0 0 40px var(--gold); }
-        .reviews { background:#111; padding:30px; border-radius:30px; margin:50px 0; }
-        .review { font-style:italic; color:#ccc; margin:15px 0; }
-        .form { margin:50px 0; }
-        input[type=email] { padding:15px; width:300px; background:#111; border:1px solid #333; color:#fff; border-radius:15px 0 0 15px; }
-        .form button { padding:15px 30px; background:var(--gold); color:#000; border:none; border-radius:0 15px 15px 0; font-weight:bold; }
-        @keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
-        @keyframes pulse { 0%{box-shadow:0 0 20px rgba(212,175,55,0.4);} 50%{box-shadow:0 0 40px rgba(212,175,55,0.7);} 100%{box-shadow:0 0 20px rgba(212,175,55,0.4);} }
+        :root { --gold: #D4AF37; --blue: #1DA1F2; --bg: #000; --nebula: rgba(29,161,242,0.1); }
+        body { margin:0; background:var(--bg); color:#fff; font-family:'Inter',sans-serif; overflow-x:hidden; }
+        canvas { position:fixed; top:0; left:0; z-index:-1; opacity:0.8; pointer-events:none; }
+        .hero { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; position:relative; }
+        .hero::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom, var(--nebula), transparent); }
+        h1 { font-family:'Cinzel',serif; font-size:4.5rem; background:linear-gradient(var(--gold), var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 0 20px var(--gold); animation:fadeIn 2s; }
+        .subtitle { font-size:1.5rem; color:#ccc; margin:10px 0; }
+        .price { font-size:3.5rem; margin:20px 0; text-shadow:0 0 15px var(--gold); }
+        .btn { background:linear-gradient(var(--gold), #b88e25); color:#000; padding:20px 60px; border-radius:50px; font-weight:700; text-decoration:none; box-shadow:0 0 40px var(--gold); animation:pulse 2s infinite; transition:0.4s; }
+        .btn:hover { transform:scale(1.1); box-shadow:0 0 60px var(--blue); }
+        select, button { padding:15px; background:#111; color:var(--gold); border:1px solid var(--blue); border-radius:15px; font-size:1.2rem; margin:15px; cursor:pointer; }
+        #preview { width:80%; max-width:800px; border-radius:30px; box-shadow:0 0 50px var(--blue); margin:30px auto; transition:transform 0.5s; }
+        #preview:hover { transform:rotate(2deg) scale(1.05); }
+        .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; max-width:1400px; margin:60px auto; padding:0 20px; }
+        .gallery img { width:100%; border-radius:25px; box-shadow:0 15px 40px rgba(0,0,0,0.7); loading:lazy; transition:0.4s; }
+        .gallery img:hover { transform:scale(1.08); box-shadow:0 0 50px var(--gold); }
+        .faq { max-width:800px; margin:80px auto; padding:20px; }
+        .faq h2 { color:var(--gold); font-family:'Cinzel'; }
+        .faq p { color:#aaa; }
+        .share { margin:40px 0; }
+        .share a { color:var(--blue); margin:0 15px; font-size:1.5rem; }
+        @keyframes fadeIn { from{opacity:0; transform:translateY(-50px);} to{opacity:1; transform:translateY(0);} }
+        @keyframes pulse { 0%{box-shadow:0 0 20px var(--gold);} 50%{box-shadow:0 0 50px var(--blue);} 100%{box-shadow:0 0 20px var(--gold);} }
+        /* Hidden SEO Keywords */
+        #seo-hidden { display:none; }
     </style>
 </head>
 <body>
-    <canvas id="stars"></canvas>
-    <div class="container">
-        <h1>2026 Zodiac Aesthetic Wallpapers</h1>
-        <p class="subtitle">60+ Premium Cosmic Designs • 8K Resolution • Instant Digital Download</p>
-        
+    <canvas id="nebula"></canvas>
+    <section class="hero">
+        <h1>2026 Zodiac Aesthetic</h1>
+        <p class="subtitle">AI-Powered Cosmic Wallpapers • 60+ 8K Galaxy Designs • Instant Download</p>
         <div class="price">$14.99 <del>$49</del></div>
-        <p class="timer">Launch Offer Ends In: <span id="countdown">7 days 00:00:00</span></p>
-        <a href="YOUR_GUMROAD_OR_STRIPE_LINK" class="btn">BUY NOW & INSTANT DOWNLOAD</a>
-        
+        <a href="YOUR_STRIPE_PAYMENT_LINK" class="btn">Unlock Cosmic Bundle</a>
         <select id="zodiacSelect">
-            <option value="aries">Aries - Fiery Energy</option>
-            <option value="taurus">Taurus - Earth Luxury</option>
-            <!-- 加满12个 -->
-            <option value="pisces">Pisces - Dreamy Ocean</option>
+            <option value="aries">Aries</option>
+            <option value="taurus">Taurus</option>
+            <!-- 加满12个星座 -->
+            <option value="pisces">Pisces</option>
         </select>
-        <img id="preview" src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=800" alt="Zodiac Preview">
-        
-        <div class="gallery" id="gallery">
-            <!-- 放20+预览图 -->
-            <img src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=400" onclick="document.getElementById('preview').src=this.src">
-            <!-- 更多 -->
-        </div>
-        
-        <div class="reviews">
-            <h2 style="color:var(--gold);">Loved by Cosmic Souls</h2>
-            <p class="review">"These wallpapers transformed my phone! Pure magic ✨" - Luna</p>
-            <p class="review">"Best zodiac bundle ever. Instant download, stunning quality!" - Star</p>
-        </div>
-        
-        <div class="form">
-            <h3>Get Free Bonus Wallpaper</h3>
-            <input type="email" placeholder="Your Email">
-            <button>Subscribe</button>
-        </div>
+        <button onclick="generatePreview()">Generate AI Preview</button>
+        <img id="preview" src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=1200" alt="AI Zodiac Preview 2026" loading="lazy">
+    </section>
+
+    <section class="gallery">
+        <!-- 20+ 懒加载预览，加alt SEO -->
+        <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4ca60?w=600" alt="Aries Zodiac Wallpaper 2026 Galaxy Aesthetic" loading="lazy">
+        <!-- 加更多 -->
+    </section>
+
+    <section class="faq">
+        <h2>Why Choose Our Cosmic Bundle?</h2>
+        <p>Q: Is it AI-generated? A: Yes, powered by state-of-the-art Flux AI for unique designs.</p>
+        <!-- 加3-5 FAQ -->
+    </section>
+
+    <div class="share">
+        <a href="https://twitter.com/intent/tweet?text=Check this cosmic zodiac art!&url=YOUR_SITE">Share on X</a>
+        <!-- 加FB/IG -->
     </div>
 
+    <div id="seo-hidden">zodiac wallpapers 2026, ai astrology art, galaxy backgrounds download, mystical star signs 8k, cosmic phone lockscreens, ethereal constellation designs, premium zodiac bundle, space nebula wallpapers, astrology aesthetic pack, digital zodiac art 2026, and 180 more long-tail keywords...</div>
+
     <script>
-        // 星空粒子背景
-        const canvas = document.getElementById('stars');
+        // Nebula粒子背景 (响应鼠标)
+        const canvas = document.getElementById('nebula');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const stars = []; for(let i=0;i<200;i++){ stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5,s:Math.random()*0.5}); }
-        function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); stars.forEach(s=>{ ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); s.y += s.s; if(s.y>canvas.height) s.y=0; }); requestAnimationFrame(animate); } animate();
+        let particles = []; for(let i=0; i<300; i++) { particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*2+1, vx:(Math.random()-0.5)*0.5, vy:(Math.random()-0.5)*0.5}); }
+        function draw() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => { ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle = `rgba(212,175,55,${p.r/3})`; ctx.fill(); p.x += p.vx; p.y += p.vy; if(p.x<0||p.x>canvas.width) p.vx=-p.vx; if(p.y<0||p.y>canvas.height) p.vy=-p.vy; }); requestAnimationFrame(draw); } draw();
+        window.addEventListener('mousemove', e => { particles.forEach(p => { let dx=e.clientX-p.x, dy=e.clientY-p.y, dist=Math.sqrt(dx*dx+dy*dy); if(dist<100) { p.vx += dx/dist*0.05; p.vy += dy/dist*0.05; } }); });
 
-        // 星座切换预览（替换成你的图URL对象）
-        const previews = {
-            aries: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=800",
-            taurus: "https://images.unsplash.com/photo-1506318137071-a8e063b4ca60?w=800",
-            // 加满12个
-        };
-        document.getElementById('zodiacSelect').onchange = function(){
-            document.getElementById('preview').src = previews[this.value] || previews.aries;
-        };
-
-        // 限时计时器（7天）
-        let time = 7*24*60*60;
-        setInterval(()=>{ time--; let d=Math.floor(time/(24*60*60)); let h=Math.floor((time%(24*60*60))/(60*60)); let m=Math.floor((time%(60*60))/60); let s=time%60;
-            document.getElementById('countdown').innerText = `${d} days \( {h<10?'0'+h:h}: \){m<10?'0'+m:m}:${s<10?'0'+s:s}`;
-        },1000);
-
-        // 简单轮播（可选扩展）
-        let current = 0; const imgs = document.querySelectorAll('.gallery img');
-        setInterval(()=>{ imgs[current].style.opacity=0.5; current=(current+1)%imgs.length; imgs[current].style.opacity=1; },3000);
+        // Puter.js Flux API 生成预览
+        async function generatePreview() {
+            const zodiac = document.getElementById('zodiacSelect').value;
+            const prompt = `ethereal cosmic ${zodiac} zodiac wallpaper, galaxy nebula background, glowing stars, mystical aura, golden accents, high detail, 8K resolution, aesthetic digital art`;
+            try {
+                const image = await puter.ai.image(prompt, { model: "flux-2-pro" });
+                document.getElementById('preview').src = image.url;
+            } catch (error) { alert('AI generation failed: ' + error); }
+        }
     </script>
 </body>
 </html>
