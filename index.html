@@ -3,161 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HINT ULTRA | Quantum Evolution</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700;900&display=swap" rel="stylesheet">
+    <title>HINT OMEGA | The Peak of Astrology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --accent: #007AFF; --bg: #ffffff; --glass: rgba(255, 255, 255, 0.7); }
-        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #fff; color: #000; overflow-x: hidden; height: 100%; }
+        :root { --p-blue: #007AFF; --p-purple: #5856D6; --bg: #ffffff; }
+        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #fff; overflow: hidden; height: 100%; cursor: crosshair; }
         
-        /* 动态流动背景层 - 极致高级感 */
-        #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; pointer-events: none; }
+        /* 交互式流体背景 */
+        #fluid-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+
+        /* 顶部系统状态栏 */
+        .sys-bar { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(255,255,255,0.7); backdrop-filter: blur(30px); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; box-sizing: border-box; border-bottom: 0.5px solid rgba(0,0,0,0.05); }
+        .logo-text { font-weight: 900; letter-spacing: -1.5px; font-size: 1.4rem; }
+        .live-count { font-size: 0.65rem; color: #888; font-family: monospace; display: flex; align-items: center; gap: 5px; }
+        .dot { width: 5px; height: 5px; background: #34C759; border-radius: 50%; box-shadow: 0 0 10px #34C759; }
+
+        /* 容器 */
+        .app-shell { max-width: 440px; margin: 0 auto; padding: 100px 25px 40px; min-height: 100vh; box-sizing: border-box; display: flex; flex-direction: column; }
+        .step-view { display: none; flex-direction: column; animation: slideUp 0.8s cubic-bezier(0, 0.9, 0, 1) forwards; }
+        .active { display: flex; }
+
+        h1 { font-size: 2.4rem; font-weight: 900; letter-spacing: -2px; line-height: 1; margin: 0 0 15px; }
+        .sub { font-size: 1.1rem; color: #86868b; line-height: 1.4; margin-bottom: 40px; }
+
+        /* 顶级触控卡片 */
+        .glass-btn { background: rgba(242, 242, 247, 0.8); border: 1px solid rgba(0,0,0,0.02); padding: 25px; border-radius: 28px; margin-bottom: 18px; cursor: pointer; transition: 0.4s; position: relative; overflow: hidden; display: flex; align-items: center; }
+        .glass-btn:hover { background: #fff; transform: scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
+        .glass-btn b { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.5px; }
+        .glass-btn span { position: absolute; right: 25px; opacity: 0.2; font-size: 1.5rem; }
+
+        /* 能量环动画 */
+        .nexus-loader { width: 150px; height: 150px; margin: 50px auto; position: relative; }
+        .ring { position: absolute; width: 100%; height: 100%; border: 2px solid transparent; border-top-color: var(--p-blue); border-radius: 50%; animation: spin 2s cubic-bezier(0.5, 0, 0.5, 1) infinite; }
+        .ring:nth-child(2) { width: 80%; height: 80%; top: 10%; left: 10%; border-top-color: var(--p-purple); animation-duration: 1.5s; }
+
+        /* 终极支付卡片 */
+        .omega-card { background: #000; color: #fff; border-radius: 35px; padding: 40px 30px; margin-top: 10px; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.3); }
+        .price-tag { font-size: 4.5rem; font-weight: 900; letter-spacing: -4px; margin: 15px 0; }
+        .price-tag del { font-size: 1.2rem; color: #444; letter-spacing: 0; margin-left: 10px; }
         
-        /* 导航进度条 */
-        .nav-bar { position: fixed; top: 0; width: 100%; height: 4px; background: #f2f2f7; z-index: 1000; }
-        .progress { height: 100%; background: linear-gradient(90deg, #5856D6, #007AFF); width: 0%; transition: width 0.8s cubic-bezier(0.65, 0, 0.35, 1); }
+        .unlock-btn { background: #fff; color: #000; padding: 24px; border-radius: 22px; font-weight: 900; font-size: 1.25rem; text-align: center; text-decoration: none; display: block; margin-top: 30px; transition: 0.3s; }
+        .unlock-btn:hover { background: var(--p-blue); color: #fff; transform: translateY(-5px); }
 
-        .app-container { max-width: 480px; margin: 0 auto; padding: 100px 24px 60px; min-height: 100vh; box-sizing: border-box; display: flex; flex-direction: column; }
-        .view { display: none; animation: viewIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-        .view.active { display: flex; flex-direction: column; }
-
-        h1 { font-size: 2.2rem; font-weight: 900; letter-spacing: -1.5px; line-height: 1; margin: 0 0 15px 0; }
-        .subtitle { font-size: 1.1rem; color: #86868b; line-height: 1.4; margin-bottom: 40px; }
-
-        /* 触感选项框 */
-        .touch-card { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(0,0,0,0.05); padding: 24px; border-radius: 24px; margin-bottom: 16px; display: flex; align-items: center; cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-        .touch-card:active { transform: scale(0.96); background: rgba(0,0,0,0.02); }
-        .card-icon { font-size: 1.8rem; margin-right: 20px; filter: grayscale(1); transition: 0.3s; }
-        .touch-card:hover .card-icon { filter: grayscale(0); transform: scale(1.2); }
-        .card-info b { display: block; font-size: 1.1rem; margin-bottom: 4px; }
-        .card-info span { font-size: 0.85rem; color: #86868b; }
-
-        /* 现代输入设计 */
-        .modern-input { border: none; background: #f2f2f7; padding: 20px 24px; border-radius: 20px; font-size: 1.2rem; font-weight: 600; width: 100%; box-sizing: border-box; margin-bottom: 20px; outline: none; transition: 0.3s; }
-        .modern-input:focus { background: #e5e5ea; box-shadow: 0 0 0 4px rgba(0,122,255,0.1); }
-
-        /* 能量核心动画 */
-        .core-loader { width: 120px; height: 120px; margin: 60px auto; position: relative; }
-        .orbit { position: absolute; width: 100%; height: 100%; border: 1px solid #eee; border-radius: 50%; animation: rotate 3s linear infinite; }
-        .particle { position: absolute; width: 10px; height: 10px; background: #007AFF; border-radius: 50%; top: -5px; left: 50%; box-shadow: 0 0 15px #007AFF; }
-
-        /* 支付结算页 - 极致转化 */
-        .checkout-box { background: #1c1c1e; color: #fff; border-radius: 32px; padding: 40px 30px; margin-top: 20px; text-align: left; }
-        .status-pill { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; display: inline-block; margin-bottom: 20px; color: #007AFF; }
-        .big-price { font-size: 4rem; font-weight: 900; letter-spacing: -3px; margin: 10px 0; }
-        .big-price sub { font-size: 1rem; color: #666; text-decoration: line-through; margin-left: 10px; letter-spacing: 0; }
-        
-        .cta-button { background: #fff; color: #000; padding: 22px; border-radius: 20px; font-weight: 800; font-size: 1.2rem; text-align: center; text-decoration: none; display: block; margin-top: 30px; transition: 0.3s; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .cta-button:active { transform: scale(0.95); }
-
-        @keyframes viewIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <canvas id="canvas-bg"></canvas>
-    <div class="nav-bar"><div class="progress" id="pbar"></div></div>
+    <canvas id="fluid-canvas"></canvas>
+    <div class="sys-bar">
+        <div class="logo-text">HINT<span style="color:var(--p-blue)">Ω</span></div>
+        <div class="live-count"><div class="dot"></div> <span id="counter">241,082</span> NODES ACTIVE</div>
+    </div>
 
-    <div class="app-container">
-        <div class="view active" id="v1">
-            <h1>Unlock Your<br>Digital Aura.</h1>
-            <p class="subtitle">Experience the most advanced celestial intelligence ever created.</p>
-            <div class="touch-card" onclick="go(2, 33)">
-                <div class="card-icon">🌑</div>
-                <div class="card-info"><b>Love & Intimacy</b><span>Find out when you meet 'The One'</span></div>
-            </div>
-            <div class="touch-card" onclick="go(2, 33)">
-                <div class="card-icon">🌕</div>
-                <div class="card-info"><b>Fortune & Power</b><span>Maximize your 2026 financial shift</span></div>
-            </div>
-            <div class="touch-card" onclick="go(2, 33)">
-                <div class="card-icon">🪐</div>
-                <div class="card-info"><b>Karmic Debt</b><span>Clear past life blockages today</span></div>
-            </div>
+    <div class="app-shell">
+        <div class="step-view active" id="v1">
+            <h1>Connect to<br>The Nexus.</h1>
+            <p class="sub">AI-driven celestial mechanics for the next generation of seekers.</p>
+            <div class="glass-btn" onclick="go(2)"><b>Aura Calibration</b><span>❤️</span></div>
+            <div class="glass-btn" onclick="go(2)"><b>Abundance Vector</b><span>💰</span></div>
+            <div class="glass-btn" onclick="go(2)"><b>Karmic Resolution</b><span>🪐</span></div>
         </div>
 
-        <div class="view" id="v2">
-            <h1>Identify Yourself.</h1>
-            <p class="subtitle">Data integrity is vital for quantum alignment.</p>
-            <input type="text" id="name" class="modern-input" placeholder="Your Full Name">
-            <input type="date" id="dob" class="modern-input">
-            <button class="cta-button" style="background:#000; color:#fff;" onclick="startDeepScan()">Begin Deep Scan</button>
+        <div class="step-view" id="v2">
+            <h1>Bio-Sync.</h1>
+            <p class="sub">Establishing neural resonance with your current location.</p>
+            <input type="text" id="name" style="width:100%; padding:22px; border:none; background:#f2f2f7; border-radius:22px; font-size:1.2rem; margin-bottom:15px; box-sizing:border-box;" placeholder="Vibrational Name">
+            <input type="date" id="dob" style="width:100%; padding:22px; border:none; background:#f2f2f7; border-radius:22px; font-size:1.2rem; box-sizing:border-box;">
+            <div class="unlock-btn" style="background:#000; color:#fff;" onclick="startFinal()">Sync Destiny</div>
         </div>
 
-        <div class="view" id="v3">
-            <h1 style="text-align: center;">Mapping Soul...</h1>
-            <div class="core-loader">
-                <div class="orbit"><div class="particle"></div></div>
-                <div class="orbit" style="animation-delay: -1s; transform: rotate(45deg);"><div class="particle"></div></div>
-                <div class="orbit" style="animation-delay: -2s; transform: rotate(-45deg);"><div class="particle"></div></div>
+        <div class="step-view" id="v3">
+            <h1 style="text-align:center">Processing...</h1>
+            <div class="nexus-loader">
+                <div class="ring"></div><div class="ring"></div><div class="ring"></div>
             </div>
-            <div id="console" style="font-family:'Space Mono', monospace; font-size:0.65rem; color:#888; text-align: center;">INITIALIZING NEURAL LINK...</div>
+            <p id="status-msg" style="text-align:center; font-family:monospace; color:#888; font-size:0.7rem;">ACCESSING ASTRAL API...</p>
         </div>
 
-        <div class="view" id="v4">
-            <div class="checkout-box">
-                <div class="status-pill">● ANALYSIS COMPLETE</div>
-                <p style="opacity: 0.6; font-size: 0.9rem;">2026 QUANTUM PROFILE</p>
-                <h2 id="res-name" style="font-size: 2rem; margin: 10px 0;">USER</h2>
-                
-                <div class="big-price">$0.90<sub>$49.00</sub></div>
-                
-                <p style="color: #8e8e93; font-size: 0.95rem; line-height: 1.6; margin: 20px 0;">
-                    Your report includes a **7-Day Risk Alert** and your **Personal 8K Power Totem**. Our algorithm found a massive surge in your 'Abundance Vector' starting this Friday.
+        <div class="step-view" id="v4">
+            <div class="omega-card">
+                <span style="font-size:0.7rem; font-weight:900; color:var(--p-blue); letter-spacing:2px;">CORE ANALYSIS READY</span>
+                <h2 id="res-name" style="margin:10px 0 0; font-size:1.8rem; letter-spacing:-1px;">USER</h2>
+                <div class="price-tag">$0.90<del>$49</del></div>
+                <p style="font-size:0.95rem; color:#888; line-height:1.6;">
+                    We found <b>3 massive energetic shifts</b> in your timeline. Your 8K Power Totem is ready to clear your path. Unlock the full blueprint now.
                 </p>
-
-                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="cta-button">Access My Future</a>
-                <p style="text-align: center; color: #444; font-size: 0.6rem; margin-top: 20px;">Secure One-Time Payment • No Hidden Fees</p>
+                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="unlock-btn">Unlock Now</a>
+                <div style="margin-top:20px; font-size:0.6rem; color:#444; text-align:center;">OFFER EXPIRES IN 02:59</div>
             </div>
         </div>
     </div>
 
     <script>
-        // 动态背景逻辑 (简单的 WebGL 效果模拟)
-        const canvas = document.getElementById('canvas-bg');
+        // 流体动效背景 (高级版)
+        const canvas = document.getElementById('fluid-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
-        function initCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            for(let i=0; i<30; i++) particles.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*100+50, v: Math.random()*0.5+0.1});
-        }
-        function draw() {
+        let points = [];
+        window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+        window.onresize();
+        for(let i=0; i<40; i++) points.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx: Math.random()-0.5, vy: Math.random()-0.5});
+
+        function animate() {
             ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(0, 122, 255, 0.05)';
-            particles.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-                ctx.fill();
-                p.y -= p.v;
-                if(p.y < -p.r) p.y = canvas.height + p.r;
+            ctx.strokeStyle = 'rgba(0,122,255,0.1)';
+            ctx.beginPath();
+            points.forEach((p, i) => {
+                p.x += p.vx; p.y += p.vy;
+                if(p.x<0 || p.x>canvas.width) p.vx*=-1;
+                if(p.y<0 || p.y>canvas.height) p.vy*=-1;
+                points.forEach((p2, j) => {
+                    if(i===j) return;
+                    let dist = Math.hypot(p.x-p2.x, p.y-p2.y);
+                    if(dist<150) {
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                    }
+                });
             });
-            requestAnimationFrame(draw);
+            ctx.stroke();
+            requestAnimationFrame(animate);
         }
-        initCanvas(); draw();
+        animate();
 
-        // 交互逻辑
-        function go(step, progress) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('v' + step).classList.add('active');
-            document.getElementById('pbar').style.width = progress + '%';
+        // 逻辑
+        let count = 241082;
+        setInterval(() => { count += Math.floor(Math.random()*3); document.getElementById('counter').innerText = count.toLocaleString(); }, 2000);
+
+        function go(s) {
+            document.querySelectorAll('.step-view').forEach(v => v.classList.remove('active'));
+            document.getElementById('v' + s).classList.add('active');
         }
 
-        function startDeepScan() {
-            const name = document.getElementById('name').value;
-            if(!name) return;
-            document.getElementById('res-name').innerText = name.toUpperCase();
-            go(3, 80);
-            const logs = ["CALIBRATING ENERGY...", "DECODING TRANSITS...", "GENERATING TOTEM...", "SECURE LINK READY."];
+        function startFinal() {
+            const n = document.getElementById('name').value;
+            if(!n) return;
+            document.getElementById('res-name').innerText = n.toUpperCase();
+            go(3);
+            const msgs = ["NEURAL SYNC...", "ASTRAL MAPPING...", "CALCULATING PROBABILITY...", "8K RENDER COMPLETE."];
             let i = 0;
-            const timer = setInterval(() => {
-                if(i < logs.length) {
-                    document.getElementById('console').innerText = logs[i];
-                    i++;
-                } else {
-                    clearInterval(timer);
-                    go(4, 100);
-                }
+            const t = setInterval(() => {
+                if(i<msgs.length) { document.getElementById('status-msg').innerText = msgs[i]; i++; }
+                else { clearInterval(t); go(4); }
             }, 1200);
         }
     </script>
