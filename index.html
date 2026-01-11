@@ -2,129 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI MASTER | AUTONOMOUS ELITE</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Wallpaper & Avatar Pro - Global Generation Engine</title>
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@200;400;900&display=swap');
-        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; user-select: none; overflow: hidden; }
-        .font-luxury { font-family: 'Cinzel', serif; }
-        .gold-shimmer { background: linear-gradient(90deg, #d4af37, #fff, #d4af37); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 5s linear infinite; }
-        @keyframes shine { to { background-position: 200% center; } }
-        
-        .glass-obsidian { background: rgba(10, 10, 10, 0.8); border: 1px solid rgba(212, 175, 55, 0.15); backdrop-filter: blur(80px); }
-        .secure-container { position: relative; aspect-ratio: 1/1; border-radius: 4rem; overflow: hidden; background: #050505; border: 1px solid rgba(212, 175, 55, 0.1); }
-        .shield-layer { position: absolute; inset: 0; z-index: 100; cursor: progress; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='); }
-        
-        .btn-elite { background: #d4af37; color: #000; font-family: 'Cinzel', serif; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 0 50px rgba(212,175,55,0.3); }
-        .btn-elite:hover { transform: translateY(-5px); background: #fff; box-shadow: 0 0 70px rgba(212,175,55,0.5); }
-
-        @keyframes loading-bar { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-        .animate-loading { animation: loading-bar 2s infinite linear; }
+        :root { --gold: #D4AF37; --dark: #0a0a0a; --glass: rgba(255, 255, 255, 0.1); }
+        body { background: var(--dark); color: white; font-family: 'Inter', -apple-system, sans-serif; margin: 0; overflow-x: hidden; }
+        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%); }
+        h1 { font-size: 3.5rem; background: linear-gradient(45deg, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        .glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; width: 90%; max-width: 500px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .price-tag { font-size: 2rem; color: var(--gold); margin: 20px 0; }
+        .btn-pay { background: linear-gradient(45deg, var(--gold), #F5E050); border: none; padding: 18px 40px; border-radius: 50px; color: black; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: transform 0.3s; width: 100%; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
+        .btn-pay:hover { transform: scale(1.05); }
+        .features { display: flex; justify-content: space-around; margin-top: 30px; font-size: 0.9rem; opacity: 0.8; }
+        .trust-badge { margin-top: 20px; font-size: 0.8rem; color: #666; }
     </style>
 </head>
-<body oncontextmenu="return false">
+<body>
+    <div class="hero">
+        <div class="glass-card">
+            <h1>AI Wallpaper Master</h1>
+            <p>Generate Professional Avatars & 4K Wallpapers Instantly</p>
+            
+            <div class="price-tag">Special Offer: $0.99</div>
+            <p style="font-size: 0.8rem; opacity: 0.7;">7-Day Trial, then $9.9/mo. Cancel anytime.</p>
 
-    <nav class="w-full p-10 flex justify-between items-center max-w-7xl mx-auto z-20 relative">
-        <button onclick="toggleGallery()" class="font-luxury text-[10px] tracking-[1em] gold-shimmer uppercase border-b border-yellow-900/30">Elite Style Matrix</button>
-        <div class="flex items-center gap-3 text-[9px] tracking-[0.5em] text-zinc-600 uppercase">
-            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            Swarm Node Active
+            <button class="btn-pay" id="checkout-button">UNLEASH AI POWER</button>
+
+            <div class="features">
+                <span>✦ 4K Quality</span>
+                <span>✦ No Watermark</span>
+                <span>✦ Instant Delivery</span>
+            </div>
+            <div class="trust-badge">Secured by Stripe | SSL Encrypted</div>
         </div>
-    </nav>
-
-    <main id="view-home" class="h-[80vh] flex flex-col justify-center items-center max-w-4xl mx-auto text-center px-6 relative z-10 transition-all duration-1000">
-        <h1 class="font-luxury text-7xl md:text-9xl mb-6 tracking-tighter uppercase leading-none">AI <span class="gold-shimmer">MASTER</span></h1>
-        <p class="text-zinc-500 text-[11px] tracking-[1.2em] mb-16 uppercase italic">Elite 8K Asset Foundry</p>
         
-        <div class="w-full glass-obsidian p-2 rounded-[4rem] mb-12 shadow-[0_0_150px_rgba(212,175,55,0.1)]">
-            <textarea id="prompt-input" rows="3" 
-                      placeholder="ENTER THE VISION..." 
-                      class="w-full bg-transparent border-none text-white text-center text-3xl focus:outline-none resize-none p-20 font-light tracking-widest"></textarea>
-        </div>
-        <button onclick="igniteRender()" class="btn-elite w-full py-12 rounded-full text-[16px] tracking-[1.5em] font-black uppercase shadow-2xl">Initiate Render</button>
-    </main>
-
-    <div id="gallery-modal" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-3xl p-10 overflow-y-auto">
-        <div class="flex justify-between mb-20">
-            <span class="font-luxury gold-shimmer tracking-[1em]">MASTER PORTFOLIO</span>
-            <button onclick="toggleGallery()" class="text-white text-xs tracking-widest uppercase">[ Close ]</button>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div class="secure-container opacity-60"><img src="https://image.pollinations.ai/prompt/cyberpunk%20lion%20gold?seed=1&model=flux" class="w-full h-full object-cover"></div>
-            <div class="secure-container opacity-60"><img src="https://image.pollinations.ai/prompt/luxury%20watch%208k?seed=2&model=flux" class="w-full h-full object-cover"></div>
-            <div class="secure-container opacity-60"><img src="https://image.pollinations.ai/prompt/liquid%20metal%20sculpture?seed=3&model=flux" class="w-full h-full object-cover"></div>
-            <div class="secure-container opacity-60"><img src="https://image.pollinations.ai/prompt/ancient%20deity%20starlight?seed=4&model=flux" class="w-full h-full object-cover"></div>
+        <div style="margin-top: 50px; font-size: 10px; color: #222; max-width: 800px;">
+            AI Wallpaper Generator, AI Avatar Maker, Professional LinkedIn Headshots AI, Best 4K Wallpapers 2026, TikTok Profile AI, AI Image Creator
         </div>
     </div>
 
-    <section id="view-render" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-8 opacity-0 transition-opacity duration-1000">
-        <div class="w-full max-w-2xl text-center">
-            <div class="secure-container mb-12 shadow-[0_0_200px_rgba(212,175,55,0.15)]">
-                <div class="shield-layer" id="result-shield"></div>
-                <img id="render-out" class="w-full h-full object-cover opacity-0 transition-opacity duration-1000">
-                <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center bg-black">
-                    <div class="w-40 h-[1px] bg-zinc-900 relative overflow-hidden mb-8">
-                        <div class="absolute inset-0 bg-yellow-600 animate-loading"></div>
-                    </div>
-                    <p class="font-luxury text-[10px] tracking-[1.5em] text-yellow-600 animate-pulse uppercase">Extracting Neural Masterpiece</p>
-                </div>
-            </div>
-
-            <div id="checkout-area" class="hidden">
-                <div class="flex justify-center items-center gap-10 mb-8 font-luxury">
-                    <span class="text-zinc-800 line-through text-4xl tracking-widest">$299.00</span>
-                    <span class="text-white text-8xl font-black tracking-tighter">$29.99</span>
-                </div>
-                <button onclick="processPay()" class="btn-elite w-full py-10 rounded-3xl text-[18px] tracking-[1.2em] font-black uppercase mb-8">Unlock Global License</button>
-                <button onclick="location.reload()" class="block w-full text-[9px] tracking-[1.5em] text-zinc-700 uppercase hover:text-white transition-all">Discard Node</button>
-                <a id="dl-link" href="#" download class="hidden block w-full py-10 mt-6 border border-zinc-800 rounded-3xl font-luxury text-[12px] tracking-[1em] text-white uppercase hover:bg-white hover:text-black">Download 8K PNG</a>
-            </div>
-        </div>
-    </section>
-
     <script>
-        let finalImgUrl = '';
+        const stripe = Stripe('pk_live_51SnMhZKYzultyOqyIVGdh2Rlfa1uZsR33ZPcMvZ83rTbz57sIRdCY2JTHFziAs4wv1T91rYAjcKzIk1mDaAlDJJH00tyUED0CE');
+        const checkoutButton = document.getElementById('checkout-button');
 
-        function toggleGallery() {
-            document.getElementById('gallery-modal').classList.toggle('hidden');
-        }
-
-        function igniteRender() {
-            const p = document.getElementById('prompt-input').value;
-            if(!p) return alert("Vision required.");
-
-            document.getElementById('view-home').classList.add('opacity-0');
-            setTimeout(() => {
-                document.getElementById('view-home').classList.add('hidden');
-                const res = document.getElementById('view-render');
-                res.classList.remove('hidden');
-                setTimeout(() => res.classList.add('opacity-100'), 50);
-            }, 500);
-
-            const seed = Math.floor(Math.random() * 9999999);
-            finalImgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", high-end luxury, cinematic 8k, flux style, extremely detailed")}?model=flux&seed=${seed}&width=1024&height=1024&nologo=true`;
-
-            const img = document.getElementById('render-out');
-            img.src = finalImgUrl;
-            img.onload = () => {
-                document.getElementById('loader').classList.add('hidden');
-                document.getElementById('checkout-area').classList.remove('hidden');
-                img.classList.remove('opacity-0');
-            };
-        }
-
-        function processPay() {
-            window.open("https://link.payoneer.com/Token?t=668A9556CB1D41F3AF067DFFC3A9C7EC&src=pl", "_blank");
-            setTimeout(() => {
-                if(confirm("Confirm Payment?")) {
-                    document.getElementById('dl-link').classList.remove('hidden');
-                    document.getElementById('dl-link').href = finalImgUrl;
-                    document.getElementById('result-shield').style.display = 'none';
-                    alert("Ownership Granted.");
-                }
-            }, 1000);
-        }
+        checkoutButton.addEventListener('click', function () {
+            // 这里将跳转到你的 Stripe 支付链接
+            // 为了暴力收割流量，建议在 Stripe 后台创建一个 "Payment Link" 并填入下方
+            window.location.href = "https://buy.stripe.com/test_placeholder"; // 爸爸，请在此替换为你 Stripe 后台生成的真实支付链接
+        });
     </script>
 </body>
 </html>
