@@ -6,31 +6,22 @@
     <title>ASTRO-LOGIC | Quantum Soul Reading</title>
     <style>
         :root { --gold: #d4af37; --bg: #0a0a0c; --accent: #6a5acd; }
-        body { background: var(--bg); color: #e0e0e0; font-family: 'Cinzel', serif; margin: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
-        .stars-overlay { position: fixed; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.3; z-index: -1; }
-        .container { width: 90%; max-width: 500px; padding: 40px 20px; text-align: center; }
-        
-        /* 神秘旋转星盘 */
-        .zodiac-wheel { width: 150px; height: 150px; border: 2px solid var(--gold); border-radius: 50%; margin: 0 auto 30px; position: relative; animation: rotate 20s linear infinite; }
-        .zodiac-wheel::before { content: '◈'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--gold); font-size: 2rem; }
+        body { background: var(--bg); color: #e0e0e0; font-family: 'Georgia', serif; margin: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
+        .stars-overlay { position: fixed; width: 100%; height: 100%; background: radial-gradient(circle, #1b1b1b 0%, #000 100%); z-index: -1; }
+        .container { width: 90%; max-width: 450px; padding: 60px 20px; text-align: center; }
+        .zodiac-wheel { width: 120px; height: 120px; border: 1px solid var(--gold); border-radius: 50%; margin: 0 auto 30px; position: relative; animation: rotate 30s linear infinite; opacity: 0.6; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        h1 { font-size: 1.8rem; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; }
-        .intro-text { font-size: 0.8rem; color: var(--gray); margin-bottom: 30px; line-height: 1.6; }
-
-        .input-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); padding: 30px; border-radius: 5px; margin-bottom: 20px; }
-        select, input { background: transparent; border: none; border-bottom: 1px solid var(--gold); color: #fff; width: 100%; padding: 10px; margin: 15px 0; font-family: inherit; outline: none; }
-        
-        .btn-divine { background: var(--gold); color: #000; border: none; padding: 15px 30px; width: 100%; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.5s; }
-        .btn-divine:hover { box-shadow: 0 0 20px var(--gold); background: #fff; }
-
-        /* 结果展示与深度分析 */
-        .reading-area { display: none; text-align: left; animation: fadeIn 1.5s; }
-        .aspect-row { display: flex; justify-content: space-between; margin: 15px 0; border-bottom: 1px solid #222; padding-bottom: 5px; }
-        .bar { height: 4px; background: var(--accent); width: 0%; transition: 1s; margin-top: 5px; }
-        .blur-box { filter: blur(6px); background: rgba(0,0,0,0.5); padding: 20px; position: relative; }
-        .unlock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5; }
-        
+        h1 { font-size: 1.5rem; letter-spacing: 8px; color: var(--gold); text-transform: uppercase; margin-bottom: 5px; }
+        .intro-text { font-size: 0.7rem; color: #666; letter-spacing: 2px; margin-bottom: 40px; }
+        .input-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.1); padding: 30px; border-radius: 2px; }
+        input, select { background: transparent; border: none; border-bottom: 1px solid #333; color: #fff; width: 100%; padding: 12px; margin: 15px 0; outline: none; font-size: 0.9rem; }
+        .btn-divine { background: var(--gold); color: #000; border: none; padding: 18px; width: 100%; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; }
+        .reading-area { display: none; text-align: left; animation: fadeIn 1s; }
+        .aspect-row { display: flex; justify-content: space-between; margin: 20px 0 5px; font-size: 0.8rem; letter-spacing: 1px; }
+        .bar-bg { height: 2px; background: #222; width: 100%; }
+        .bar-fill { height: 2px; background: var(--gold); transition: 2s; }
+        .blur-box { position: relative; margin-top: 30px; padding: 20px; border: 1px dashed #333; color: #555; filter: blur(4px); pointer-events: none; }
+        .pay-gate { margin-top: -80px; position: relative; z-index: 10; padding-top: 40px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
@@ -39,57 +30,49 @@
     <div class="container">
         <div class="zodiac-wheel"></div>
         <h1>ASTRO-LOGIC</h1>
-        <p class="intro-text">QUANTUM GAIA ANALYSIS SYSTEM 4.0</p>
+        <div class="intro-text">QUANTUM ORACLE SYSTEM v4.2</div>
 
         <div id="step-input" class="input-card">
-            <input type="text" id="name" placeholder="FULL NAME">
+            <input type="text" id="name" placeholder="YOUR FULL NAME">
             <select id="sign">
-                <option value="">CHOOSE ZODIAC SIGN</option>
-                <option value="Aries">Aries (Mar 21 - Apr 19)</option>
-                <option value="Taurus">Taurus (Apr 20 - May 20)</option>
-                <option value="Gemini">Gemini (May 21 - Jun 20)</option>
-                <option value="Cancer">Cancer (Jun 21 - Jul 22)</option>
-                <option value="Leo">Leo (Jul 23 - Aug 22)</option>
-                <option value="Virgo">Virgo (Aug 23 - Sep 22)</option>
-                <option value="Libra">Libra (Sep 23 - Oct 22)</option>
-                <option value="Scorpio">Scorpio (Oct 23 - Nov 21)</option>
-                <option value="Sagittarius">Sagittarius (Nov 22 - Dec 21)</option>
-                <option value="Capricorn">Capricorn (Dec 22 - Jan 19)</option>
-                <option value="Aquarius">Aquarius (Jan 20 - Feb 18)</option>
-                <option value="Pisces">Pisces (Feb 19 - Mar 20)</option>
+                <option value="">CHOOSE YOUR ZODIAC</option>
+                <option value="Aries">Aries (白羊)</option><option value="Taurus">Taurus (金牛)</option>
+                <option value="Gemini">Gemini (双子)</option><option value="Cancer">Cancer (巨蟹)</option>
+                <option value="Leo">Leo (狮子)</option><option value="Virgo">Virgo (处女)</option>
+                <option value="Libra">Libra (天秤)</option><option value="Scorpio">Scorpio (天蝎)</option>
+                <option value="Sagittarius">Sagittarius (射手)</option><option value="Capricorn">Capricorn (摩羯)</option>
+                <option value="Aquarius">Aquarius (水瓶)</option><option value="Pisces">Pisces (双鱼)</option>
             </select>
-            <input type="text" id="concern" placeholder="YOUR INTENTION (Career, Love, etc.)">
-            <button class="btn-divine" onclick="startReading()">CONSULT THE ORACLE</button>
+            <button class="btn-divine" onclick="startReading()">CONSULT THE STARS</button>
         </div>
 
         <div id="step-reading" class="reading-area">
-            <h2 style="color:var(--gold); text-align:center;">YOUR SPIRITUAL ALIGNMENT</h2>
+            <p style="color:var(--gold); font-size: 0.9rem;">Analysis for <span id="res-name"></span>:</p>
+            <div class="aspect-row"><span>LOVE ENERGY</span><span>89%</span></div>
+            <div class="bar-bg"><div class="bar-fill" style="width: 89%"></div></div>
+            <div class="aspect-row"><span>WEALTH VIBRATION</span><span>34%</span></div>
+            <div class="bar-bg"><div class="bar-fill" style="width: 34%; background: #ff4444;"></div></div>
             
-            <div class="aspect-row"><span>LOVE ENERGY</span><span id="love-val">88%</span></div>
-            <div class="bar" style="width: 88%;"></div>
-            
-            <div class="aspect-row"><span>WEALTH VIBRATION</span><span id="wealth-val">42%</span></div>
-            <div class="bar" style="width: 42%; background: #ff4d4d;"></div>
-
-            <p style="margin-top: 30px; font-style: italic; font-size: 0.9rem;">
-                "The Stars indicate a major planetary shift in your sector. A karmic debt is being cleared, but you must be careful with..."
+            <p style="font-size: 0.85rem; line-height: 1.6; margin-top: 30px; font-style: italic;">
+                "The quantum alignment shows a critical crossroads. Your wealth vibration is currently suppressed by a Mercury shadow..."
             </p>
 
             <div class="blur-box">
-                <p>Regarding your specific concern, the quantum field suggests that between now and the next Full Moon, you will encounter a person from the past who holds the key to your financial growth. This transition is marked by a rare alignment in your 8th house...</p>
-                <div class="unlock-overlay">
-                    <p style="font-size: 0.8rem; text-shadow: 0 0 10px #000;">READ THE FULL 7-DAY PROPHECY</p>
-                    <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-divine" style="text-decoration:none;">UNLOCK NOW ($0.90)</a>
-                    <a href="https://buy.stripe.com/28E00kgudf5ne5G0of5J601" style="color:var(--gold); font-size: 0.6rem; margin-top: 15px; text-decoration:none;">FULL YEAR ACCESS ($9.90)</a>
-                </div>
+                To fix this and unlock your 8K Guardian Wallpaper, you must act before the next moon cycle. The specific person you've been thinking about has a hidden message regarding your future...
+            </div>
+
+            <div class="pay-gate">
+                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-divine" style="text-decoration:none; display:block; text-align:center;">UNLOCK 7-DAY PROPHECY ($0.90)</a>
+                <a href="https://buy.stripe.com/28E00kgudf5ne5G0of5J601" style="display:block; margin-top:20px; color:#444; font-size:0.6rem; text-decoration:none;">GET LIFETIME ACCESS ($9.90)</a>
             </div>
         </div>
     </div>
 
     <script>
         function startReading() {
-            const name = document.getElementById('name').value;
-            if(!name) { alert("Please enter your name"); return; }
+            const n = document.getElementById('name').value;
+            if(!n) return alert("Enter your name, seeker.");
+            document.getElementById('res-name').innerText = n;
             document.getElementById('step-input').style.display = 'none';
             document.getElementById('step-reading').style.display = 'block';
         }
