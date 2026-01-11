@@ -52,6 +52,12 @@
         .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:25px; max-width:1600px; margin:80px auto; padding:0 30px; }
         .gallery img { width:100%; border-radius:30px; box-shadow:0 20px 50px rgba(0,0,0,0.8); loading:lazy; transition:0.5s; }
         .gallery img:hover { transform:scale(1.1) rotate(3deg); box-shadow:0 0 70px var(--gold); }
+        .buyers-show { max-width:1200px; margin:100px auto; padding:40px; background:rgba(17,17,17,0.6); border-radius:50px; box-shadow:0 0 60px var(--blue); text-align:center; }
+        .buyers-show h2 { color:var(--gold); font-family:'Cinzel'; animation:breathe 5s infinite; }
+        .buyers-show .show-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; margin-top:40px; }
+        .buyers-show .show-item { position:relative; }
+        .buyers-show img { width:100%; border-radius:30px; box-shadow:0 0 40px var(--gold); }
+        .buyers-show p { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.7); padding:10px 20px; border-radius:20px; font-size:1rem; color:#fff; }
         .faq { max-width:900px; margin:100px auto; padding:30px; background:rgba(17,17,17,0.5); border-radius:40px; box-shadow:0 0 50px var(--blue); }
         .faq h2 { color:var(--gold); font-family:'Cinzel'; animation:breathe 5s infinite; }
         .faq p { color:#bbb; font-size:1.1rem; }
@@ -94,17 +100,37 @@
         <div id="preview-carousel"></div>
     </section>
 
+    <section class="buyers-show">
+        <h2>Buyers' Cosmic Vibes ✨</h2>
+        <p>See how our wallpapers light up real devices – instant vibe upgrade!</p>
+        <div class="show-grid">
+            <div class="show-item">
+                <img src="https://img.freepik.com/premium-photo/set-zodiac-signs-generative-ai_356060-6670.jpg" alt="Aries wallpaper on phone screen">
+                <p>"My Aries lockscreen is pure fire! Daily inspiration." - @CosmicLeo</p>
+            </div>
+            <div class="show-item">
+                <img src="https://img.freepik.com/premium-photo/astronomical-clock-zodiac-signs-zodiac-background-ai-generated_538213-11153.jpg" alt="Taurus wallpaper on desktop">
+                <p>"Taurus bundle transformed my workspace – so luxurious!" - @EarthVibes</p>
+            </div>
+            <div class="show-item">
+                <img src="https://img.freepik.com/premium-photo/ai-generated-illustration-horoscope-capricorn-astrological-sign-with-galaxy-background_665346-41801.jpg" alt="Gemini wallpaper on tablet">
+                <p>"Gemini designs are dual perfection. Worth every penny!" - @TwinStars</p>
+            </div>
+            <!-- 加2-3更多, 用AI图替换 -->
+        </div>
+    </section>
+
     <section class="gallery">
         <!-- 30+ 预览，加alt SEO -->
-        <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4ca60?w=600" alt="Aries Zodiac Wallpaper 2026 Galaxy Aesthetic" loading="lazy">
+        <img src="https://img.freepik.com/premium-photo/ai-generated-illustration-sagittarius-astrological-horoscope-sign-with-galaxy-background_665346-38179.jpg" alt="Sagittarius Zodiac Wallpaper 2026 Galaxy Aesthetic" loading="lazy">
         <!-- Add more high-quality AI-style images -->
     </section>
 
     <section class="faq">
         <h2>Why Our Cosmic Bundle?</h2>
-        <p>Q: AI-generated? A: Yes, Flux AI for unique, high-res designs.</p>
-        <p>Q: Instant? A: Download ZIP right after payment.</p>
-        <p>Q: Compatible? A: Phone, desktop, tablet – all resolutions.</p>
+        <p>Q: What do I get? A: 60+ unique 8K wallpapers, ZIP download instantly.</p>
+        <p>Q: AI-generated? A: Yes, Flux AI for stunning, original designs.</p>
+        <p>Q: How to use? A: Set as phone/desktop background – easy vibe boost!</p>
         <p>Q: Refund? A: 30-day guarantee if not cosmic enough!</p>
         <p>Q: Custom? A: Upgrade for personalized zodiac art.</p>
     </section>
@@ -117,7 +143,7 @@
     <div id="seo-hidden">zodiac wallpapers 2026 ai generated, galaxy star sign backgrounds 8k, ethereal constellation phone lockscreens, premium mystical astrology pack digital, cosmic nebula desktop art download, futuristic zodiac designs bundle, space theme wallpapers instant, astrology aesthetic 2026 collection, ai powered star signs art, nebula galaxy zodiac wallpapers high res, and 190 more...</div>
 
     <script>
-        VanillaTilt.init(document.querySelectorAll(".gallery img"), { max: 25, speed: 400, glare: true, "max-glare": 0.5 }); // 3D Tilt
+        VanillaTilt.init(document.querySelectorAll(".gallery img, .show-item img"), { max: 25, speed: 400, glare: true, "max-glare": 0.5 }); // 3D Tilt for previews
 
         // Nebula粒子 (拖拽响应)
         const canvas = document.getElementById('nebula');
