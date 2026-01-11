@@ -3,54 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASTRO-AI | Daily Oracle</title>
+    <title>ASTRO-QUANTUM | The Oracle</title>
     <style>
-        :root { --gold: #D4AF37; --void: #060606; --text: #e0e0e0; }
-        body { background: var(--void); color: var(--text); font-family: 'Times New Roman', serif; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; }
-        .stars-bg { position: fixed; top: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a1a2e 0%, #060606 100%); z-index: -1; }
-        .oracle-card { border: 1px solid var(--gold); background: rgba(0,0,0,0.8); padding: 40px 20px; width: 90%; max-width: 400px; position: relative; box-shadow: 0 0 50px rgba(212, 175, 55, 0.1); }
-        .oracle-card::before { content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; border: 1px solid rgba(212,175,55,0.2); z-index: -1; }
-        h1 { font-size: 2.5rem; letter-spacing: 10px; color: var(--gold); margin: 0; }
-        .date-display { font-size: 0.8rem; letter-spacing: 3px; color: var(--gold); margin-top: 10px; opacity: 0.7; }
-        .daily-reading { margin: 40px 0; border-top: 1px solid #222; border-bottom: 1px solid #222; padding: 30px 0; }
-        .status-tag { font-size: 0.6rem; letter-spacing: 2px; color: #888; margin-bottom: 10px; display: block; }
-        .btn-main { display: block; background: var(--gold); color: black; text-decoration: none; padding: 18px; font-weight: bold; letter-spacing: 2px; margin-bottom: 15px; transition: 0.3s; }
-        .btn-sub { display: block; color: var(--gold); text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; border: 1px solid var(--gold); padding: 12px; }
-        .countdown { font-size: 0.7rem; margin-top: 30px; color: #555; }
+        :root { --gold: #C5A059; --bg: #030303; --gray: #888; }
+        body { background: var(--bg); color: #fff; font-family: 'Helvetica Neue', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
+        .stars { position: fixed; width: 100%; height: 100%; background: radial-gradient(circle at center, #111 0%, #000 100%); z-index: -1; }
+        .main-container { width: 90%; max-width: 500px; text-align: center; transition: all 0.8s ease; }
+        
+        /* 引导步骤样式 */
+        .step { display: none; animation: fadeIn 1s forwards; }
+        .active { display: block; }
+        
+        h1 { font-size: 1.2rem; letter-spacing: 8px; color: var(--gold); text-transform: uppercase; margin-bottom: 40px; }
+        .input-group { margin-bottom: 20px; }
+        input, select { background: transparent; border: none; border-bottom: 1px solid #333; color: var(--gold); padding: 10px; width: 80%; font-size: 1rem; outline: none; text-align: center; }
+        .btn-next { margin-top: 30px; background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px 40px; border-radius: 50px; cursor: pointer; letter-spacing: 2px; transition: 0.3s; }
+        .btn-next:hover { background: var(--gold); color: #000; }
+
+        /* 结果展示区 */
+        .result-box { text-align: left; line-height: 1.8; font-size: 0.9rem; color: #ccc; background: rgba(255,255,255,0.02); padding: 25px; border-radius: 10px; border: 1px solid #222; }
+        .locked-content { filter: blur(4px); user-select: none; pointer-events: none; }
+        .pay-banner { margin-top: -50px; position: relative; z-index: 10; background: linear-gradient(to bottom, transparent, #000); padding: 40px 0; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    <div class="stars-bg"></div>
-    <div class="oracle-card">
-        <span class="status-tag">REAL-TIME PLANETARY ALIGNMENT</span>
-        <h1>ASTRO-AI</h1>
-        <div id="date" class="date-display"></div>
+    <div class="stars"></div>
 
-        <div class="daily-reading">
-            <p id="oracle-text" style="font-style: italic; font-size: 1.1rem; line-height: 1.6;">
-                "The stars are shifting. Your 8K Guardian Wallpaper is ready for synthesis."
-            </p>
+    <div class="main-container" id="app">
+        <h1>ASTRO-QUANTUM</h1>
+
+        <div class="step active" id="step1">
+            <p style="font-size: 0.8rem; color: var(--gray);">IDENTIFY YOUR COORDINATES</p>
+            <div class="input-group"><input type="text" id="userName" placeholder="Your Name"></div>
+            <div class="input-group">
+                <select id="zodiac">
+                    <option value="">Select Zodiac Sign</option>
+                    <option value="Aries">Aries</option><option value="Leo">Leo</option>
+                    <option value="Scorpio">Scorpio</option><option value="Pisces">Pisces</option>
+                    </select>
+            </div>
+            <button class="btn-next" onclick="nextStep(2)">INITIALIZE READING</button>
         </div>
 
-        <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-main">GET TODAY'S ORACLE ($0.90)</a>
-        <a href="https://buy.stripe.com/28E00kgudf5ne5G0of5J601" class="btn-sub">UNLIMITED MONTHLY ACCESS ($9.90)</a>
+        <div class="step" id="step2">
+            <p style="font-size: 0.8rem; color: var(--gray);">CHOOSE YOUR FOCUS</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
+                <button class="btn-next" onclick="generateReading('Wealth')">Wealth & Career</button>
+                <button class="btn-next" onclick="generateReading('Love')">Love & Soulmate</button>
+                <button class="btn-next" onclick="generateReading('Future')">7-Day Transit</button>
+                <button class="btn-next" onclick="generateReading('Mystery')">Secret Oracle</button>
+            </div>
+        </div>
 
-        <div class="countdown">Next alignment in: <span id="timer">--:--:--</span></div>
+        <div class="step" id="step3">
+            <div class="result-box">
+                <p id="free-reading"></p>
+                <div class="locked-content">
+                    <p>Based on your cosmic alignment, the next 48 hours are critical for your financial flow. A specific alignment between Mars and your house of legacy suggests that a decision made tomorrow will...</p>
+                    <p>Regarding your relationship, the hidden energy suggests that someone from your past or a new frequency is entering...</p>
+                </div>
+            </div>
+
+            <div class="pay-banner">
+                <p style="color:var(--gold); font-size: 0.9rem; margin-bottom: 20px;">Unlock Full 30-Day Guidance & 8K Luck Wallpaper</p>
+                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-next" style="text-decoration:none; display:inline-block;">UNLOCK FULL DESTINY ($0.90)</a>
+                <p style="font-size: 0.6rem; color: #444; margin-top: 15px;">One-time access. Real-time AI processing.</p>
+            </div>
+        </div>
     </div>
 
     <script>
-        // 自动更新日期
-        document.getElementById('date').innerText = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).toUpperCase();
-
-        // 简易倒计时逻辑
-        function startTimer() {
-            let h = 23 - new Date().getHours();
-            let m = 59 - new Date().getMinutes();
-            let s = 59 - new Date().getSeconds();
-            document.getElementById('timer').innerText = h + ":" + (m<10?'0':'')+m + ":" + (s<10?'0':'')+s;
-            setTimeout(startTimer, 1000);
+        function nextStep(s) {
+            document.querySelectorAll('.step').forEach(div => div.classList.remove('active'));
+            document.getElementById('step' + s).classList.add('active');
         }
-        startTimer();
+
+        function generateReading(focus) {
+            const name = document.getElementById('userName').value || "Seeker";
+            const zodiac = document.getElementById('zodiac').value;
+            const freeText = `Greeting, ${name}. As a ${zodiac}, the current transit of Saturn suggests a period of intense recalibration in your ${focus} sector. Today's energy is high, but a shadow remains...`;
+            
+            document.getElementById('free-reading').innerText = freeText;
+            nextStep(3);
+        }
     </script>
 </body>
 </html>
