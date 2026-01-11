@@ -2,80 +2,193 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASTRO-LOGIC | Quantum Soul Reading</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ETHER-ORACLE | Deep Soul Analysis</title>
     <style>
-        :root { --gold: #d4af37; --bg: #0a0a0c; --accent: #6a5acd; }
-        body { background: var(--bg); color: #e0e0e0; font-family: 'Georgia', serif; margin: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
-        .stars-overlay { position: fixed; width: 100%; height: 100%; background: radial-gradient(circle, #1b1b1b 0%, #000 100%); z-index: -1; }
-        .container { width: 90%; max-width: 450px; padding: 60px 20px; text-align: center; }
-        .zodiac-wheel { width: 120px; height: 120px; border: 1px solid var(--gold); border-radius: 50%; margin: 0 auto 30px; position: relative; animation: rotate 30s linear infinite; opacity: 0.6; }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        h1 { font-size: 1.5rem; letter-spacing: 8px; color: var(--gold); text-transform: uppercase; margin-bottom: 5px; }
-        .intro-text { font-size: 0.7rem; color: #666; letter-spacing: 2px; margin-bottom: 40px; }
-        .input-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.1); padding: 30px; border-radius: 2px; }
-        input, select { background: transparent; border: none; border-bottom: 1px solid #333; color: #fff; width: 100%; padding: 12px; margin: 15px 0; outline: none; font-size: 0.9rem; }
-        .btn-divine { background: var(--gold); color: #000; border: none; padding: 18px; width: 100%; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; }
-        .reading-area { display: none; text-align: left; animation: fadeIn 1s; }
-        .aspect-row { display: flex; justify-content: space-between; margin: 20px 0 5px; font-size: 0.8rem; letter-spacing: 1px; }
-        .bar-bg { height: 2px; background: #222; width: 100%; }
-        .bar-fill { height: 2px; background: var(--gold); transition: 2s; }
-        .blur-box { position: relative; margin-top: 30px; padding: 20px; border: 1px dashed #333; color: #555; filter: blur(4px); pointer-events: none; }
-        .pay-gate { margin-top: -80px; position: relative; z-index: 10; padding-top: 40px; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        :root { --accent: #D4AF37; --bg: #050505; --glass: rgba(255, 255, 255, 0.05); }
+        body { background: var(--bg); color: #fff; font-family: 'Times New Roman', serif; margin: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        
+        /* 动态星空背景 */
+        .stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); overflow: hidden; }
+        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--duration) infinite ease-in-out; opacity: 0; }
+        @keyframes twinkle { 0% { opacity: 0; transform: translateY(0); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateY(-20px); } }
+
+        /* 容器样式 */
+        .container { width: 85%; max-width: 400px; position: relative; z-index: 10; transition: all 0.8s ease; }
+        .hidden { display: none; opacity: 0; }
+        .fade-in { display: block; animation: fadeIn 1s forwards; }
+
+        /* 标题 */
+        h1 { font-size: 1.8rem; letter-spacing: 6px; color: var(--accent); margin-bottom: 10px; font-weight: normal; text-transform: uppercase; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+        .subtitle { font-size: 0.6rem; letter-spacing: 3px; color: #888; margin-bottom: 40px; text-transform: uppercase; }
+
+        /* 输入框组 */
+        .input-group { margin-bottom: 25px; text-align: left; }
+        label { font-size: 0.6rem; letter-spacing: 2px; color: #666; display: block; margin-bottom: 5px; margin-left: 5px; }
+        input, select { background: var(--glass); border: 1px solid #333; color: #eee; width: 100%; padding: 15px; font-size: 1rem; outline: none; border-radius: 4px; transition: 0.3s; box-sizing: border-box; font-family: inherit; }
+        input:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
+
+        /* 按钮 */
+        .btn-main { background: linear-gradient(45deg, #b8860b, #e5c100); color: #000; border: none; padding: 18px; width: 100%; font-size: 0.9rem; font-weight: bold; letter-spacing: 3px; cursor: pointer; border-radius: 2px; text-transform: uppercase; margin-top: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+        .btn-main:active { transform: scale(0.98); }
+
+        /* 模拟计算过程 */
+        .loader-box { text-align: center; }
+        .spinner { width: 60px; height: 60px; border: 2px solid rgba(255,255,255,0.1); border-top: 2px solid var(--accent); border-radius: 50%; margin: 0 auto 30px; animation: spin 1s linear infinite; }
+        .loading-text { font-size: 0.7rem; letter-spacing: 2px; color: var(--accent); min-height: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* 结果页 */
+        .result-card { background: rgba(0,0,0,0.6); border: 1px solid #222; padding: 30px; border-radius: 10px; backdrop-filter: blur(10px); }
+        .chart-row { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; font-size: 0.7rem; letter-spacing: 1px; }
+        .chart-bar { flex: 1; height: 4px; background: #222; margin: 0 15px; border-radius: 2px; overflow: hidden; }
+        .chart-fill { height: 100%; background: var(--accent); width: 0; transition: width 1.5s ease-out; }
+        
+        .blur-section { margin-top: 25px; position: relative; text-align: left; line-height: 1.8; font-size: 0.9rem; color: #ccc; }
+        .blur-content { filter: blur(6px); user-select: none; opacity: 0.7; }
+        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 5; background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%); }
+
+        .btn-unlock { background: var(--accent); color: #000; text-decoration: none; padding: 15px 30px; font-weight: bold; font-size: 0.8rem; letter-spacing: 1px; border-radius: 50px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); animation: pulse 2s infinite; }
+        .btn-sub { display: block; margin-top: 15px; font-size: 0.6rem; color: #666; text-decoration: none; letter-spacing: 1px; border-bottom: 1px solid #333; padding-bottom: 2px; }
+        
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    <div class="stars-overlay"></div>
-    <div class="container">
-        <div class="zodiac-wheel"></div>
-        <h1>ASTRO-LOGIC</h1>
-        <div class="intro-text">QUANTUM ORACLE SYSTEM v4.2</div>
+    <div class="stars" id="star-container"></div>
 
-        <div id="step-input" class="input-card">
-            <input type="text" id="name" placeholder="YOUR FULL NAME">
-            <select id="sign">
-                <option value="">CHOOSE YOUR ZODIAC</option>
-                <option value="Aries">Aries (白羊)</option><option value="Taurus">Taurus (金牛)</option>
-                <option value="Gemini">Gemini (双子)</option><option value="Cancer">Cancer (巨蟹)</option>
-                <option value="Leo">Leo (狮子)</option><option value="Virgo">Virgo (处女)</option>
-                <option value="Libra">Libra (天秤)</option><option value="Scorpio">Scorpio (天蝎)</option>
-                <option value="Sagittarius">Sagittarius (射手)</option><option value="Capricorn">Capricorn (摩羯)</option>
-                <option value="Aquarius">Aquarius (水瓶)</option><option value="Pisces">Pisces (双鱼)</option>
+    <div class="container fade-in" id="step-1">
+        <h1>ETHER ORACLE</h1>
+        <div class="subtitle">Quantum Destiny Analysis v5.0</div>
+        
+        <div class="input-group">
+            <label>YOUR IDENTITY</label>
+            <input type="text" id="name" placeholder="Full Name">
+        </div>
+        <div class="input-group">
+            <label>DATE OF BIRTH</label>
+            <input type="date" id="dob" style="color:#aaa;">
+        </div>
+        <div class="input-group">
+            <label>PRIMARY CONCERN</label>
+            <select id="concern">
+                <option value="General">Choose Focus...</option>
+                <option value="Wealth">Financial Future (Wealth)</option>
+                <option value="Love">Soulmate & Connection (Love)</option>
+                <option value="Karma">Past Life Debt (Karma)</option>
             </select>
-            <button class="btn-divine" onclick="startReading()">CONSULT THE STARS</button>
         </div>
 
-        <div id="step-reading" class="reading-area">
-            <p style="color:var(--gold); font-size: 0.9rem;">Analysis for <span id="res-name"></span>:</p>
-            <div class="aspect-row"><span>LOVE ENERGY</span><span>89%</span></div>
-            <div class="bar-bg"><div class="bar-fill" style="width: 89%"></div></div>
-            <div class="aspect-row"><span>WEALTH VIBRATION</span><span>34%</span></div>
-            <div class="bar-bg"><div class="bar-fill" style="width: 34%; background: #ff4444;"></div></div>
-            
-            <p style="font-size: 0.85rem; line-height: 1.6; margin-top: 30px; font-style: italic;">
-                "The quantum alignment shows a critical crossroads. Your wealth vibration is currently suppressed by a Mercury shadow..."
-            </p>
+        <button class="btn-main" onclick="startProcess()">INITIATE SCAN</button>
+        <p style="margin-top: 20px; font-size: 0.5rem; color: #444;">SECURE ENCRYPTED CONNECTION • 2026 NODE</p>
+    </div>
 
-            <div class="blur-box">
-                To fix this and unlock your 8K Guardian Wallpaper, you must act before the next moon cycle. The specific person you've been thinking about has a hidden message regarding your future...
+    <div class="container hidden" id="step-2">
+        <div class="loader-box">
+            <div class="spinner"></div>
+            <div class="loading-text" id="load-text">CONNECTING TO ASTRAL PLANE...</div>
+        </div>
+    </div>
+
+    <div class="container hidden" id="step-3">
+        <div class="result-card">
+            <h2 style="font-size: 1rem; color: var(--accent); margin-bottom: 5px;">ANALYSIS COMPLETE</h2>
+            <p style="font-size: 0.6rem; color: #888; margin-bottom: 20px;">TARGET: <span id="res-name"></span></p>
+
+            <div class="chart-row">
+                <span>AURA</span>
+                <div class="chart-bar"><div class="chart-fill" style="width: 84%;"></div></div>
+                <span>84%</span>
+            </div>
+            <div class="chart-row">
+                <span>LUCK</span>
+                <div class="chart-bar"><div class="chart-fill" style="width: 41%; background: #ff5555;"></div></div>
+                <span style="color:#ff5555">41%</span>
+            </div>
+            <div class="chart-row">
+                <span>KARMA</span>
+                <div class="chart-bar"><div class="chart-fill" style="width: 92%; background: #9b59b6;"></div></div>
+                <span>92%</span>
             </div>
 
-            <div class="pay-gate">
-                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-divine" style="text-decoration:none; display:block; text-align:center;">UNLOCK 7-DAY PROPHECY ($0.90)</a>
-                <a href="https://buy.stripe.com/28E00kgudf5ne5G0of5J601" style="display:block; margin-top:20px; color:#444; font-size:0.6rem; text-decoration:none;">GET LIFETIME ACCESS ($9.90)</a>
+            <p style="text-align: left; margin-top: 25px; font-size: 0.85rem; color: #eee; line-height: 1.6;">
+                <strong style="color:var(--accent)">CRITICAL ALERT:</strong> We detected a rare planetary alignment in your <span id="res-concern"></span> sector. While your Karma energy is high, a blockage is preventing success.
+            </p>
+
+            <div class="blur-section">
+                <div class="blur-content">
+                    Based on your birth chart, the next 7 days are crucial. A person with the initial 'J' or 'M' is influencing your path. To avoid the upcoming conflict, you must align your frequency with...
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                
+                <div class="lock-overlay">
+                    <p style="font-size: 0.7rem; color: #fff; margin-bottom: 15px; letter-spacing: 1px;">UNLOCK FULL 7-DAY FORECAST & REMEDY</p>
+                    
+                    <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-unlock">REVEAL DESTINY ($0.90)</a>
+                    
+                    <a href="https://buy.stripe.com/28E00kgudf5ne5G0of5J601" class="btn-sub">Or Get 30-Day Pass ($9.90)</a>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        function startReading() {
-            const n = document.getElementById('name').value;
-            if(!n) return alert("Enter your name, seeker.");
-            document.getElementById('res-name').innerText = n;
-            document.getElementById('step-input').style.display = 'none';
-            document.getElementById('step-reading').style.display = 'block';
+        // 生成星空背景
+        const starContainer = document.getElementById('star-container');
+        for(let i=0; i<50; i++) {
+            let star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            star.style.animationDelay = Math.random() * 5 + 's';
+            starContainer.appendChild(star);
+        }
+
+        // 核心交互逻辑
+        function startProcess() {
+            const name = document.getElementById('name').value;
+            const concern = document.getElementById('concern').value;
+            
+            if(!name) return alert("Energy signature required (Please enter name).");
+
+            // 切换到 Loading 界面
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-1').classList.remove('fade-in');
+            document.getElementById('step-2').classList.remove('hidden');
+            document.getElementById('step-2').classList.add('fade-in');
+
+            // 模拟计算步骤 (心理暗示)
+            const texts = [
+                "CALCULATING BIRTH CHART...",
+                "ALIGNING PLANETARY NODES...",
+                "DETECTING ENERGY BLOCKAGES...",
+                "SYNTHESIZING 8K WALLPAPER...",
+                "FINALIZING SOUL REPORT..."
+            ];
+            
+            let step = 0;
+            const interval = setInterval(() => {
+                if(step < texts.length) {
+                    document.getElementById('load-text').innerText = texts[step];
+                    step++;
+                } else {
+                    clearInterval(interval);
+                    showResult(name, concern);
+                }
+            }, 1200); // 每 1.2 秒换一句话，总共约 6 秒，这个等待时间是精心设计的
+        }
+
+        function showResult(name, concern) {
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-3').classList.remove('hidden');
+            document.getElementById('step-3').classList.add('fade-in');
+            
+            document.getElementById('res-name').innerText = name.toUpperCase();
+            document.getElementById('res-concern').innerText = (concern === "General" ? "LIFE PATH" : concern).toUpperCase();
         }
     </script>
 </body>
-</html>
