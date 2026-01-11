@@ -3,90 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASTRO-QUANTUM | The Oracle</title>
+    <title>ASTRO-LOGIC | Quantum Soul Reading</title>
     <style>
-        :root { --gold: #C5A059; --bg: #030303; --gray: #888; }
-        body { background: var(--bg); color: #fff; font-family: 'Helvetica Neue', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
-        .stars { position: fixed; width: 100%; height: 100%; background: radial-gradient(circle at center, #111 0%, #000 100%); z-index: -1; }
-        .main-container { width: 90%; max-width: 500px; text-align: center; transition: all 0.8s ease; }
+        :root { --gold: #d4af37; --bg: #0a0a0c; --accent: #6a5acd; }
+        body { background: var(--bg); color: #e0e0e0; font-family: 'Cinzel', serif; margin: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
+        .stars-overlay { position: fixed; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.3; z-index: -1; }
+        .container { width: 90%; max-width: 500px; padding: 40px 20px; text-align: center; }
         
-        /* 引导步骤样式 */
-        .step { display: none; animation: fadeIn 1s forwards; }
-        .active { display: block; }
-        
-        h1 { font-size: 1.2rem; letter-spacing: 8px; color: var(--gold); text-transform: uppercase; margin-bottom: 40px; }
-        .input-group { margin-bottom: 20px; }
-        input, select { background: transparent; border: none; border-bottom: 1px solid #333; color: var(--gold); padding: 10px; width: 80%; font-size: 1rem; outline: none; text-align: center; }
-        .btn-next { margin-top: 30px; background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px 40px; border-radius: 50px; cursor: pointer; letter-spacing: 2px; transition: 0.3s; }
-        .btn-next:hover { background: var(--gold); color: #000; }
+        /* 神秘旋转星盘 */
+        .zodiac-wheel { width: 150px; height: 150px; border: 2px solid var(--gold); border-radius: 50%; margin: 0 auto 30px; position: relative; animation: rotate 20s linear infinite; }
+        .zodiac-wheel::before { content: '◈'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--gold); font-size: 2rem; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* 结果展示区 */
-        .result-box { text-align: left; line-height: 1.8; font-size: 0.9rem; color: #ccc; background: rgba(255,255,255,0.02); padding: 25px; border-radius: 10px; border: 1px solid #222; }
-        .locked-content { filter: blur(4px); user-select: none; pointer-events: none; }
-        .pay-banner { margin-top: -50px; position: relative; z-index: 10; background: linear-gradient(to bottom, transparent, #000); padding: 40px 0; }
+        h1 { font-size: 1.8rem; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; }
+        .intro-text { font-size: 0.8rem; color: var(--gray); margin-bottom: 30px; line-height: 1.6; }
+
+        .input-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); padding: 30px; border-radius: 5px; margin-bottom: 20px; }
+        select, input { background: transparent; border: none; border-bottom: 1px solid var(--gold); color: #fff; width: 100%; padding: 10px; margin: 15px 0; font-family: inherit; outline: none; }
         
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-divine { background: var(--gold); color: #000; border: none; padding: 15px 30px; width: 100%; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.5s; }
+        .btn-divine:hover { box-shadow: 0 0 20px var(--gold); background: #fff; }
+
+        /* 结果展示与深度分析 */
+        .reading-area { display: none; text-align: left; animation: fadeIn 1.5s; }
+        .aspect-row { display: flex; justify-content: space-between; margin: 15px 0; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        .bar { height: 4px; background: var(--accent); width: 0%; transition: 1s; margin-top: 5px; }
+        .blur-box { filter: blur(6px); background: rgba(0,0,0,0.5); padding: 20px; position: relative; }
+        .unlock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
-    <div class="stars"></div>
+    <div class="stars-overlay"></div>
+    <div class="container">
+        <div class="zodiac-wheel"></div>
+        <h1>ASTRO-LOGIC</h1>
+        <p class="intro-text">QUANTUM GAIA ANALYSIS SYSTEM 4.0</p>
 
-    <div class="main-container" id="app">
-        <h1>ASTRO-QUANTUM</h1>
-
-        <div class="step active" id="step1">
-            <p style="font-size: 0.8rem; color: var(--gray);">IDENTIFY YOUR COORDINATES</p>
-            <div class="input-group"><input type="text" id="userName" placeholder="Your Name"></div>
-            <div class="input-group">
-                <select id="zodiac">
-                    <option value="">Select Zodiac Sign</option>
-                    <option value="Aries">Aries</option><option value="Leo">Leo</option>
-                    <option value="Scorpio">Scorpio</option><option value="Pisces">Pisces</option>
-                    </select>
-            </div>
-            <button class="btn-next" onclick="nextStep(2)">INITIALIZE READING</button>
+        <div id="step-input" class="input-card">
+            <input type="text" id="name" placeholder="FULL NAME">
+            <select id="sign">
+                <option value="">CHOOSE ZODIAC SIGN</option>
+                <option value="Aries">Aries (Mar 21 - Apr 19)</option>
+                <option value="Taurus">Taurus (Apr 20 - May 20)</option>
+                <option value="Gemini">Gemini (May 21 - Jun 20)</option>
+                <option value="Cancer">Cancer (Jun 21 - Jul 22)</option>
+                <option value="Leo">Leo (Jul 23 - Aug 22)</option>
+                <option value="Virgo">Virgo (Aug 23 - Sep 22)</option>
+                <option value="Libra">Libra (Sep 23 - Oct 22)</option>
+                <option value="Scorpio">Scorpio (Oct 23 - Nov 21)</option>
+                <option value="Sagittarius">Sagittarius (Nov 22 - Dec 21)</option>
+                <option value="Capricorn">Capricorn (Dec 22 - Jan 19)</option>
+                <option value="Aquarius">Aquarius (Jan 20 - Feb 18)</option>
+                <option value="Pisces">Pisces (Feb 19 - Mar 20)</option>
+            </select>
+            <input type="text" id="concern" placeholder="YOUR INTENTION (Career, Love, etc.)">
+            <button class="btn-divine" onclick="startReading()">CONSULT THE ORACLE</button>
         </div>
 
-        <div class="step" id="step2">
-            <p style="font-size: 0.8rem; color: var(--gray);">CHOOSE YOUR FOCUS</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
-                <button class="btn-next" onclick="generateReading('Wealth')">Wealth & Career</button>
-                <button class="btn-next" onclick="generateReading('Love')">Love & Soulmate</button>
-                <button class="btn-next" onclick="generateReading('Future')">7-Day Transit</button>
-                <button class="btn-next" onclick="generateReading('Mystery')">Secret Oracle</button>
-            </div>
-        </div>
+        <div id="step-reading" class="reading-area">
+            <h2 style="color:var(--gold); text-align:center;">YOUR SPIRITUAL ALIGNMENT</h2>
+            
+            <div class="aspect-row"><span>LOVE ENERGY</span><span id="love-val">88%</span></div>
+            <div class="bar" style="width: 88%;"></div>
+            
+            <div class="aspect-row"><span>WEALTH VIBRATION</span><span id="wealth-val">42%</span></div>
+            <div class="bar" style="width: 42%; background: #ff4d4d;"></div>
 
-        <div class="step" id="step3">
-            <div class="result-box">
-                <p id="free-reading"></p>
-                <div class="locked-content">
-                    <p>Based on your cosmic alignment, the next 48 hours are critical for your financial flow. A specific alignment between Mars and your house of legacy suggests that a decision made tomorrow will...</p>
-                    <p>Regarding your relationship, the hidden energy suggests that someone from your past or a new frequency is entering...</p>
+            <p style="margin-top: 30px; font-style: italic; font-size: 0.9rem;">
+                "The Stars indicate a major planetary shift in your sector. A karmic debt is being cleared, but you must be careful with..."
+            </p>
+
+            <div class="blur-box">
+                <p>Regarding your specific concern, the quantum field suggests that between now and the next Full Moon, you will encounter a person from the past who holds the key to your financial growth. This transition is marked by a rare alignment in your 8th house...</p>
+                <div class="unlock-overlay">
+                    <p style="font-size: 0.8rem; text-shadow: 0 0 10px #000;">READ THE FULL 7-DAY PROPHECY</p>
+                    <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-divine" style="text-decoration:none;">UNLOCK NOW ($0.90)</a>
+                    <a href="https://buy.stripe.com/28E00kgudf5ne5G0of5J601" style="color:var(--gold); font-size: 0.6rem; margin-top: 15px; text-decoration:none;">FULL YEAR ACCESS ($9.90)</a>
                 </div>
-            </div>
-
-            <div class="pay-banner">
-                <p style="color:var(--gold); font-size: 0.9rem; margin-bottom: 20px;">Unlock Full 30-Day Guidance & 8K Luck Wallpaper</p>
-                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-next" style="text-decoration:none; display:inline-block;">UNLOCK FULL DESTINY ($0.90)</a>
-                <p style="font-size: 0.6rem; color: #444; margin-top: 15px;">One-time access. Real-time AI processing.</p>
             </div>
         </div>
     </div>
 
     <script>
-        function nextStep(s) {
-            document.querySelectorAll('.step').forEach(div => div.classList.remove('active'));
-            document.getElementById('step' + s).classList.add('active');
-        }
-
-        function generateReading(focus) {
-            const name = document.getElementById('userName').value || "Seeker";
-            const zodiac = document.getElementById('zodiac').value;
-            const freeText = `Greeting, ${name}. As a ${zodiac}, the current transit of Saturn suggests a period of intense recalibration in your ${focus} sector. Today's energy is high, but a shadow remains...`;
-            
-            document.getElementById('free-reading').innerText = freeText;
-            nextStep(3);
+        function startReading() {
+            const name = document.getElementById('name').value;
+            if(!name) { alert("Please enter your name"); return; }
+            document.getElementById('step-input').style.display = 'none';
+            document.getElementById('step-reading').style.display = 'block';
         }
     </script>
 </body>
