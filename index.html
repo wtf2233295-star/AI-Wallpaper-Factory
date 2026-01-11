@@ -3,113 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HINT | Quantum Soul Guidance</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    <title>Hint | Personalized Astrology & Insights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --accent: #fff; --bg: #080808; --gray: #888; }
-        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        :root { --hint-blue: #007AFF; --text-dark: #1D1D1F; --text-gray: #86868B; --bg-light: #FBFBFD; }
+        body { background: #fff; color: var(--text-dark); font-family: 'Inter', -apple-system, sans-serif; margin: 0; display: flex; flex-direction: column; min-height: 100vh; -webkit-font-smoothing: antialiased; }
         
-        /* 顶部进度条：Hint 的灵魂 */
-        .progress-wrap { position: fixed; top: 0; width: 100%; height: 3px; background: #1a1a1a; z-index: 100; }
-        .progress-bar { height: 100%; background: var(--accent); width: 0%; transition: 0.4s; }
+        /* Hint 标志性的超细进度条 */
+        .header-nav { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(255,255,255,0.8); backdrop-filter: blur(20px); z-index: 100; display: flex; align-items: center; justify-content: center; border-bottom: 0.5px solid #eee; }
+        .logo { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.5px; }
+        .progress-container { position: absolute; bottom: 0; width: 100%; height: 2px; background: #f2f2f2; }
+        .progress-bar { height: 100%; background: var(--hint-blue); width: 10%; transition: width 0.4s ease; }
 
-        .container { width: 90%; max-width: 420px; padding: 100px 20px 40px; text-align: center; display: flex; flex-direction: column; flex: 1; }
-        .step { display: none; animation: slideIn 0.5s forwards; }
-        .active { display: block; }
+        .container { width: 90%; max-width: 480px; margin: 100px auto 40px; text-align: center; flex: 1; }
+        .step { display: none; }
+        .active { display: block; animation: fadeIn 0.6s ease; }
 
-        /* 题目样式 */
-        h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: normal; font-style: italic; margin-bottom: 40px; line-height: 1.3; }
-        
-        /* 选项样式：大方块，点击感极强 */
-        .option { background: #121212; border: 1px solid #222; padding: 20px; margin-bottom: 12px; border-radius: 8px; cursor: pointer; transition: 0.2s; text-align: left; display: flex; justify-content: space-between; align-items: center; }
-        .option:active { background: #1a1a1a; border-color: #444; }
-        .option span { font-size: 0.95rem; letter-spacing: 0.5px; }
-        .option::after { content: '→'; opacity: 0.3; }
+        /* Hint 的大标题：优雅、直接 */
+        h1 { font-size: 1.8rem; font-weight: 700; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.5px; }
+        p.subtitle { color: var(--text-gray); font-size: 1rem; margin-bottom: 35px; }
 
-        /* 输入框样式 */
-        input { background: transparent; border: none; border-bottom: 1px solid #333; color: #fff; font-size: 1.5rem; width: 100%; padding: 10px 0; text-align: center; outline: none; margin-top: 20px; }
+        /* 选项框：Hint 采用的是圆角、软阴影、白色背景 */
+        .option { background: #fff; border: 1.5px solid #F2F2F7; padding: 22px; margin-bottom: 16px; border-radius: 16px; cursor: pointer; transition: all 0.2s; text-align: left; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .option:active { transform: scale(0.98); background: #FBFBFD; border-color: var(--hint-blue); }
+        .option span { font-weight: 500; font-size: 1.05rem; }
+        .option-arrow { color: #C7C7CC; font-size: 1.2rem; }
 
-        /* 模拟星盘旋转：高逼格视觉 */
-        .astrolabe { width: 200px; height: 200px; border: 1px solid #1a1a1a; border-radius: 50%; margin: 0 auto 30px; position: relative; animation: rotate 20s linear infinite; }
-        .astrolabe::before { content: ''; position: absolute; top: 20%; left: 20%; width: 60%; height: 60%; border: 1px dashed #333; border-radius: 50%; }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        /* 输入控件 */
+        .input-wrap { margin-top: 20px; }
+        input[type="text"], input[type="date"] { width: 100%; border: 2px solid #F2F2F7; padding: 18px; border-radius: 16px; font-size: 1.1rem; box-sizing: border-box; outline: none; transition: 0.3s; font-family: inherit; }
+        input:focus { border-color: var(--hint-blue); }
 
-        /* 支付卡片 */
-        .pay-card { background: #fff; color: #000; border-radius: 12px; padding: 30px; margin-top: 20px; text-align: left; }
-        .price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .old-price { text-decoration: line-through; color: #888; font-size: 0.9rem; }
-        .new-price { font-size: 2rem; font-weight: bold; color: #000; }
-        .btn-pay { background: #000; color: #fff; width: 100%; padding: 20px; border-radius: 8px; border: none; font-weight: bold; font-size: 1rem; cursor: pointer; text-align: center; text-decoration: none; display: block; box-sizing: border-box; }
+        /* 信任背书：Hint 的杀手锏 */
+        .trust-badge { margin-top: 40px; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-gray); font-size: 0.8rem; }
+        .stars { color: #FFCC00; font-size: 0.9rem; }
 
-        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* 支付页面专有样式 */
+        .pay-card { background: var(--bg-light); border-radius: 24px; padding: 30px; margin-top: 20px; text-align: left; position: relative; overflow: hidden; }
+        .badge-limited { position: absolute; top: 0; right: 0; background: #FF3B30; color: #fff; font-size: 0.7rem; padding: 6px 12px; border-bottom-left-radius: 12px; font-weight: 600; }
+        .price-big { font-size: 2.8rem; font-weight: 800; margin: 10px 0; letter-spacing: -1px; }
+        .price-big span { font-size: 1rem; color: var(--text-gray); text-decoration: line-through; margin-left: 10px; }
+        .btn-confirm { background: var(--text-dark); color: #fff; width: 100%; padding: 20px; border-radius: 18px; border: none; font-weight: 700; font-size: 1.1rem; cursor: pointer; margin-top: 20px; text-decoration: none; display: block; text-align: center; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
+    <div class="header-nav">
+        <div class="logo">Hint</div>
+        <div class="progress-container"><div class="progress-bar" id="pbar"></div></div>
+    </div>
 
     <div class="container">
         
         <div class="step active" id="s1">
-            <h2>What is your primary focus for 2026?</h2>
-            <div class="option" onclick="go(2, 20)"><span>Relationship & Love</span></div>
-            <div class="option" onclick="go(2, 20)"><span>Financial Wealth</span></div>
-            <div class="option" onclick="go(2, 20)"><span>Career Path</span></div>
-            <div class="option" onclick="go(2, 20)"><span>Health & Vitality</span></div>
+            <h1>Select your gender</h1>
+            <p class="subtitle">This helps us align your natal chart energy.</p>
+            <div class="option" onclick="go(2, 30)"><span>Female</span><span class="option-arrow">›</span></div>
+            <div class="option" onclick="go(2, 30)"><span>Male</span><span class="option-arrow">›</span></div>
+            <div class="option" onclick="go(2, 30)"><span>Non-binary</span><span class="option-arrow">›</span></div>
+            <div class="trust-badge">
+                <span class="stars">★★★★★</span>
+                <span>4.9/5 by 2M+ users</span>
+            </div>
         </div>
 
-        <div class="step" id="s2">
-            <h2>Are you currently feeling a sense of stagnation?</h2>
-            <div class="option" onclick="go(3, 40)"><span>Yes, very much</span></div>
-            <div class="option" onclick="go(3, 40)"><span>Sometimes</span></div>
-            <div class="option" onclick="go(3, 40)"><span>I'm thriving, but want more</span></div>
+        <div id="s2" class="step">
+            <h1>What's on your mind?</h1>
+            <p class="subtitle">Focus your energy on one specific area.</p>
+            <div class="option" onclick="go(3, 60)"><span>My Love Life</span><span class="option-arrow">›</span></div>
+            <div class="option" onclick="go(3, 60)"><span>My Career & Money</span><span class="option-arrow">›</span></div>
+            <div class="option" onclick="go(3, 60)"><span>My Future Self</span><span class="option-arrow">›</span></div>
         </div>
 
-        <div class="step" id="s3">
-            <h2>Your date of birth</h2>
-            <p style="color:#666; font-size:0.8rem;">To calculate your exact planetary transit.</p>
-            <input type="date" id="dob" onchange="go(4, 60)">
+        <div id="s3" class="step">
+            <h1>Personalize your chart</h1>
+            <p class="subtitle">Enter your details for a 100% accurate reading.</p>
+            <div class="input-wrap">
+                <input type="text" id="name" placeholder="Full Name" style="margin-bottom: 15px;">
+                <input type="date" id="dob">
+            </div>
+            <button class="btn-confirm" onclick="runAnalysis()">Continue</button>
         </div>
 
-        <div class="step" id="s4">
-            <h2>And your name, seeker?</h2>
-            <input type="text" id="uname" placeholder="Enter full name">
-            <button class="option" style="width:100%; margin-top:40px; background:#fff; color:#000;" onclick="startCalc()">Calculate Destiny →</button>
+        <div id="s4" class="step">
+            <h1 id="status">Connecting to NASA Ephemeris...</h1>
+            <div style="margin: 50px 0;">
+                <svg width="60" height="60" viewBox="0 0 50 50">
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#eee" stroke-width="4"></circle>
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#007AFF" stroke-width="4" stroke-dasharray="31.4 31.4" stroke-linecap="round">
+                        <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"></animateTransform>
+                    </circle>
+                </svg>
+            </div>
+            <p id="log" style="color: #888; font-family: monospace; font-size: 0.8rem;"></p>
         </div>
 
-        <div class="step" id="s5">
-            <div class="astrolabe"></div>
-            <h2 id="loading-txt">Syncing with NASA data...</h2>
-            <p id="data-stream" style="font-family:'Courier New'; font-size:0.7rem; color:#444;"></p>
-        </div>
-
-        <div class="step" id="s6">
-            <p style="text-align:left; color:var(--gray); font-size:0.7rem; letter-spacing:2px;">REPORT GENERATED</p>
-            <h2 style="text-align:left; margin-bottom:10px;">The stars have a message for you, <span id="final-name"></span>.</h2>
+        <div id="s5" class="step" style="text-align: left;">
+            <p style="color:var(--hint-blue); font-weight:700; font-size:0.8rem; letter-spacing:1px; margin-bottom:10px;">ANALYSIS COMPLETE</p>
+            <h1>Your 2026 Cosmic Blueprint is ready.</h1>
             
-            <p style="text-align:left; line-height:1.6; color:#ccc; font-size:0.9rem;">
-                Your chart shows a **rare triple-conjunction** in your 8th house. This only happens once every 24 years. It indicates that you have been ignoring a specific sign from the universe regarding your future.
-            </p>
-
-            <div style="filter:blur(4px); text-align:left; font-size:0.8rem; margin-top:20px; border-left: 2px solid #333; padding-left:15px;">
-                The specific person who will change your life this month has the following characteristics... You must avoid the date January 19th because...
-            </div>
-
             <div class="pay-card">
-                <div class="price-row">
-                    <div>
-                        <div class="old-price">REGULAR $49.00</div>
-                        <div class="new-price">$0.90</div>
-                    </div>
-                    <div style="text-align:right; font-size:0.6rem; color:#666;">Limited Time Offer<br>Ends in 04:59</div>
-                </div>
-                <p style="font-size:0.8rem; margin-bottom:20px; color:#333; line-height:1.4;">
-                    ✔ Full 2026 Soul Blueprint<br>
-                    ✔ Your Personal 8K Power Totem (Wallpaper)<br>
-                    ✔ 7-Day Survival Guide
+                <div class="badge-limited">ONE-TIME OFFER</div>
+                <p style="color:var(--text-gray); margin:0;">Full Access + 8K Wallpaper</p>
+                <div class="price-big">$0.90 <span>$49.00</span></div>
+                
+                <p style="font-size: 0.9rem; line-height: 1.5; color: #444;">
+                    We found a <b>critical transit</b> in your chart starting next week. Unlock now to see how to protect your energy and attract abundance.
                 </p>
-                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-pay">REVEAL MY DESTINY</a>
+                
+                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-confirm">Get My Reading</a>
             </div>
+            
+            <p style="text-align:center; font-size:0.7rem; color:#888; margin-top:20px;">
+                Guaranteed safe checkout. Secure 256-bit SSL encryption.
+            </p>
         </div>
 
     </div>
@@ -121,30 +130,26 @@
             document.getElementById('pbar').style.width = progress + '%';
         }
 
-        function startCalc() {
-            const name = document.getElementById('uname').value;
-            if(!name) return alert("Please enter your name.");
-            document.getElementById('final-name').innerText = name;
-            
-            go(5, 80);
-            
+        function runAnalysis() {
+            if(!document.getElementById('name').value) return alert("Enter your name");
+            go(4, 90);
             const logs = [
-                "Locating star position...",
-                "Mapping 12 houses...",
-                "Analyzing karmic debt...",
-                "Finalizing 8K visualization..."
+                "Gathering planetary coordinates...",
+                "Calculating natal house cusp...",
+                "Analyzing transit patterns...",
+                "Generating personalized 8K totem..."
             ];
             let i = 0;
-            const timer = setInterval(() => {
+            const interval = setInterval(() => {
                 if(i < logs.length) {
-                    document.getElementById('loading-txt').innerText = logs[i];
-                    document.getElementById('data-stream').innerHTML += Math.random().toString(16).substring(2,15) + "<br>";
+                    document.getElementById('status').innerText = logs[i];
+                    document.getElementById('log').innerHTML += "> " + Math.random().toString(36).substring(7) + "<br>";
                     i++;
                 } else {
-                    clearInterval(timer);
-                    go(6, 100);
+                    clearInterval(interval);
+                    go(5, 100);
                 }
-            }, 1000);
+            }, 1200);
         }
     </script>
 </body>
