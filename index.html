@@ -3,150 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HINT OMEGA | The Peak of Astrology</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;900&display=swap" rel="stylesheet">
+    <title>HINT GOD-MODE | Quantum Soul Reading</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        :root { --p-blue: #007AFF; --p-purple: #5856D6; --bg: #ffffff; }
-        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #fff; overflow: hidden; height: 100%; cursor: crosshair; }
+        :root { --primary: #007AFF; --danger: #FF3B30; --success: #34C759; --bg: #FBFBFD; }
+        body { background: var(--bg); color: #1d1d1f; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
         
-        /* 交互式流体背景 */
-        #fluid-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        /* 顶部状态：制造紧迫感 */
+        .status-header { position: fixed; top: 0; width: 100%; height: 50px; background: #000; color: #fff; z-index: 1000; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; }
+        .live-pulse { width: 8px; height: 8px; background: var(--danger); border-radius: 50%; margin-right: 10px; animation: pulse 1s infinite; }
 
-        /* 顶部系统状态栏 */
-        .sys-bar { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(255,255,255,0.7); backdrop-filter: blur(30px); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; box-sizing: border-box; border-bottom: 0.5px solid rgba(0,0,0,0.05); }
-        .logo-text { font-weight: 900; letter-spacing: -1.5px; font-size: 1.4rem; }
-        .live-count { font-size: 0.65rem; color: #888; font-family: monospace; display: flex; align-items: center; gap: 5px; }
-        .dot { width: 5px; height: 5px; background: #34C759; border-radius: 50%; box-shadow: 0 0 10px #34C759; }
+        .container { max-width: 450px; margin: 70px auto 40px; padding: 0 20px; }
+        .step { display: none; animation: fadeIn 0.5s forwards; }
+        .active { display: block; }
 
-        /* 容器 */
-        .app-shell { max-width: 440px; margin: 0 auto; padding: 100px 25px 40px; min-height: 100vh; box-sizing: border-box; display: flex; flex-direction: column; }
-        .step-view { display: none; flex-direction: column; animation: slideUp 0.8s cubic-bezier(0, 0.9, 0, 1) forwards; }
-        .active { display: flex; }
+        /* 问题卡片 */
+        h1 { font-size: 2.2rem; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
+        .option-btn { background: #fff; border: 1.5px solid #eee; padding: 20px; border-radius: 18px; margin-bottom: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: 0.3s; }
+        .option-btn:active { background: #f2f2f7; transform: scale(0.98); }
+        .option-btn b { font-size: 1.1rem; }
 
-        h1 { font-size: 2.4rem; font-weight: 900; letter-spacing: -2px; line-height: 1; margin: 0 0 15px; }
-        .sub { font-size: 1.1rem; color: #86868b; line-height: 1.4; margin-bottom: 40px; }
+        /* 反馈弹窗 */
+        #feedback { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: var(--success); color: #fff; padding: 10px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: bold; z-index: 2000; display: none; animation: slideDown 0.3s forwards; }
 
-        /* 顶级触控卡片 */
-        .glass-btn { background: rgba(242, 242, 247, 0.8); border: 1px solid rgba(0,0,0,0.02); padding: 25px; border-radius: 28px; margin-bottom: 18px; cursor: pointer; transition: 0.4s; position: relative; overflow: hidden; display: flex; align-items: center; }
-        .glass-btn:hover { background: #fff; transform: scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
-        .glass-btn b { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.5px; }
-        .glass-btn span { position: absolute; right: 25px; opacity: 0.2; font-size: 1.5rem; }
+        /* 图表展示区 */
+        .chart-container { background: #fff; border-radius: 24px; padding: 20px; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .radar-box { width: 100%; height: 250px; margin-bottom: 20px; }
 
-        /* 能量环动画 */
-        .nexus-loader { width: 150px; height: 150px; margin: 50px auto; position: relative; }
-        .ring { position: absolute; width: 100%; height: 100%; border: 2px solid transparent; border-top-color: var(--p-blue); border-radius: 50%; animation: spin 2s cubic-bezier(0.5, 0, 0.5, 1) infinite; }
-        .ring:nth-child(2) { width: 80%; height: 80%; top: 10%; left: 10%; border-top-color: var(--p-purple); animation-duration: 1.5s; }
+        /* 损失厌恶：警报卡片 */
+        .alert-card { background: #FFF2F2; border: 1px solid #FFD6D6; border-radius: 20px; padding: 20px; margin: 20px 0; display: flex; gap: 15px; }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-text b { color: var(--danger); display: block; margin-bottom: 5px; }
+        .alert-text p { margin: 0; font-size: 0.85rem; color: #666; }
 
-        /* 终极支付卡片 */
-        .omega-card { background: #000; color: #fff; border-radius: 35px; padding: 40px 30px; margin-top: 10px; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.3); }
-        .price-tag { font-size: 4.5rem; font-weight: 900; letter-spacing: -4px; margin: 15px 0; }
-        .price-tag del { font-size: 1.2rem; color: #444; letter-spacing: 0; margin-left: 10px; }
-        
-        .unlock-btn { background: #fff; color: #000; padding: 24px; border-radius: 22px; font-weight: 900; font-size: 1.25rem; text-align: center; text-decoration: none; display: block; margin-top: 30px; transition: 0.3s; }
-        .unlock-btn:hover { background: var(--p-blue); color: #fff; transform: translateY(-5px); }
+        /* 交付预览：模糊效果引诱 */
+        .delivery-preview { position: relative; width: 100%; height: 300px; border-radius: 24px; overflow: hidden; margin-top: 20px; }
+        .preview-img { width: 100%; height: 100%; object-fit: cover; filter: blur(15px); }
+        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        /* 最终支付按钮 */
+        .pay-btn { background: #000; color: #fff; width: 100%; padding: 22px; border-radius: 20px; font-size: 1.2rem; font-weight: 800; border: none; cursor: pointer; text-decoration: none; display: block; text-align: center; margin-top: 25px; box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { from { top: 40px; opacity: 0; } to { top: 70px; opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <canvas id="fluid-canvas"></canvas>
-    <div class="sys-bar">
-        <div class="logo-text">HINT<span style="color:var(--p-blue)">Ω</span></div>
-        <div class="live-count"><div class="dot"></div> <span id="counter">241,082</span> NODES ACTIVE</div>
+    <div id="feedback">COMPATIBILITY MATCHED 98%</div>
+    
+    <div class="status-header">
+        <div class="live-pulse"></div> HIGH-FREQUENCY NODE CONNECTED
     </div>
 
-    <div class="app-shell">
-        <div class="step-view active" id="v1">
-            <h1>Connect to<br>The Nexus.</h1>
-            <p class="sub">AI-driven celestial mechanics for the next generation of seekers.</p>
-            <div class="glass-btn" onclick="go(2)"><b>Aura Calibration</b><span>❤️</span></div>
-            <div class="glass-btn" onclick="go(2)"><b>Abundance Vector</b><span>💰</span></div>
-            <div class="glass-btn" onclick="go(2)"><b>Karmic Resolution</b><span>🪐</span></div>
+    <div class="container">
+        
+        <div class="step active" id="s1">
+            <h1>What keeps you awake at night?</h1>
+            <div class="option-btn" onclick="showFeedback('Energy Aligned', 2)"><b>Unfulfilled Potential</b><span>→</span></div>
+            <div class="option-btn" onclick="showFeedback('Destiny Syncing', 2)"><b>Financial Uncertainty</b><span>→</span></div>
+            <div class="option-btn" onclick="showFeedback('Heart-Link Detected', 2)"><b>Romantic Void</b><span>→</span></div>
+            <p style="font-size: 0.7rem; color: #999; margin-top: 20px;">94% of seekers found clarity within 24 hours.</p>
         </div>
 
-        <div class="step-view" id="v2">
-            <h1>Bio-Sync.</h1>
-            <p class="sub">Establishing neural resonance with your current location.</p>
-            <input type="text" id="name" style="width:100%; padding:22px; border:none; background:#f2f2f7; border-radius:22px; font-size:1.2rem; margin-bottom:15px; box-sizing:border-box;" placeholder="Vibrational Name">
-            <input type="date" id="dob" style="width:100%; padding:22px; border:none; background:#f2f2f7; border-radius:22px; font-size:1.2rem; box-sizing:border-box;">
-            <div class="unlock-btn" style="background:#000; color:#fff;" onclick="startFinal()">Sync Destiny</div>
+        <div class="step" id="s2">
+            <h1>Identify your Soul Signature.</h1>
+            <input type="text" id="name" style="width:100%; padding:20px; border:1px solid #eee; border-radius:15px; font-size:1.1rem; margin-bottom:15px; box-sizing:border-box;" placeholder="Full Name">
+            <input type="date" id="dob" style="width:100%; padding:20px; border:1px solid #eee; border-radius:15px; font-size:1.1rem; box-sizing:border-box;">
+            <button class="pay-btn" style="background:var(--primary)" onclick="startAnalysis()">Analyze Neural Map</button>
         </div>
 
-        <div class="step-view" id="v3">
-            <h1 style="text-align:center">Processing...</h1>
-            <div class="nexus-loader">
-                <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <div class="step" id="s3">
+            <h1 style="text-align: center;">Decoding...</h1>
+            <div class="chart-container">
+                <canvas id="soulRadar"></canvas>
             </div>
-            <p id="status-msg" style="text-align:center; font-family:monospace; color:#888; font-size:0.7rem;">ACCESSING ASTRAL API...</p>
+            <p id="loading-logs" style="font-family:'JetBrains Mono'; font-size:0.7rem; color:var(--primary); text-align: center; margin-top: 20px;"></p>
         </div>
 
-        <div class="step-view" id="v4">
-            <div class="omega-card">
-                <span style="font-size:0.7rem; font-weight:900; color:var(--p-blue); letter-spacing:2px;">CORE ANALYSIS READY</span>
-                <h2 id="res-name" style="margin:10px 0 0; font-size:1.8rem; letter-spacing:-1px;">USER</h2>
-                <div class="price-tag">$0.90<del>$49</del></div>
-                <p style="font-size:0.95rem; color:#888; line-height:1.6;">
-                    We found <b>3 massive energetic shifts</b> in your timeline. Your 8K Power Totem is ready to clear your path. Unlock the full blueprint now.
-                </p>
-                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="unlock-btn">Unlock Now</a>
-                <div style="margin-top:20px; font-size:0.6rem; color:#444; text-align:center;">OFFER EXPIRES IN 02:59</div>
+        <div class="step" id="s4">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                <h1 style="font-size: 1.5rem;">Results for <span id="u-name" style="color:var(--primary);"></span></h1>
+                <span style="font-size: 0.7rem; color: var(--success);">● LIVE READING</span>
+            </div>
+
+            <div class="alert-card">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-text">
+                    <b>CRITICAL TIME WINDOW DETECTED</b>
+                    <p>A major celestial shift occurs in <b>41 hours</b>. Failure to act on this window may reset your wealth cycle for another 12 years.</p>
+                </div>
+            </div>
+
+            <p style="line-height: 1.6; color: #444; font-size: 0.9rem;">
+                Your <b>Quantum Soul Blueprint</b> reveals a hidden blockage in your "Abundance Sector". To clear this and manifest your 2026 totem, you must unlock the full visual ritual.
+            </p>
+
+            <div class="delivery-preview">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" class="preview-img">
+                <div class="lock-overlay">
+                    <span style="font-size: 2rem;">🔒</span>
+                    <p style="font-weight: bold; margin-top: 10px;">YOUR 8K POWER TOTEM</p>
+                    <p style="font-size: 0.7rem;">PERSONALIZED & RENDERED</p>
+                </div>
+            </div>
+
+            <div style="background: #fff; padding: 25px; border-radius: 24px; margin-top: 20px; border: 1.5px solid #000;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="font-size: 0.7rem; color: #888; text-decoration: line-through;">REGULAR $49.00</span>
+                        <div style="font-size: 2.2rem; font-weight: 900;">$0.90</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="display: block; font-size: 0.6rem; font-weight: bold; color: var(--danger);">EXPIRES IN</span>
+                        <span id="timer" style="font-family: 'JetBrains Mono'; font-size: 1.2rem; font-weight: bold;">04:59</span>
+                    </div>
+                </div>
+                <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="pay-btn">UNLOCK MY DESTINY NOW</a>
+                <p style="text-align: center; font-size: 0.6rem; color: #999; margin-top: 15px;">SECURE CHECKOUT • INSTANT ACCESS</p>
             </div>
         </div>
+
     </div>
 
     <script>
-        // 流体动效背景 (高级版)
-        const canvas = document.getElementById('fluid-canvas');
-        const ctx = canvas.getContext('2d');
-        let points = [];
-        window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-        window.onresize();
-        for(let i=0; i<40; i++) points.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx: Math.random()-0.5, vy: Math.random()-0.5});
-
-        function animate() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.strokeStyle = 'rgba(0,122,255,0.1)';
-            ctx.beginPath();
-            points.forEach((p, i) => {
-                p.x += p.vx; p.y += p.vy;
-                if(p.x<0 || p.x>canvas.width) p.vx*=-1;
-                if(p.y<0 || p.y>canvas.height) p.vy*=-1;
-                points.forEach((p2, j) => {
-                    if(i===j) return;
-                    let dist = Math.hypot(p.x-p2.x, p.y-p2.y);
-                    if(dist<150) {
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                    }
-                });
-            });
-            ctx.stroke();
-            requestAnimationFrame(animate);
+        function showFeedback(text, nextStep) {
+            const fb = document.getElementById('feedback');
+            fb.innerText = text;
+            fb.style.display = 'block';
+            setTimeout(() => {
+                fb.style.display = 'none';
+                if(nextStep) go(nextStep);
+            }, 1000);
         }
-        animate();
-
-        // 逻辑
-        let count = 241082;
-        setInterval(() => { count += Math.floor(Math.random()*3); document.getElementById('counter').innerText = count.toLocaleString(); }, 2000);
 
         function go(s) {
-            document.querySelectorAll('.step-view').forEach(v => v.classList.remove('active'));
-            document.getElementById('v' + s).classList.add('active');
+            document.querySelectorAll('.step').forEach(v => v.classList.remove('active'));
+            document.getElementById('s' + s).classList.add('active');
+            window.scrollTo(0,0);
         }
 
-        function startFinal() {
-            const n = document.getElementById('name').value;
-            if(!n) return;
-            document.getElementById('res-name').innerText = n.toUpperCase();
+        function startAnalysis() {
+            const name = document.getElementById('name').value;
+            if(!name) return alert("Your Soul Signature is required.");
+            document.getElementById('u-name').innerText = name;
             go(3);
-            const msgs = ["NEURAL SYNC...", "ASTRAL MAPPING...", "CALCULATING PROBABILITY...", "8K RENDER COMPLETE."];
+            
+            // 初始化雷达图 (伪专业数据)
+            const ctx = document.getElementById('soulRadar').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Wealth', 'Love', 'Karma', 'Energy', 'Focus', 'Future'],
+                    datasets: [{
+                        label: 'Your Vibration',
+                        data: [65, 80, 45, 90, 70, 85],
+                        backgroundColor: 'rgba(0, 122, 255, 0.2)',
+                        borderColor: '#007AFF',
+                        borderWidth: 2
+                    }]
+                },
+                options: { scales: { r: { display: false } }, plugins: { legend: { display: false } } }
+            });
+
+            const logs = [
+                "RETRIEVING CELESTIAL COORDINATES...",
+                "CALCULATING KARMIC VELOCITY...",
+                "DETECTING ABUNDANCE BLOCKAGES...",
+                "RENDERING 8K POWER TOTEM...",
+                "FINALIZING SOUL BLUEPRINT..."
+            ];
             let i = 0;
             const t = setInterval(() => {
-                if(i<msgs.length) { document.getElementById('status-msg').innerText = msgs[i]; i++; }
-                else { clearInterval(t); go(4); }
-            }, 1200);
+                if(i < logs.length) {
+                    document.getElementById('loading-logs').innerText = logs[i];
+                    i++;
+                } else {
+                    clearInterval(t);
+                    go(4);
+                    startTimer();
+                }
+            }, 1500);
+        }
+
+        function startTimer() {
+            let time = 299;
+            setInterval(() => {
+                let m = Math.floor(time / 60);
+                let s = time % 60;
+                document.getElementById('timer').innerText = `0${m}:${s < 10 ? '0' + s : s}`;
+                if(time > 0) time--;
+            }, 1000);
         }
     </script>
 </body>
