@@ -3,23 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI MASTER | ELITE 8K FOUNDRY</title>
+    <title>ASTRO-AI | Daily Oracle</title>
     <style>
-        :root { --gold: #E2B05E; --dark: #000; }
-        body { background: var(--dark); color: white; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
-        .logo { font-size: 3rem; letter-spacing: 5px; margin-bottom: 20px; color: var(--gold); font-weight: bold; }
-        .box { background: #111; border: 1px solid #222; border-radius: 20px; padding: 40px; width: 300px; }
-        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border-radius: 50px; border: none; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 1rem; }
-        .btn-gold { background: var(--gold); color: black; }
-        .btn-outline { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
+        :root { --gold: #D4AF37; --void: #060606; --text: #e0e0e0; }
+        body { background: var(--void); color: var(--text); font-family: 'Times New Roman', serif; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; }
+        .stars-bg { position: fixed; top: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a1a2e 0%, #060606 100%); z-index: -1; }
+        .oracle-card { border: 1px solid var(--gold); background: rgba(0,0,0,0.8); padding: 40px 20px; width: 90%; max-width: 400px; position: relative; box-shadow: 0 0 50px rgba(212, 175, 55, 0.1); }
+        .oracle-card::before { content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; border: 1px solid rgba(212,175,55,0.2); z-index: -1; }
+        h1 { font-size: 2.5rem; letter-spacing: 10px; color: var(--gold); margin: 0; }
+        .date-display { font-size: 0.8rem; letter-spacing: 3px; color: var(--gold); margin-top: 10px; opacity: 0.7; }
+        .daily-reading { margin: 40px 0; border-top: 1px solid #222; border-bottom: 1px solid #222; padding: 30px 0; }
+        .status-tag { font-size: 0.6rem; letter-spacing: 2px; color: #888; margin-bottom: 10px; display: block; }
+        .btn-main { display: block; background: var(--gold); color: black; text-decoration: none; padding: 18px; font-weight: bold; letter-spacing: 2px; margin-bottom: 15px; transition: 0.3s; }
+        .btn-sub { display: block; color: var(--gold); text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; border: 1px solid var(--gold); padding: 12px; }
+        .countdown { font-size: 0.7rem; margin-top: 30px; color: #555; }
     </style>
 </head>
 <body>
-    <div class="logo">AI MASTER</div>
-    <div class="box">
-        <p style="color:#666; margin-bottom:30px;">SECURE ACCESS PANEL</p>
-        <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn btn-gold">START TRIAL ($0.90)</a>
-        <a href="https://buy.stripe.com/28E00kgudf5ne5G0of5J601" class="btn btn-outline">JOIN VIP ($9.90)</a>
+    <div class="stars-bg"></div>
+    <div class="oracle-card">
+        <span class="status-tag">REAL-TIME PLANETARY ALIGNMENT</span>
+        <h1>ASTRO-AI</h1>
+        <div id="date" class="date-display"></div>
+
+        <div class="daily-reading">
+            <p id="oracle-text" style="font-style: italic; font-size: 1.1rem; line-height: 1.6;">
+                "The stars are shifting. Your 8K Guardian Wallpaper is ready for synthesis."
+            </p>
+        </div>
+
+        <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-main">GET TODAY'S ORACLE ($0.90)</a>
+        <a href="https://buy.stripe.com/28E00kgudf5ne5G0of5J601" class="btn-sub">UNLIMITED MONTHLY ACCESS ($9.90)</a>
+
+        <div class="countdown">Next alignment in: <span id="timer">--:--:--</span></div>
     </div>
+
+    <script>
+        // 自动更新日期
+        document.getElementById('date').innerText = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).toUpperCase();
+
+        // 简易倒计时逻辑
+        function startTimer() {
+            let h = 23 - new Date().getHours();
+            let m = 59 - new Date().getMinutes();
+            let s = 59 - new Date().getSeconds();
+            document.getElementById('timer').innerText = h + ":" + (m<10?'0':'')+m + ":" + (s<10?'0':'')+s;
+            setTimeout(startTimer, 1000);
+        }
+        startTimer();
+    </script>
 </body>
 </html>
