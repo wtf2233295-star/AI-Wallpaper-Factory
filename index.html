@@ -3,192 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ETHER-ORACLE | Deep Soul Analysis</title>
+    <title>UNSEEN | Hyper-Personalized Astrology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --accent: #D4AF37; --bg: #050505; --glass: rgba(255, 255, 255, 0.05); }
-        body { background: var(--bg); color: #fff; font-family: 'Times New Roman', serif; margin: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        :root { --bg: #050505; --ink: #f0f0f0; --dim: #444; --accent: #fff; }
+        body { background: var(--bg); color: var(--ink); font-family: 'Space Mono', monospace; margin: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
         
-        /* 动态星空背景 */
-        .stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); overflow: hidden; }
-        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--duration) infinite ease-in-out; opacity: 0; }
-        @keyframes twinkle { 0% { opacity: 0; transform: translateY(0); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateY(-20px); } }
+        /* 动态背景：模仿 Co-Star 的虚无流动感 */
+        .void-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(20,20,20,1) 100%), radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%); z-index: -1; animation: breathe 8s infinite alternate; }
+        @keyframes breathe { 0% { opacity: 0.8; transform: scale(1); } 100% { opacity: 1; transform: scale(1.02); } }
 
-        /* 容器样式 */
-        .container { width: 85%; max-width: 400px; position: relative; z-index: 10; transition: all 0.8s ease; }
-        .hidden { display: none; opacity: 0; }
-        .fade-in { display: block; animation: fadeIn 1s forwards; }
+        /* 布局容器 */
+        .layout { padding: 30px; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; justify-content: space-between; max-width: 600px; margin: 0 auto; width: 100%; }
 
-        /* 标题 */
-        h1 { font-size: 1.8rem; letter-spacing: 6px; color: var(--accent); margin-bottom: 10px; font-weight: normal; text-transform: uppercase; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
-        .subtitle { font-size: 0.6rem; letter-spacing: 3px; color: #888; margin-bottom: 40px; text-transform: uppercase; }
+        /* 顶部品牌区 */
+        header { border-bottom: 1px solid var(--dim); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .brand { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; letter-spacing: -1px; line-height: 0.8; }
+        .status { font-size: 0.6rem; color: var(--dim); text-transform: uppercase; }
 
-        /* 输入框组 */
-        .input-group { margin-bottom: 25px; text-align: left; }
-        label { font-size: 0.6rem; letter-spacing: 2px; color: #666; display: block; margin-bottom: 5px; margin-left: 5px; }
-        input, select { background: var(--glass); border: 1px solid #333; color: #eee; width: 100%; padding: 15px; font-size: 1rem; outline: none; border-radius: 4px; transition: 0.3s; box-sizing: border-box; font-family: inherit; }
-        input:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
-
-        /* 按钮 */
-        .btn-main { background: linear-gradient(45deg, #b8860b, #e5c100); color: #000; border: none; padding: 18px; width: 100%; font-size: 0.9rem; font-weight: bold; letter-spacing: 3px; cursor: pointer; border-radius: 2px; text-transform: uppercase; margin-top: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
-        .btn-main:active { transform: scale(0.98); }
-
-        /* 模拟计算过程 */
-        .loader-box { text-align: center; }
-        .spinner { width: 60px; height: 60px; border: 2px solid rgba(255,255,255,0.1); border-top: 2px solid var(--accent); border-radius: 50%; margin: 0 auto 30px; animation: spin 1s linear infinite; }
-        .loading-text { font-size: 0.7rem; letter-spacing: 2px; color: var(--accent); min-height: 20px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* 结果页 */
-        .result-card { background: rgba(0,0,0,0.6); border: 1px solid #222; padding: 30px; border-radius: 10px; backdrop-filter: blur(10px); }
-        .chart-row { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; font-size: 0.7rem; letter-spacing: 1px; }
-        .chart-bar { flex: 1; height: 4px; background: #222; margin: 0 15px; border-radius: 2px; overflow: hidden; }
-        .chart-fill { height: 100%; background: var(--accent); width: 0; transition: width 1.5s ease-out; }
+        /* 核心交互区 */
+        .stage { flex: 1; display: flex; flex-direction: column; justify-content: center; opacity: 0; animation: fadeUp 0.8s forwards; }
+        .stage.hidden { display: none; }
         
-        .blur-section { margin-top: 25px; position: relative; text-align: left; line-height: 1.8; font-size: 0.9rem; color: #ccc; }
-        .blur-content { filter: blur(6px); user-select: none; opacity: 0.7; }
-        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 5; background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%); }
+        h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; margin: 0 0 30px 0; line-height: 1.1; }
+        p.desc { font-size: 0.75rem; color: #888; margin-bottom: 40px; line-height: 1.6; max-width: 90%; }
 
-        .btn-unlock { background: var(--accent); color: #000; text-decoration: none; padding: 15px 30px; font-weight: bold; font-size: 0.8rem; letter-spacing: 1px; border-radius: 50px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); animation: pulse 2s infinite; }
-        .btn-sub { display: block; margin-top: 15px; font-size: 0.6rem; color: #666; text-decoration: none; letter-spacing: 1px; border-bottom: 1px solid #333; padding-bottom: 2px; }
+        /* 极简输入框 */
+        input, select { background: transparent; border: none; border-bottom: 1px solid var(--dim); color: var(--ink); font-family: 'Space Mono', monospace; font-size: 1.2rem; width: 100%; padding: 10px 0; outline: none; border-radius: 0; transition: 0.3s; }
+        input:focus { border-bottom-color: var(--accent); }
         
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* 按钮：反色设计 */
+        .btn { background: var(--ink); color: var(--bg); border: none; padding: 18px 0; width: 100%; font-family: 'Space Mono', monospace; font-weight: 700; text-transform: uppercase; cursor: pointer; letter-spacing: 1px; margin-top: auto; transition: 0.2s; }
+        .btn:active { transform: scale(0.98); opacity: 0.9; }
+
+        /* 运算界面：模仿 NASA 数据流 */
+        .terminal { font-size: 0.7rem; color: #666; line-height: 1.8; text-align: left; }
+        .cursor { display: inline-block; width: 8px; height: 14px; background: var(--ink); animation: blink 1s infinite; }
+
+        /* 结果模糊页 */
+        .report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--dim); border: 1px solid var(--dim); margin-bottom: 20px; }
+        .cell { background: var(--bg); padding: 15px; text-align: center; }
+        .cell-label { display: block; font-size: 0.6rem; color: #666; margin-bottom: 5px; }
+        .cell-value { font-size: 1.2rem; font-weight: bold; }
+        
+        .blur-wall { position: relative; margin-top: 30px; text-align: left; }
+        .blur-text { filter: blur(5px); opacity: 0.6; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; line-height: 1.6; }
+        .pay-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(to bottom, rgba(5,5,5,0), rgba(5,5,5,1)); }
+        
+        .price-tag { font-size: 2rem; font-family: 'Cormorant Garamond', serif; margin-bottom: 10px; }
+        .trial-text { font-size: 0.7rem; color: #888; margin-bottom: 20px; text-transform: uppercase; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
-    <div class="stars" id="star-container"></div>
+    <div class="void-bg"></div>
+    <div class="layout">
+        <header>
+            <div class="brand">UNSEEN</div>
+            <div class="status">Node: 2026.01.11<br>Lat: <span id="lat">---</span></div>
+        </header>
 
-    <div class="container fade-in" id="step-1">
-        <h1>ETHER ORACLE</h1>
-        <div class="subtitle">Quantum Destiny Analysis v5.0</div>
-        
-        <div class="input-group">
-            <label>YOUR IDENTITY</label>
-            <input type="text" id="name" placeholder="Full Name">
-        </div>
-        <div class="input-group">
-            <label>DATE OF BIRTH</label>
-            <input type="date" id="dob" style="color:#aaa;">
-        </div>
-        <div class="input-group">
-            <label>PRIMARY CONCERN</label>
-            <select id="concern">
-                <option value="General">Choose Focus...</option>
-                <option value="Wealth">Financial Future (Wealth)</option>
-                <option value="Love">Soulmate & Connection (Love)</option>
-                <option value="Karma">Past Life Debt (Karma)</option>
-            </select>
+        <div id="s1" class="stage">
+            <h2>Who is asking?</h2>
+            <p class="desc">We need to locate your energy signature in the current planetary transit.</p>
+            <input type="text" id="username" placeholder="Enter your name" autocomplete="off">
+            <div style="height: 50px;"></div>
+            <button class="btn" onclick="next(1)">Next · Initiate</button>
         </div>
 
-        <button class="btn-main" onclick="startProcess()">INITIATE SCAN</button>
-        <p style="margin-top: 20px; font-size: 0.5rem; color: #444;">SECURE ENCRYPTED CONNECTION • 2026 NODE</p>
-    </div>
-
-    <div class="container hidden" id="step-2">
-        <div class="loader-box">
-            <div class="spinner"></div>
-            <div class="loading-text" id="load-text">CONNECTING TO ASTRAL PLANE...</div>
+        <div id="s2" class="stage hidden">
+            <h2>When did you arrive?</h2>
+            <p class="desc">Your celestial coordinates determine your karmic debt and future velocity.</p>
+            <input type="date" id="dob" style="color-scheme: dark;">
+            <div style="height: 50px;"></div>
+            <button class="btn" onclick="next(2)">Next · Calculate</button>
         </div>
-    </div>
 
-    <div class="container hidden" id="step-3">
-        <div class="result-card">
-            <h2 style="font-size: 1rem; color: var(--accent); margin-bottom: 5px;">ANALYSIS COMPLETE</h2>
-            <p style="font-size: 0.6rem; color: #888; margin-bottom: 20px;">TARGET: <span id="res-name"></span></p>
+        <div id="s3" class="stage hidden">
+            <div class="terminal" id="console"></div>
+        </div>
 
-            <div class="chart-row">
-                <span>AURA</span>
-                <div class="chart-bar"><div class="chart-fill" style="width: 84%;"></div></div>
-                <span>84%</span>
+        <div id="s4" class="stage hidden">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <span class="status">ANALYSIS COMPLETE</span>
+                <h2 style="font-size: 1.5rem; margin-top: 10px;">Your Planetary Profile</h2>
             </div>
-            <div class="chart-row">
-                <span>LUCK</span>
-                <div class="chart-bar"><div class="chart-fill" style="width: 41%; background: #ff5555;"></div></div>
-                <span style="color:#ff5555">41%</span>
-            </div>
-            <div class="chart-row">
-                <span>KARMA</span>
-                <div class="chart-bar"><div class="chart-fill" style="width: 92%; background: #9b59b6;"></div></div>
-                <span>92%</span>
+            
+            <div class="report-grid">
+                <div class="cell"><span class="cell-label">MOON PHASE</span><span class="cell-value">Waning</span></div>
+                <div class="cell"><span class="cell-label">CHAOS METER</span><span class="cell-value" style="color: #ff4444;">HIGH</span></div>
+                <div class="cell"><span class="cell-label">POWER COLOR</span><span class="cell-value">Onyx</span></div>
+                <div class="cell"><span class="cell-label">LUCK VECTOR</span><span class="cell-value">NW 32°</span></div>
             </div>
 
-            <p style="text-align: left; margin-top: 25px; font-size: 0.85rem; color: #eee; line-height: 1.6;">
-                <strong style="color:var(--accent)">CRITICAL ALERT:</strong> We detected a rare planetary alignment in your <span id="res-concern"></span> sector. While your Karma energy is high, a blockage is preventing success.
-            </p>
-
-            <div class="blur-section">
-                <div class="blur-content">
-                    Based on your birth chart, the next 7 days are crucial. A person with the initial 'J' or 'M' is influencing your path. To avoid the upcoming conflict, you must align your frequency with...
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <div class="blur-wall">
+                <div class="blur-text">
+                    Your chart indicates a rare collision between Saturn and your 10th house. This means the anxiety you are feeling is not random, but a precursor to a major shift. To survive this transit, you must avoid...
+                    Lorem ipsum dolor sit amet.
                 </div>
-                
-                <div class="lock-overlay">
-                    <p style="font-size: 0.7rem; color: #fff; margin-bottom: 15px; letter-spacing: 1px;">UNLOCK FULL 7-DAY FORECAST & REMEDY</p>
-                    
-                    <a href="https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600" class="btn-unlock">REVEAL DESTINY ($0.90)</a>
-                    
-                    <a href="https://buy.stripe.com/28E00kgudf5ne5G0of5J601" class="btn-sub">Or Get 30-Day Pass ($9.90)</a>
+                <div class="pay-overlay">
+                    <div class="price-tag">$0.90</div>
+                    <div class="trial-text">7-Day Access + 8K Talisman</div>
+                    <button class="btn" onclick="window.location.href='https://buy.stripe.com/7sY8wQ2Dne1jbXy3Ar5J600'">UNLOCK FULL REPORT</button>
+                    <div style="margin-top:15px; font-size:0.6rem; color:#666; cursor:pointer;" onclick="window.location.href='https://buy.stripe.com/28E00kgudf5ne5G0of5J601'">or Join VIP ($9.90/mo)</div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 生成星空背景
-        const starContainer = document.getElementById('star-container');
-        for(let i=0; i<50; i++) {
-            let star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.width = Math.random() * 3 + 'px';
-            star.style.height = star.style.width;
-            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-            star.style.animationDelay = Math.random() * 5 + 's';
-            starContainer.appendChild(star);
+        // 模拟随机经纬度，增加真实感
+        document.getElementById('lat').innerText = (Math.random() * 180 - 90).toFixed(4) + " / " + (Math.random() * 360 - 180).toFixed(4);
+
+        function next(step) {
+            const current = document.getElementById('s' + step);
+            const nextStep = document.getElementById('s' + (step + 1));
+            
+            if(step === 1 && !document.getElementById('username').value) return;
+            if(step === 2 && !document.getElementById('dob').value) return;
+
+            current.classList.add('hidden');
+            nextStep.classList.remove('hidden');
+
+            if(step === 2) runTerminal();
         }
 
-        // 核心交互逻辑
-        function startProcess() {
-            const name = document.getElementById('name').value;
-            const concern = document.getElementById('concern').value;
-            
-            if(!name) return alert("Energy signature required (Please enter name).");
-
-            // 切换到 Loading 界面
-            document.getElementById('step-1').classList.add('hidden');
-            document.getElementById('step-1').classList.remove('fade-in');
-            document.getElementById('step-2').classList.remove('hidden');
-            document.getElementById('step-2').classList.add('fade-in');
-
-            // 模拟计算步骤 (心理暗示)
-            const texts = [
-                "CALCULATING BIRTH CHART...",
-                "ALIGNING PLANETARY NODES...",
-                "DETECTING ENERGY BLOCKAGES...",
-                "SYNTHESIZING 8K WALLPAPER...",
-                "FINALIZING SOUL REPORT..."
+        function runTerminal() {
+            const logs = [
+                "ACCESSING NASA EPHEMERIS API...",
+                "CALCULATING PLANETARY POSITIONS...",
+                "DETECTING RETROGRADE MERCURY...",
+                "SYNTHESIZING KARMIC PATTERNS...",
+                "GENERATING 8K VISUAL ASSET...",
+                "DONE."
             ];
+            const consoleDiv = document.getElementById('console');
+            let i = 0;
             
-            let step = 0;
             const interval = setInterval(() => {
-                if(step < texts.length) {
-                    document.getElementById('load-text').innerText = texts[step];
-                    step++;
+                if (i < logs.length) {
+                    consoleDiv.innerHTML += `> ${logs[i]}<br>`;
+                    i++;
                 } else {
                     clearInterval(interval);
-                    showResult(name, concern);
+                    setTimeout(() => {
+                        document.getElementById('s3').classList.add('hidden');
+                        document.getElementById('s4').classList.remove('hidden');
+                    }, 800);
                 }
-            }, 1200); // 每 1.2 秒换一句话，总共约 6 秒，这个等待时间是精心设计的
-        }
-
-        function showResult(name, concern) {
-            document.getElementById('step-2').classList.add('hidden');
-            document.getElementById('step-3').classList.remove('hidden');
-            document.getElementById('step-3').classList.add('fade-in');
-            
-            document.getElementById('res-name').innerText = name.toUpperCase();
-            document.getElementById('res-concern').innerText = (concern === "General" ? "LIFE PATH" : concern).toUpperCase();
+            }, 800);
         }
     </script>
 </body>
+</html>
