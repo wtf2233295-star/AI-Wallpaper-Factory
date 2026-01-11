@@ -3,34 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Your Zodiac Wallpapers | Thank You!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Inter:wght@400&display=swap" rel="stylesheet">
+    <title>Cosmic Bundle Delivered | Thank You!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Inter&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --bg: #0a0a1a; }
-        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; text-align: center; padding: 40px; }
-        .glow { font-family: 'Cinzel', serif; font-size: 3rem; color: var(--gold); text-shadow: 0 0 30px rgba(212,175,55,0.5); animation: pulse 3s infinite; }
-        .card { background: linear-gradient(135deg, #111, #000); border: 1px solid #333; border-radius: 30px; padding: 30px; margin: 30px auto; max-width: 500px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
-        .preview { width: 100%; border-radius: 20px; margin: 20px 0; }
-        .btn-dl { background: var(--gold); color: #000; padding: 20px; border-radius: 50px; display: block; text-decoration: none; font-weight: bold; margin: 20px 0; }
-        @keyframes pulse { 0% { text-shadow: 0 0 20px rgba(212,175,55,0.5); } 50% { text-shadow: 0 0 40px rgba(212,175,55,0.8); } 100% { text-shadow: 0 0 20px rgba(212,175,55,0.5); } }
+        body { background:var(--bg); color:#fff; font-family:'Inter',sans-serif; text-align:center; padding:40px; }
+        canvas { position:fixed; top:0; left:0; z-index:-1; opacity:0.5; }
+        .glow { font-family:'Cinzel',serif; font-size:3.5rem; color:var(--gold); text-shadow:0 0 40px rgba(212,175,55,0.6); animation:pulse 3s infinite; }
+        .card { background:linear-gradient(135deg,#111,#000); border:1px solid #333; border-radius:30px; padding:40px; margin:40px auto; max-width:600px; box-shadow:0 30px 80px rgba(0,0,0,0.9); animation:fadeIn 2s; }
+        .preview { width:100%; border-radius:20px; margin:20px 0; }
+        .btn-dl { background:var(--gold); color:#000; padding:20px 60px; border-radius:50px; display:block; text-decoration:none; font-weight:bold; margin:30px 0; font-size:1.3rem; box-shadow:0 0 40px rgba(212,175,55,0.5); }
+        .upsell { margin-top:50px; color:#aaa; }
+        @keyframes pulse { 0%{text-shadow:0 0 30px rgba(212,175,55,0.6);} 50%{text-shadow:0 0 60px rgba(212,175,55,0.9);} 100%{text-shadow:0 0 30px rgba(212,175,55,0.6);} }
+        @keyframes fadeIn { from{opacity:0; transform:scale(0.9);} to{opacity:1; transform:scale(1);} }
     </style>
 </head>
 <body>
-    <h1 class="glow">Cosmic Access Granted</h1>
-    <p>Thank you! Your 2026 Zodiac Wallpaper Bundle is ready.</p>
+    <canvas id="stars"></canvas>
+    <h1 class="glow">Cosmic Access Granted ✨</h1>
+    <p>Thank you! Your premium 2026 Zodiac Bundle is ready for download.</p>
     
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=800" class="preview" alt="Preview">
-        <b style="color:var(--gold);">Full Bundle (60+ Files • 34MB)</b>
-        <p>Includes all 12 signs in phone & desktop versions.</p>
-        <a href="YOUR_DIRECT_DOWNLOAD_ZIP_LINK" class="btn-dl">DOWNLOAD FULL BUNDLE</a>
+        <img src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=800" class="preview" alt="Bundle Preview">
+        <b style="color:var(--gold); font-size:1.5rem;">Full Bundle (60+ Files • 150MB)</b>
+        <p>All 12 signs • Phone + Desktop • Bonus Styles</p>
+        <a href="YOUR_ZIP_DOWNLOAD_LINK" class="btn-dl">DOWNLOAD FULL BUNDLE NOW</a>
     </div>
     
-    <div class="card">
-        <p>Bonus: Set as lockscreen for daily cosmic vibes ✨</p>
-        <a href="YOUR_EXTRA_BONUS_LINK" class="btn-dl">DOWNLOAD BONUS PACK</a>
+    <div class="card upsell">
+        <p>Want Personalized Custom Zodiac? Add for +$9.99</p>
+        <a href="YOUR_UPSELL_LINK" class="btn-dl">UPGRADE NOW</a>
     </div>
-    
-    <p style="color:#666; margin-top:50px;">Enjoy your aesthetic journey! Contact for support.</p>
+
+    <script>
+        // 同上星空背景
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const stars = []; for(let i=0;i<150;i++){ stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2,s:Math.random()*0.5}); }
+        function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); stars.forEach(s=>{ ctx.fillStyle='#D4AF37'; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); s.y += s.s; if(s.y>canvas.height) s.y=0; }); requestAnimationFrame(animate); } animate();
+    </script>
 </body>
 </html>
